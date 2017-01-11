@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Simplify Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap core CSS -->
+    <link href="lib/bower_components/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="lib/css/font-awesome.min.css" rel="stylesheet">
+    <!-- ionicons -->
+    <link href="lib/css/ionicons.min.css" rel="stylesheet">
+    <!-- Simplify -->
+    <link href="lib/css/simplify.min.css" rel="stylesheet">
+</head>
+
+<body class="overflow-hidden">
+    <div class="wrapper preload">
+        <div class="sidebar-right">
+        </div>
+        <!-- sidebar-right -->
+        <header class="top-nav">
+            <div class="top-nav-inner">
+                <div class="nav-header">
+                    <button type="button" class="navbar-toggle pull-left sidebar-toggle" id="sidebarToggleSM">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <ul class="nav-notification pull-right">
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog fa-lg"></i></a>
+                            <ul class="dropdown-menu dropdown-sm pull-right">
+                                <li class="user-avatar">
+                                    <!-- <img src="images/profile/profile1.jpg" alt="" class="img-circle"> -->
+                                    <div class="user-content">
+                                        <h5 class="no-m-bottom">管理员</h5>
+                                    </div>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="signin.html">退出</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <a href="#" class="brand">
+                        <i class="fa fa-database"></i><span class="brand-name">党风廉政监督系统</span>
+                    </a>
+                </div>
+                <div class="nav-container">
+                    <button type="button" class="navbar-toggle pull-left sidebar-toggle" id="sidebarToggleLG">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="pull-right m-right-sm">
+                        <div class="user-block hidden-xs">
+                            <a href="#" id="userToggle" data-toggle="dropdown">
+                                <!-- <img src="images/profile/profile1.jpg" alt="" class="img-circle inline-block user-profile-pic"> -->
+                                <div class="user-detail inline-block">
+                                    管理员
+                                    <i class="fa fa-angle-down"></i>
+                                </div>
+                            </a>
+                            <div class="panel border dropdown-menu user-panel">
+                                <div class="panel-body paddingTB-sm">
+                                    <ul>
+                                        <li>
+                                            <a href="signin.html">
+                                                <i class="fa fa-power-off fa-lg"></i><span class="m-left-xs">退出</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ./top-nav-inner -->
+        </header>
+        <aside class="sidebar-menu fixed">
+            <div class="sidebar-inner scrollable-sidebar">
+                <div class="main-menu">
+                    <ul class="accordion">
+                        <li class="openable bg-palette4">
+                            <a href="#">
+                                <span class="menu-content block">
+										<span class="menu-icon"><i class="block fa fa-list fa-lg"></i></span>
+                                <span class="text m-left-sm">婚丧事宜</span>
+                                <span class="submenu-icon"></span>
+                                </span>
+                                <span class="menu-content-hover block">
+										婚丧事宜
+									</span>
+                            </a>
+                            <ul class="submenu">
+                                <!-- <li><a href="#"><span class="submenu-label">现场监督</span></a></li> -->
+                                <li class="openable">
+                                    <a href="signin.html">
+                                        <span class="submenu-label">申报管理</span>
+                                        <small class="badge badge-success badge-square bounceIn animation-delay2 m-left-xs pull-right">5</small>
+                                    </a>
+                                    <ul class="submenu third-level">
+                                        <li><a href="#"><span class="submenu-label">申报</span></a></li>
+                                        <li><a href="#"><span class="submenu-label">审批</span></a></li>
+                                        <li><a href="#"><span class="submenu-label">公示</span></a></li>
+                                        <li><a href="#"><span class="submenu-label">现场监督</span></a></li>
+                                        <li class="openable">
+                                            <a href="#">
+                                                <span class="submenu-label">查询统计</span>
+                                                <small class="badge badge-danger badge-square bounceIn animation-delay2 m-left-xs pull-right">3</small>
+                                            </a>
+                                            <ul class="submenu fourth-level">
+                                                <li><a href="#"><span class="submenu-label">精确查询</span></a></li>
+                                                <li><a href="#"><span class="submenu-label">组合查询</span></a></li>
+                                                <li><a href="#"><span class="submenu-label">数量统计</span></a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="openable">
+                                    <a href="signin.html">
+                                        <span class="submenu-label">责任追究</span>
+                                        <small class="badge badge-success badge-square bounceIn animation-delay2 m-left-xs pull-right">2</small>
+                                    </a>
+                                    <ul class="submenu third-level">
+                                        <li><a href="form_element.html"><span class="submenu-label">公开通报</span></a></li>
+                                        <li><a href="form_validation.html"><span class="submenu-label">纪律处分</span></a></li>
+                                        <li class="openable">
+                                    </ul>
+                                    </li>
+                            </ul>
+                        </li>
+                        <li class="openable bg-palette2">
+								<a href="#">
+									<span class="menu-content block">
+										<span class="menu-icon"><i class="block fa fa-list fa-lg"></i></span>
+										<span class="text m-left-sm">四风问题举报处理</span>
+										<span class="submenu-icon"></span>
+									</span>
+									<span class="menu-content-hover block">
+										四风问题
+									</span>
+								</a>
+								<ul class="submenu bg-palette4">
+									<li><a href="form_element.html"><span class="submenu-label">Form Element</span></a></li>
+									<li><a href="form_validation.html"><span class="submenu-label">Form Validation</span></a></li>
+									<li><a href="form_wizard.html"><span class="submenu-label">Form Wizard</span></a></li>
+									<li><a href="dropzone.html"><span class="submenu-label">Dropzone</span></a></li>
+								</ul>
+						</li>
+						<li class="openable bg-palette3">
+								<a href="#">
+									<span class="menu-content block">
+										<span class="menu-icon"><i class="block fa fa-list fa-lg"></i></span>
+										<span class="text m-left-sm">廉政教育平台</span>
+										<span class="submenu-icon"></span>
+									</span>
+									<span class="menu-content-hover block">
+										廉政教育
+									</span>
+								</a>
+								<ul class="submenu bg-palette4">
+									<li><a href="form_element.html"><span class="submenu-label">Form Element</span></a></li>
+									<li><a href="form_validation.html"><span class="submenu-label">Form Validation</span></a></li>
+									<li><a href="form_wizard.html"><span class="submenu-label">Form Wizard</span></a></li>
+									<li><a href="dropzone.html"><span class="submenu-label">Dropzone</span></a></li>
+								</ul>
+						</li>
+                        <li class="openable  ">
+                                <a href="#">
+                                    <span class="menu-content block">
+                        			<span class="menu-icon"><i class="block fa fa-gift fa-lg"></i></span>
+                                    <span class="text m-left-sm">系统设置</span>
+                                    <span class="submenu-icon"></span>
+                                    </span>
+                                    <span class="menu-content-hover block">
+                        				系统设置
+                        			</span>
+                                </a>
+                                <ul class="submenu">
+                                    <li><a href="error404.html"><span class="submenu-label">用户管理</span></a></li>
+                                    <li><a href="blank.html"><span class="submenu-label">角色管理</span></a></li>
+                                </ul>
+                                <!-- </li> -->
+                    </ul>
+                </div>
+                <!-- 左下角信息 开始 -->
+                <div class="sidebar-fix-bottom clearfix">
+                    <div class="user-dropdown dropup pull-left">
+                        <a href="#" class="dropdwon-toggle font-18" data-toggle="dropdown"><i class="ion-person-add"></i>
+							</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="inbox.html">
+										Inbox
+										<span class="badge badge-danger bounceIn animation-delay2 pull-right">1</span>
+									</a>
+                            </li>
+                            <li>
+                                <a href="#">
+										Notification
+										<span class="badge badge-purple bounceIn animation-delay3 pull-right">2</span>
+									</a>
+                            </li>
+                            <li>
+                                <a href="#" class="sidebarRight-toggle">
+										Message
+										<span class="badge badge-success bounceIn animation-delay4 pull-right">7</span>
+									</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">Setting</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="lockscreen.html" class="pull-right font-18"><i class="ion-log-out"></i></a>
+                </div>
+                <!-- 左下角信息 结束 -->
+
+            </div>
+            <!-- sidebar-inner -->
+        </aside>
+        <!-- 内容区域 开始 -->
+        <div class="main-container">
+            <div class="padding-md">
+                内容区
+            </div>
+            <!-- ./padding-md -->
+        </div>
+        <!-- 内容区域 结束 -->
+        <!-- /main-container -->
+    </div>
+    <!-- /wrapper -->
+    <!-- Le javascript
+	    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- Jquery -->
+</body>
+<script src="lib/js/jquery-1.11.1.min.js"></script>
+<!-- Bootstrap -->
+<script src="lib/bower_components/bootstrap/js/bootstrap.min.js"></script>
+<!-- Slimscroll -->
+<script src='lib/js/jquery.slimscroll.min.js'></script>
+<!-- Popup Overlay -->
+<script src='lib/js/jquery.popupoverlay.min.js'></script>
+<!-- Modernizr -->
+<script src='lib/js/modernizr.min.js'></script>
+<!-- Simplify -->
+<script src="lib/js/simplify.js"></script>
+
+</html>
