@@ -1,5 +1,5 @@
 angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
-    .config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
+    .config(function($stateProvider, $urlRouterProvider) {
         // $ocLazyLoadProvider.config(function() {
         //     module: [{
         //         name: 'mainModule',
@@ -21,7 +21,7 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
             })
             .state('main', {
                 url: '/main',
-                controller: 'mainCtrl as main',
+                controller: 'mainCtrl',
                 templateUrl: 'templates/main.html',
                 resolve: {
                     main: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -29,13 +29,14 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                         return $ocLazyLoad.load({
                             name: 'main',
                             files: [
-                                'lib/js/jquery-1.11.1.min.js',
-                                'lib/bower_components/bootstrap/js/bootstrap.min.js',
-                                'lib/js/jquery.slimscroll.min.js',
-                                'lib/js/jquery.popupoverlay.min.js',
-                                'lib/js/modernizr.min.js',
-                                'lib/js/simplify.js'
-                            ]
+                                '../lib/js/jquery-1.11.1.min.js',
+                                '../lib/bower_components/bootstrap/js/bootstrap.min.js',
+                                '../lib/js/jquery.slimscroll.min.js',
+                                '../lib/js/jquery.popupoverlay.min.js',
+                                '../lib/js/modernizr.min.js',
+                                '../lib/js/simplify.js'
+                            ],
+                            cache:true
                         });
                     }]
                 }
@@ -45,7 +46,7 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                 views: {
                     'content': {
                         templateUrl: 'templates/declare.html',
-                        controller: 'page1Ctrl'
+                        controller: 'mainCtrl'
                     }
                 },
                 params: {
@@ -58,7 +59,7 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                 views: {
                     'content': {
                         templateUrl: 'templates/approve.html',
-                        controller: 'page1Ctrl'
+                        controller: 'mainCtrl'
                     }
                 },
                 params: {
@@ -71,7 +72,7 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                 views: {
                     'content': {
                         templateUrl: 'templates/publicity.html',
-                        controller: 'page1Ctrl'
+                        controller: 'mainCtrl'
                     }
                 },
                 params: {
@@ -84,7 +85,7 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                 views: {
                     'content': {
                         templateUrl: 'templates/supervision.html',
-                        controller: 'page1Ctrl'
+                        controller: 'mainCtrl'
                     }
                 },
                 params: {
@@ -97,7 +98,7 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                 views: {
                     'content': {
                         templateUrl: 'templates/precisequery.html',
-                        controller: 'page1Ctrl'
+                        controller: 'mainCtrl'
                     }
                 },
                 params: {
@@ -110,7 +111,7 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                 views: {
                     'content': {
                         templateUrl: 'templates/combinequery.html',
-                        controller: 'page1Ctrl'
+                        controller: 'mainCtrl'
                     }
                 },
                 params: {
@@ -123,7 +124,7 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                 views: {
                     'content': {
                         templateUrl: 'templates/statistic.html',
-                        controller: 'page1Ctrl'
+                        controller: 'mainCtrl'
                     }
                 },
                 params: {
@@ -136,7 +137,7 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                 views: {
                     'content': {
                         templateUrl: 'templates/notification.html',
-                        controller: 'page1Ctrl'
+                        controller: 'mainCtrl'
                     }
                 },
                 params: {
@@ -149,7 +150,7 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                 views: {
                     'content': {
                         templateUrl: 'templates/punish.html',
-                        controller: 'page1Ctrl'
+                        controller: 'mainCtrl'
                     }
                 },
                 params: {
@@ -162,7 +163,7 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                 views: {
                     'content': {
                         templateUrl: 'templates/usermanage.html',
-                        controller: 'page1Ctrl'
+                        controller: 'mainCtrl'
                     }
                 },
                 params: {
@@ -175,7 +176,7 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                 views: {
                     'content': {
                         templateUrl: 'templates/rolemanage.html',
-                        controller: 'page1Ctrl'
+                        controller: 'mainCtrl'
                     }
                 },
                 params: {
