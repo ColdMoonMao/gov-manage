@@ -18,12 +18,12 @@ angular.module('app', ['app.controllers', 'app.services','ui.router', 'oc.lazyLo
                         return $ocLazyLoad.load({
                             name: 'main',
                             files: [
-                                '../lib/js/jquery-1.11.1.min.js',
-                                '../lib/bower_components/bootstrap/js/bootstrap.min.js',
-                                '../lib/js/jquery.slimscroll.min.js',
-                                '../lib/js/jquery.popupoverlay.min.js',
-                                '../lib/js/modernizr.min.js',
-                                '../lib/js/simplify.js'
+                                'lib/js/jquery-1.11.1.min.js',
+                                'lib/bower_components/bootstrap/js/bootstrap.min.js',
+                                'lib/js/jquery.slimscroll.min.js',
+                                'lib/js/jquery.popupoverlay.min.js',
+                                'lib/js/modernizr.min.js',
+                                'lib/js/simplify.js'
                             ],
                             cache:true
                         });
@@ -116,7 +116,7 @@ angular.module('app', ['app.controllers', 'app.services','ui.router', 'oc.lazyLo
                 views: {
                     'content': {
                         templateUrl: 'templates/punish.html',
-                        controller: 'mainCtrl'
+                        controller: 'punishCtrl'
                     }
                 }
             })
