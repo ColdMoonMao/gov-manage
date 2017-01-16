@@ -1,24 +1,13 @@
-angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
+angular.module('app', ['app.controllers', 'app.services','ui.router', 'oc.lazyLoad'])
     .config(function($stateProvider, $urlRouterProvider) {
-        // $ocLazyLoadProvider.config(function() {
-        //     module: [{
-        //         name: 'mainModule',
-        //         files: [
-        //             '../lib/js/jquery-1.11.1.min.js',
-        //             '../lib/bower_components/bootstrap/js/bootstrap.min.js',
-        //             '../lib/js/jquery.slimscroll.min.js',
-        //             '../lib/js/jquery.popupoverlay.min.js',
-        //             '../lib/js/modernizr.min.js',
-        //             '../lib/js/simplify.js'
-        //         ]
-        //     }]
-        // });
         $stateProvider
+            //login登录页面
             .state('login', {
                 url: '/login',
                 controller: 'loginCtrl',
                 templateUrl: 'templates/login.html'
             })
+            //主页面main
             .state('main', {
                 url: '/main',
                 controller: 'mainCtrl',
@@ -41,19 +30,17 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                     }]
                 }
             })
+            //declare申报页面
             .state('main.declare', {
                 url: '/declare',
                 views: {
                     'content': {
                         templateUrl: 'templates/declare.html',
-                        controller: 'mainCtrl'
+                        controller: 'declareCtrl'
                     }
-                },
-                params: {
-                    data: {},
-                    event: {}
                 }
             })
+            //approve审批页面
             .state('main.approve', {
                 url: '/approve',
                 views: {
@@ -61,12 +48,9 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                         templateUrl: 'templates/approve.html',
                         controller: 'mainCtrl'
                     }
-                },
-                params: {
-                    data: {},
-                    event: {}
                 }
             })
+            //publicity 公示页面
             .state('main.publicity', {
                 url: '/publicity',
                 views: {
@@ -74,12 +58,9 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                         templateUrl: 'templates/publicity.html',
                         controller: 'mainCtrl'
                     }
-                },
-                params: {
-                    data: {},
-                    event: {}
                 }
             })
+            //supervision 监督页面
             .state('main.supervision', {
                 url: '/supervision',
                 views: {
@@ -87,12 +68,9 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                         templateUrl: 'templates/supervision.html',
                         controller: 'mainCtrl'
                     }
-                },
-                params: {
-                    data: {},
-                    event: {}
                 }
             })
+            //precisequery精确查询
             .state('main.precisequery', {
                 url: '/precisequery',
                 views: {
@@ -100,12 +78,9 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                         templateUrl: 'templates/precisequery.html',
                         controller: 'mainCtrl'
                     }
-                },
-                params: {
-                    data: {},
-                    event: {}
                 }
             })
+            //combinequery组合查询
             .state('main.combinequery', {
                 url: '/combinequery',
                 views: {
@@ -113,12 +88,9 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                         templateUrl: 'templates/combinequery.html',
                         controller: 'mainCtrl'
                     }
-                },
-                params: {
-                    data: {},
-                    event: {}
                 }
             })
+            //statistic数量统计
             .state('main.statistic', {
                 url: '/statistic',
                 views: {
@@ -126,25 +98,19 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                         templateUrl: 'templates/statistic.html',
                         controller: 'mainCtrl'
                     }
-                },
-                params: {
-                    data: {},
-                    event: {}
                 }
             })
+            //notification 公开通报
             .state('main.notification', {
                 url: '/notification',
                 views: {
                     'content': {
                         templateUrl: 'templates/notification.html',
-                        controller: 'mainCtrl'
+                        controller: 'NotifCtrl'
                     }
-                },
-                params: {
-                    data: {},
-                    event: {}
                 }
             })
+            //punish纪律处分
             .state('main.punish', {
                 url: '/punish',
                 views: {
@@ -152,12 +118,9 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                         templateUrl: 'templates/punish.html',
                         controller: 'mainCtrl'
                     }
-                },
-                params: {
-                    data: {},
-                    event: {}
                 }
             })
+            //usermanage用户管理
             .state('main.usermanage', {
                 url: '/usermanage',
                 views: {
@@ -165,12 +128,9 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                         templateUrl: 'templates/usermanage.html',
                         controller: 'mainCtrl'
                     }
-                },
-                params: {
-                    data: {},
-                    event: {}
                 }
             })
+            //rolemanage角色管理
             .state('main.rolemanage', {
                 url: '/rolemanage',
                 views: {
@@ -178,10 +138,6 @@ angular.module('app', ['app.controllers', 'ui.router', 'oc.lazyLoad'])
                         templateUrl: 'templates/rolemanage.html',
                         controller: 'mainCtrl'
                     }
-                },
-                params: {
-                    data: {},
-                    event: {}
                 }
             })
 

@@ -1,0 +1,6 @@
+/* Empty. Add your own CSS if you like */
+@media (min-width: 768px){
+	.form-inline .form-group {
+    margin: 3px .34%;
+}
+}

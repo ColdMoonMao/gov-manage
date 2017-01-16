@@ -1,1 +1,426 @@
-角色管理 
+<div>
+    <h3 class=" m-left-xs header-text">角色管理</h3>
+    <div class="col-md-12">
+        <button class="btn btn-success pull-right" data-toggle="modal" data-target="#largeModal">新增</button>
+    </div>
+    <table class="table table-striped table-responsive table-hover" id="dataTable">
+        <thead>
+            <tr>
+                <th>角色名</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="col-md-10">#1001</td>
+                <td class="col-md-2">
+                    <button type="button" class="btn btn-info">修改</button>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+            </tr>
+            <tr>
+                <td>#1001</td>
+                <td>
+                    <button type="button" class="btn btn-info">修改</button>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+            </tr>
+            <tr>
+                <td>#1001</td>
+                <td>
+                    <button type="button" class="btn btn-info">修改</button>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+            </tr>
+            <tr>
+                <td>#1001</td>
+                <td>
+                    <button type="button" class="btn btn-info">修改</button>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+            </tr>
+            <tr>
+                <td>#1001</td>
+                <td>
+                    <button type="button" class="btn btn-info">修改</button>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- /table -->
+    <!-- pagination -->
+    <div class="col-md-12">
+        <ul class="pagination col-md-9">
+            <li class="disabled"><a href="">«</a></li>
+            <li class="disabled">
+                <a href="">
+                    <</a>
+            </li>
+            <li class="active"><a href="">1</a></li>
+            <li><a href="">2</a></li>
+            <li><a href="">3</a></li>
+            <li><a href="">4</a></li>
+            <li><a href="">5</a></li>
+            <li><a href="">></a></li>
+            <li><a href="">»</a></li>
+            <li>
+                <button type="button" class="btn btn-sm btn-success">刷新</button>
+            </li>
+        </ul>
+        <ul class="pagination col-md-3">
+            <li><a>显示311-161条,共800条</a></li>
+        </ul>
+    </div>
+    <!-- /pagination -->
+    <!-- modal -->
+    <div class="modal fade" id="largeModal" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">添加角色</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="roleName" class="col-md-1 control-label">角色名:</label>
+                            <div class="col-md-11">
+                                <input type="text" class="form-control" id="roleName" placeholder="角色名">
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </form>
+                    <form>
+                        <div class="form-group">
+                            <legend>
+                                <label for="checkbox">子系统访问</label>
+                            </legend>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxWed" class="checkbox-blue">
+                                    <label for="inlineCheckboxWed"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    婚丧事宜申报
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckbox4" class="checkbox-blue">
+                                    <label for="inlineCheckbox4"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    四风问题举报
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxIncorrupt" class="checkbox-blue">
+                                    <label for="inlineCheckboxIncorrupt"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    廉政教育
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxSet" class="checkbox-blue">
+                                    <label for="inlineCheckboxSet"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    系统设置
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <legend>
+                                <label for="checkbox">婚丧</label>
+                            </legend>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxWedDeclare" class="checkbox-blue">
+                                    <label for="inlineCheckboxWedDeclare"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    婚丧申报
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxApprove" class="checkbox-blue">
+                                    <label for="inlineCheckboxApprove"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    婚丧审批
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxNotificate" class="checkbox-blue">
+                                    <label for="inlineCheckboxNotificate"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    婚丧公示
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxVison" class="checkbox-blue">
+                                    <label for="inlineCheckboxVison"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    婚丧现场监督
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxStastis" class="checkbox-blue">
+                                    <label for="inlineCheckboxStastis"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    婚丧查询统计
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxRepReg" class="checkbox-blue">
+                                    <label for="inlineCheckboxRepReg"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    婚丧举报登记
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxRepDeal" class="checkbox-blue">
+                                    <label for="inlineCheckboxRepDeal"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    婚丧举报处理
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxInvesDeal" class="checkbox-blue">
+                                    <label for="inlineCheckboxInvesDeal"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    婚丧查处处理
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxPublicLook" class="checkbox-blue">
+                                    <label for="inlineCheckboxPublicLook"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    婚丧公开通报查看
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxpublicManage" class="checkbox-blue">
+                                    <label for="inlineCheckboxpublicManage"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    婚丧公开通报管理
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxPunishLook" class="checkbox-blue">
+                                    <label for="inlineCheckboxPunishLook"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    婚丧纪律处分查看
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxPunishManage" class="checkbox-blue">
+                                    <label for="inlineCheckboxPunishManage"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    婚丧纪律处分管理
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxCommitLook" class="checkbox-blue">
+                                    <label for="inlineCheckboxCommitLook"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    婚丧承诺书查看
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxCommitManage" class="checkbox-blue">
+                                    <label for="inlineCheckboxCommitManage"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    婚丧承诺书管理
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxEduLook" class="checkbox-blue">
+                                    <label for="inlineCheckboxEduLook"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    婚丧专题教育查看
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxEduManage" class="checkbox-blue">
+                                    <label for="inlineCheckboxEduManage"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    婚丧专题教育管理
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxReformLook" class="checkbox-blue">
+                                    <label for="inlineCheckboxReformLook"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    婚丧集中整改查看
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxReformManage" class="checkbox-blue">
+                                    <label for="inlineCheckboxReformManage"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    婚丧集中整改管理
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <legend>
+                                <label for="checkbox">投诉</label>
+                            </legend>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckbox4WindComplainLook" class="checkbox-blue">
+                                    <label for="inlineCheckbox4WindComplainLook"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    四风问题投诉查看
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckLetterBoxLook" class="checkbox-blue">
+                                    <label for="inlineCheckLetterBoxLook"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    纪委书记信箱查看
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxArrangeLook" class="checkbox-blue">
+                                    <label for="inlineCheckboxArrangeLook"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    大操大办查看
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxEatWantLook" class="checkbox-blue">
+                                    <label for="inlineCheckboxEatWantLook"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    吃拿卡要查看
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxComplainRepLook" class="checkbox-blue">
+                                    <label for="inlineCheckboxComplainRepLook"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    投诉举报查看
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <legend>
+                                <label for="checkbox">廉政教育</label>
+                            </legend>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxReqCourseManage" class="checkbox-blue">
+                                    <label for="inlineCheckboxReqCourseManage"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    必修课管理
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckOptCourManage" class="checkbox-blue">
+                                    <label for="inlineCheckOptCourManage"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    选修课管理
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckboxVideoManage" class="checkbox-blue">
+                                    <label for="inlineCheckboxVideoManage"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    廉政视频管理
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <legend>
+                                <label for="checkbox">系统设置</label>
+                            </legend>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckUserManage" class="checkbox-blue">
+                                    <label for="inlineCheckUserManage"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    用户管理
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckOrgManage" class="checkbox-blue">
+                                    <label for="inlineCheckOrgManage"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    组织管理
+                                </div>
+                            </div>
+                            <div class="checkbox inline-block" id="checkbox">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="inlineCheckRoleManage" class="checkbox-blue">
+                                    <label for="inlineCheckRoleManage"></label>
+                                </div>
+                                <div class="inline-block vertical-top">
+                                    角色管理
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
+                    <button type="button" class="btn btn-primary col-md-12">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /modal -->
+</div>

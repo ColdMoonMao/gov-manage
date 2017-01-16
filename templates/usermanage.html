@@ -1,1 +1,155 @@
-用户管理
+<div>
+    <h3 class=" m-left-xs header-text">用户管理</h3>
+    <div class="col-md-12">
+        <button class="btn btn-success pull-right" data-toggle="modal" data-target="#normalModal">新增</button>
+    </div>
+    <table class="table table-striped table-responsive table-hover" id="dataTable">
+        <thead>
+            <tr>
+                <th>用户名</th>
+                <th>姓名</th>
+                <th>部门</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>#1001</td>
+                <td>Leather Bag</td>
+                <td>Oct 08,2013</td>
+                <td>
+                    <button type="button" class="btn btn-info">修改</button>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+            </tr>
+            <tr>
+                <td>#1001</td>
+                <td>Leather Bag</td>
+                <td>Oct 08,2013</td>
+                <td>
+                    <button type="button" class="btn btn-info">修改</button>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+            </tr>
+            <tr>
+                <td>#1001</td>
+                <td>Leather Bag</td>
+                <td>Oct 08,2013</td>
+                <td>
+                    <button type="button" class="btn btn-info">修改</button>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+            </tr>
+            <tr>
+                <td>#1001</td>
+                <td>Leather Bag</td>
+                <td>Oct 08,2013</td>
+                <td>
+                    <button type="button" class="btn btn-info">修改</button>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+            </tr>
+            <tr>
+                <td>#1001</td>
+                <td>Leather Bag</td>
+                <td>Oct 08,2013</td>
+                <td>
+                    <button type="button" class="btn btn-info">修改</button>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- /table -->
+    <!-- pagination -->
+    <div class="col-md-12">
+        <ul class="pagination col-md-9">
+            <li class="disabled"><a href="">«</a></li>
+            <li class="disabled">
+                <a href="">
+                    <</a>
+            </li>
+            <li class="active"><a href="">1</a></li>
+            <li><a href="">2</a></li>
+            <li><a href="">3</a></li>
+            <li><a href="">4</a></li>
+            <li><a href="">5</a></li>
+            <li><a href="">></a></li>
+            <li><a href="">»</a></li>
+            <li>
+                <button type="button" class="btn btn-sm btn-success">刷新</button>
+            </li>
+        </ul>
+        <ul class="pagination col-md-3">
+            <li><a>显示311-161条,共800条</a></li>
+        </ul>
+    </div>
+    <!-- /pagination -->
+    <!-- modal -->
+    <div class="modal fade" id="normalModal" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">添加用户</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputUserName" class="col-lg-2 control-label">用户名:</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="inputUserName" placeholder="用户名">
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName" class="col-lg-2 control-label">姓名:</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="inputName" placeholder="姓名">
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">部门:</label>
+                            <div class="col-lg-10">
+                                <select class="form-control">
+                                    <option>根组织</option>
+                                </select>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="col-lg-2 control-label">密码:</label>
+                            <div class="col-lg-10">
+                                <input type="password" class="form-control" id="inputPassword" placeholder="密码">
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPasswordConfirm" class="col-lg-2 control-label">确认密码:</label>
+                            <div class="col-lg-10">
+                                <input type="password" class="form-control" id="inputPasswordConfirm" placeholder="确认密码">
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">角色:</label>
+                            <div class="col-lg-10">
+                                <select class="form-control">
+                                    <option>根组织</option>
+                                </select>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /form-group -->
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
+                    <button type="button" class="btn btn-primary col-md-12">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /modal -->
+</div>
