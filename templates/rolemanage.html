@@ -1,426 +1,756 @@
 <div>
-    <h3 class=" m-left-xs header-text">角色管理</h3>
-    <div class="col-md-12">
-        <button class="btn btn-success pull-right" data-toggle="modal" data-target="#largeModal">新增</button>
-    </div>
-    <table class="table table-striped table-responsive table-hover" id="dataTable">
-        <thead>
-            <tr>
-                <th>角色名</th>
-                <th>操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="col-md-10">#1001</td>
-                <td class="col-md-2">
-                    <button type="button" class="btn btn-info">修改</button>
-                    <button type="button" class="btn btn-danger">删除</button>
-                </td>
-            </tr>
-            <tr>
-                <td>#1001</td>
-                <td>
-                    <button type="button" class="btn btn-info">修改</button>
-                    <button type="button" class="btn btn-danger">删除</button>
-                </td>
-            </tr>
-            <tr>
-                <td>#1001</td>
-                <td>
-                    <button type="button" class="btn btn-info">修改</button>
-                    <button type="button" class="btn btn-danger">删除</button>
-                </td>
-            </tr>
-            <tr>
-                <td>#1001</td>
-                <td>
-                    <button type="button" class="btn btn-info">修改</button>
-                    <button type="button" class="btn btn-danger">删除</button>
-                </td>
-            </tr>
-            <tr>
-                <td>#1001</td>
-                <td>
-                    <button type="button" class="btn btn-info">修改</button>
-                    <button type="button" class="btn btn-danger">删除</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <!-- /table -->
-    <!-- pagination -->
-    <div class="col-md-12">
-        <ul class="pagination col-md-9">
-            <li class="disabled"><a href="">«</a></li>
-            <li class="disabled">
-                <a href="">
-                    <</a>
-            </li>
-            <li class="active"><a href="">1</a></li>
-            <li><a href="">2</a></li>
-            <li><a href="">3</a></li>
-            <li><a href="">4</a></li>
-            <li><a href="">5</a></li>
-            <li><a href="">></a></li>
-            <li><a href="">»</a></li>
-            <li>
-                <button type="button" class="btn btn-sm btn-success">刷新</button>
-            </li>
-        </ul>
-        <ul class="pagination col-md-3">
-            <li><a>显示311-161条,共800条</a></li>
-        </ul>
-    </div>
-    <!-- /pagination -->
-    <!-- modal -->
-    <div class="modal fade" id="largeModal" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">添加角色</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <label for="roleName" class="col-md-1 control-label">角色名:</label>
-                            <div class="col-md-11">
-                                <input type="text" class="form-control" id="roleName" placeholder="角色名">
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                    </form>
-                    <form>
-                        <div class="form-group">
-                            <legend>
-                                <label for="checkbox">子系统访问</label>
-                            </legend>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxWed" class="checkbox-blue">
-                                    <label for="inlineCheckboxWed"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    婚丧事宜申报
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckbox4" class="checkbox-blue">
-                                    <label for="inlineCheckbox4"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    四风问题举报
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxIncorrupt" class="checkbox-blue">
-                                    <label for="inlineCheckboxIncorrupt"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    廉政教育
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxSet" class="checkbox-blue">
-                                    <label for="inlineCheckboxSet"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    系统设置
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <legend>
-                                <label for="checkbox">婚丧</label>
-                            </legend>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxWedDeclare" class="checkbox-blue">
-                                    <label for="inlineCheckboxWedDeclare"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    婚丧申报
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxApprove" class="checkbox-blue">
-                                    <label for="inlineCheckboxApprove"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    婚丧审批
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxNotificate" class="checkbox-blue">
-                                    <label for="inlineCheckboxNotificate"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    婚丧公示
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxVison" class="checkbox-blue">
-                                    <label for="inlineCheckboxVison"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    婚丧现场监督
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxStastis" class="checkbox-blue">
-                                    <label for="inlineCheckboxStastis"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    婚丧查询统计
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxRepReg" class="checkbox-blue">
-                                    <label for="inlineCheckboxRepReg"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    婚丧举报登记
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxRepDeal" class="checkbox-blue">
-                                    <label for="inlineCheckboxRepDeal"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    婚丧举报处理
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxInvesDeal" class="checkbox-blue">
-                                    <label for="inlineCheckboxInvesDeal"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    婚丧查处处理
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxPublicLook" class="checkbox-blue">
-                                    <label for="inlineCheckboxPublicLook"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    婚丧公开通报查看
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxpublicManage" class="checkbox-blue">
-                                    <label for="inlineCheckboxpublicManage"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    婚丧公开通报管理
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxPunishLook" class="checkbox-blue">
-                                    <label for="inlineCheckboxPunishLook"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    婚丧纪律处分查看
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxPunishManage" class="checkbox-blue">
-                                    <label for="inlineCheckboxPunishManage"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    婚丧纪律处分管理
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxCommitLook" class="checkbox-blue">
-                                    <label for="inlineCheckboxCommitLook"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    婚丧承诺书查看
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxCommitManage" class="checkbox-blue">
-                                    <label for="inlineCheckboxCommitManage"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    婚丧承诺书管理
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxEduLook" class="checkbox-blue">
-                                    <label for="inlineCheckboxEduLook"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    婚丧专题教育查看
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxEduManage" class="checkbox-blue">
-                                    <label for="inlineCheckboxEduManage"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    婚丧专题教育管理
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxReformLook" class="checkbox-blue">
-                                    <label for="inlineCheckboxReformLook"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    婚丧集中整改查看
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxReformManage" class="checkbox-blue">
-                                    <label for="inlineCheckboxReformManage"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    婚丧集中整改管理
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <legend>
-                                <label for="checkbox">投诉</label>
-                            </legend>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckbox4WindComplainLook" class="checkbox-blue">
-                                    <label for="inlineCheckbox4WindComplainLook"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    四风问题投诉查看
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckLetterBoxLook" class="checkbox-blue">
-                                    <label for="inlineCheckLetterBoxLook"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    纪委书记信箱查看
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxArrangeLook" class="checkbox-blue">
-                                    <label for="inlineCheckboxArrangeLook"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    大操大办查看
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxEatWantLook" class="checkbox-blue">
-                                    <label for="inlineCheckboxEatWantLook"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    吃拿卡要查看
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxComplainRepLook" class="checkbox-blue">
-                                    <label for="inlineCheckboxComplainRepLook"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    投诉举报查看
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <legend>
-                                <label for="checkbox">廉政教育</label>
-                            </legend>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxReqCourseManage" class="checkbox-blue">
-                                    <label for="inlineCheckboxReqCourseManage"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    必修课管理
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckOptCourManage" class="checkbox-blue">
-                                    <label for="inlineCheckOptCourManage"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    选修课管理
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckboxVideoManage" class="checkbox-blue">
-                                    <label for="inlineCheckboxVideoManage"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    廉政视频管理
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <legend>
-                                <label for="checkbox">系统设置</label>
-                            </legend>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckUserManage" class="checkbox-blue">
-                                    <label for="inlineCheckUserManage"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    用户管理
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckOrgManage" class="checkbox-blue">
-                                    <label for="inlineCheckOrgManage"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    组织管理
-                                </div>
-                            </div>
-                            <div class="checkbox inline-block" id="checkbox">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" id="inlineCheckRoleManage" class="checkbox-blue">
-                                    <label for="inlineCheckRoleManage"></label>
-                                </div>
-                                <div class="inline-block vertical-top">
-                                    角色管理
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
-                    <button type="button" class="btn btn-primary col-md-12">确定</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /modal -->
+	<h3 class=" m-left-xs header-text">角色管理</h3>
+	<div class="col-sm-4 col-md-4 ">
+		<!-- <div class="input-group">
+			<input type="text" class="form-control" ng-model="listObj.staff">
+			<div class="input-group-btn">
+				<button ng-click="search()" type="button" class="btn btn-info no-shadow">查询</button>
+			</div> -->
+		<!-- /input-group-btn -->
+		<!-- </div> -->
+		<!-- /input-group -->
+	</div>
+	<div class="col-sm-8 col-md-8 ">
+		<button class="btn btn-success pull-right" data-toggle="modal" data-target="#addModal" ng-click="addFun()">添加</button>
+	</div>
+	<table class="table table-striped table-responsive table-hover" id="dataTable">
+		<thead>
+			<tr>
+				<th class="col-md-8">角色名</th>
+				<th class="col-md-4">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="(key, value) in array.result">
+				<td>{{value.name}}</td>
+				<td>
+					<button data-target="#editModal" ng-click="edit()" type="button" class="btn btn-info" data-toggle="modal" >修改</button>
+					<button ng-click="del()" type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModal">删除</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<!-- /table -->
+	<!-- pagination -->
+	<div class="col-md-12">
+		<ul class="pagination col-md-9 col-sm-9">
+			<li ng-click="listObj.page=1"><a href="">«</a></li>
+			<li ng-click="prePage()">
+				<a href="">
+					<</a>
+			</li>
+			<li>
+				<input style="display: inline-block;width: 65px;height: 32px;float: left;" min="1" max="{{array.total/listObj.limit+1}}" type="number" class="form-control" ng-model="listObj.page" value="listObj.page">
+			</li>
+			<li ng-click="nextPage()"><a href="">></a></li>
+			<li ng-click="lastPage()"><a href="">»</a></li>
+			<li>
+				<button type="button" ng-click="refresh()" class="btn btn-sm btn-success"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+			</li>
+		</ul>
+		<ul class="pagination col-md-3 col-sm-3">
+			<li><a>显示{{listObj.page < 2 ? 1:(listObj.limit*(listObj.page-1))}}-{{(listObj.limit*(listObj.page-1)+listObj.limit)}}条,共{{array.total}}条</a></li>
+		</ul>
+	</div>
+	<!-- /pagination -->
+	<!-- 新增 modal -->
+	<div class="modal fade" id="addModal" aria-hidden="true" style="display: none;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title">添加</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal">
+						<div class="form-group">
+							<label for="roleName" class="col-md-1 control-label">角色名:</label>
+							<div class="col-md-11">
+								<input type="text" class="form-control" id="roleName" placeholder="角色名" ng-model="addObj.roleName">
+							</div>
+							<!-- /.col -->
+						</div>
+					</form>
+					<form>
+						<div class="form-group">
+							<legend>
+								<label for="checkbox">子系统访问</label>
+							</legend>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxWed" class="checkbox-blue"  ng-checked="check()" title="1">
+									<label for="inlineCheckboxWed"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧事宜申报
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckbox4" class="checkbox-blue"  ng-checked="check()" title="2">
+									<label for="inlineCheckbox4"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									四风问题举报
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxIncorrupt" class="checkbox-blue"  ng-checked="check()" title="3">
+									<label for="inlineCheckboxIncorrupt"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									廉政教育
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxSet" class="checkbox-blue"  ng-checked="check()" title="4">
+									<label for="inlineCheckboxSet"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									系统设置
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<legend>
+								<label for="checkbox">婚丧</label>
+							</legend>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxWedDeclare" class="checkbox-blue"  ng-checked="check()" title="1.1">
+									<label for="inlineCheckboxWedDeclare"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧申报
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxApprove" class="checkbox-blue"  ng-checked="check()" title="1.2">
+									<label for="inlineCheckboxApprove"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧审批
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxNotificate" class="checkbox-blue"  ng-checked="check()" title="1.3">
+									<label for="inlineCheckboxNotificate"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧公示
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxVison" class="checkbox-blue"  ng-checked="check()" title="1.4">
+									<label for="inlineCheckboxVison"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧现场监督
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxStastis" class="checkbox-blue"  ng-checked="check()" title="1.5">
+									<label for="inlineCheckboxStastis"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧查询统计
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxRepReg" class="checkbox-blue"  ng-checked="check()" title="1.6">
+									<label for="inlineCheckboxRepReg"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧举报登记
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxRepDeal" class="checkbox-blue"  ng-checked="check()" title="1.7">
+									<label for="inlineCheckboxRepDeal"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧举报处理
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxInvesDeal" class="checkbox-blue"  ng-checked="check()" title="1.8">
+									<label for="inlineCheckboxInvesDeal"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧查处处理
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxPublicLook" class="checkbox-blue"  ng-checked="check()" title="1.9">
+									<label for="inlineCheckboxPublicLook"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧公开通报查看
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxpublicManage" class="checkbox-blue"  ng-checked="check()" title="1.10">
+									<label for="inlineCheckboxpublicManage"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧公开通报管理
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxPunishLook" class="checkbox-blue"  ng-checked="check()" title="1.11">
+									<label for="inlineCheckboxPunishLook"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧纪律处分查看
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxPunishManage" class="checkbox-blue"  ng-checked="check()" title="1.12">
+									<label for="inlineCheckboxPunishManage"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧纪律处分管理
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxCommitLook" class="checkbox-blue"  ng-checked="check()" title="1.13">
+									<label for="inlineCheckboxCommitLook"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧承诺书查看
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxCommitManage" class="checkbox-blue"  ng-checked="check()" title="1.14">
+									<label for="inlineCheckboxCommitManage"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧承诺书管理
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxEduLook" class="checkbox-blue"  ng-checked="check()" title="1.15">
+									<label for="inlineCheckboxEduLook"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧专题教育查看
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxEduManage" class="checkbox-blue"  ng-checked="check()" title="1.16">
+									<label for="inlineCheckboxEduManage"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧专题教育管理
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxReformLook" class="checkbox-blue"  ng-checked="check()" title="1.17">
+									<label for="inlineCheckboxReformLook"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧集中整改查看
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxReformManage" class="checkbox-blue"  ng-checked="check()" title="1.18">
+									<label for="inlineCheckboxReformManage"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧集中整改管理
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<legend>
+								<label for="checkbox">投诉</label>
+							</legend>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckbox4WindComplainLook" class="checkbox-blue"  ng-checked="check()" title="2.1">
+									<label for="inlineCheckbox4WindComplainLook"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									四风问题投诉查看
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckLetterBoxLook" class="checkbox-blue"  ng-checked="check()" title="2.2">
+									<label for="inlineCheckLetterBoxLook"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									纪委书记信箱查看
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxArrangeLook" class="checkbox-blue"  ng-checked="check()" title="2.3">
+									<label for="inlineCheckboxArrangeLook"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									大操大办查看
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxEatWantLook" class="checkbox-blue"  ng-checked="check()" title="2.4">
+									<label for="inlineCheckboxEatWantLook"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									吃拿卡要查看
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxComplainRepLook" class="checkbox-blue"  ng-checked="check()" title="2.5">
+									<label for="inlineCheckboxComplainRepLook"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									投诉举报查看
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<legend>
+								<label for="checkbox">廉政教育</label>
+							</legend>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxReqCourseManage" class="checkbox-blue"  ng-checked="check()" title="3.1">
+									<label for="inlineCheckboxReqCourseManage"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									必修课管理
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckOptCourManage" class="checkbox-blue"  ng-checked="check()" title="3.2">
+									<label for="inlineCheckOptCourManage"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									选修课管理
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxVideoManage" class="checkbox-blue"  ng-checked="check()" title="3.3">
+									<label for="inlineCheckboxVideoManage"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									廉政视频管理
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<legend>
+								<label for="checkbox">系统设置</label>
+							</legend>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckUserManage" class="checkbox-blue"  ng-checked="check()" title="4.1">
+									<label for="inlineCheckUserManage"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									用户管理
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckOrgManage" class="checkbox-blue"  ng-checked="check()" title="4.2">
+									<label for="inlineCheckOrgManage"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									组织管理
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckRoleManage" class="checkbox-blue"  ng-checked="check()" title="4.3">
+									<label for="inlineCheckRoleManage"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									角色管理
+								</div>
+							</div>
+						</div>
+				</div>
+				<div class="modal-footer">
+					<!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
+					<button class="btn btn-primary col-md-12" ng-click="add()" data-dismiss="modal">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /modal -->
+	<!-- 修改 modal -->
+	<div class="modal fade" id="editModal" aria-hidden="true" style="display: none;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title">修改</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal">
+						<div class="form-group">
+							<label for="roleName" class="col-md-1 control-label">角色名:</label>
+							<div class="col-md-11">
+								<input type="text" class="form-control" id="roleName" placeholder="角色名" ng-model="editObj.roleName">
+							</div>
+							<!-- /.col -->
+						</div>
+					</form>
+					<form>
+						<div class="form-group">
+							<legend>
+								<label for="checkbox">子系统访问</label>
+							</legend>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxWededit" class="checkbox-blue" ng-click="clickfunbtn()" title="1" >
+									<label for="inlineCheckboxWededit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧事宜申报
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckbox4edit" class="checkbox-blue" ng-click="clickfunbtn()" title="2">
+									<label for="inlineCheckbox4edit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									四风问题举报
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxIncorruptedit" class="checkbox-blue" ng-click="clickfunbtn()" title="3">
+									<label for="inlineCheckboxIncorruptedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									廉政教育
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxSetedit" class="checkbox-blue" ng-click="clickfunbtn()" title="4">
+									<label for="inlineCheckboxSetedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									系统设置
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<legend>
+								<label for="checkbox">婚丧</label>
+							</legend>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxWedDeclareedit" class="checkbox-blue" ng-click="clickfunbtn()" title="1.1">
+									<label for="inlineCheckboxWedDeclareedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧申报
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxApproveedit" class="checkbox-blue" ng-click="clickfunbtn()" title="1.2">
+									<label for="inlineCheckboxApproveedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧审批
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxNotificateedit" class="checkbox-blue" ng-click="clickfunbtn()" title="1.3">
+									<label for="inlineCheckboxNotificateedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧公示
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxVisonedit" class="checkbox-blue" ng-click="clickfunbtn()" title="1.4">
+									<label for="inlineCheckboxVisonedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧现场监督
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxStastisedit" class="checkbox-blue" ng-click="clickfunbtn()" title="1.5">
+									<label for="inlineCheckboxStastisedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧查询统计
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxRepRegedit" class="checkbox-blue" ng-click="clickfunbtn()" title="1.6">
+									<label for="inlineCheckboxRepRegedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧举报登记
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxRepDealedit" class="checkbox-blue" ng-click="clickfunbtn()" title="1.7">
+									<label for="inlineCheckboxRepDealedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧举报处理
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxInvesDealedit" class="checkbox-blue" ng-click="clickfunbtn()" title="1.8">
+									<label for="inlineCheckboxInvesDealedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧查处处理
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxPublicLookedit" class="checkbox-blue" ng-click="clickfunbtn()" title="1.9">
+									<label for="inlineCheckboxPublicLookedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧公开通报查看
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxpublicManageedit" class="checkbox-blue" ng-click="clickfunbtn()" title="1.10">
+									<label for="inlineCheckboxpublicManageedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧公开通报管理
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxPunishLookedit" class="checkbox-blue" ng-click="clickfunbtn()" title="1.11">
+									<label for="inlineCheckboxPunishLookedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧纪律处分查看
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxPunishManageedit" class="checkbox-blue" ng-click="clickfunbtn()" title="1.12">
+									<label for="inlineCheckboxPunishManageedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧纪律处分管理
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxCommitLookedit" class="checkbox-blue" ng-click="clickfunbtn()" title="1.13">
+									<label for="inlineCheckboxCommitLookedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧承诺书查看
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxCommitManageedit" class="checkbox-blue" ng-click="clickfunbtn()" title="1.14">
+									<label for="inlineCheckboxCommitManageedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧承诺书管理
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxEduLookedit" class="checkbox-blue" ng-click="clickfunbtn()" title="1.15">
+									<label for="inlineCheckboxEduLookedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧专题教育查看
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxEduManageedit" class="checkbox-blue" ng-click="clickfunbtn()" title="1.16">
+									<label for="inlineCheckboxEduManageedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧专题教育管理
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxReformLookedit" class="checkbox-blue" ng-click="clickfunbtn()" title="1.17">
+									<label for="inlineCheckboxReformLookedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧集中整改查看
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxReformManageedit" class="checkbox-blue" ng-click="clickfunbtn()" title="1.18">
+									<label for="inlineCheckboxReformManageedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									婚丧集中整改管理
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<legend>
+								<label for="checkbox">投诉</label>
+							</legend>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckbox4WindComplainLookedit" class="checkbox-blue" ng-click="clickfunbtn()" title="2.1">
+									<label for="inlineCheckbox4WindComplainLookedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									四风问题投诉查看
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckLetterBoxLookedit" class="checkbox-blue" ng-click="clickfunbtn()" title="2.2">
+									<label for="inlineCheckLetterBoxLookedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									纪委书记信箱查看
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxArrangeLookedit" class="checkbox-blue" ng-click="clickfunbtn()" title="2.3">
+									<label for="inlineCheckboxArrangeLookedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									大操大办查看
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxEatWantLookedit" class="checkbox-blue" ng-click="clickfunbtn()" title="2.4">
+									<label for="inlineCheckboxEatWantLookedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									吃拿卡要查看
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxComplainRepLookedit" class="checkbox-blue" ng-click="clickfunbtn()" title="2.5">
+									<label for="inlineCheckboxComplainRepLookedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									投诉举报查看
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<legend>
+								<label for="checkbox">廉政教育</label>
+							</legend>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxReqCourseManageedit" class="checkbox-blue" ng-click="clickfunbtn()" title="3.1">
+									<label for="inlineCheckboxReqCourseManageedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									必修课管理
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckOptCourManageedit" class="checkbox-blue" ng-click="clickfunbtn()" title="3.2">
+									<label for="inlineCheckOptCourManageedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									选修课管理
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckboxVideoManageedit" class="checkbox-blue" ng-click="clickfunbtn()" title="3.3">
+									<label for="inlineCheckboxVideoManageedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									廉政视频管理
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<legend>
+								<label for="checkbox">系统设置</label>
+							</legend>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckUserManageedit" class="checkbox-blue" ng-click="clickfunbtn()" title="4.1">
+									<label for="inlineCheckUserManageedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									用户管理
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckOrgManageedit" class="checkbox-blue" ng-click="clickfunbtn()" title="4.2">
+									<label for="inlineCheckOrgManageedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									组织管理
+								</div>
+							</div>
+							<div class="checkbox inline-block" id="checkbox">
+								<div class="custom-checkbox">
+									<input type="checkbox" id="inlineCheckRoleManageedit" class="checkbox-blue" ng-click="clickfunbtn()" title="4.3">
+									<label for="inlineCheckRoleManageedit"></label>
+								</div>
+								<div class="inline-block vertical-top">
+									角色管理
+								</div>
+							</div>
+						</div>
+				</div>
+				<div class="modal-footer">
+					<!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
+					<button class="btn btn-primary col-md-12" ng-click="editConfirm()" data-dismiss="modal">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /modal -->
 </div>

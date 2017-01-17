@@ -1,7 +1,17 @@
 <div>
     <h3 class=" m-left-xs header-text">用户管理</h3>
-    <div class="col-md-12">
-        <button class="btn btn-success pull-right" data-toggle="modal" data-target="#normalModal">新增</button>
+    <div class="col-sm-4 col-md-4 ">
+        <!-- <div class="input-group">
+            <input type="text" class="form-control" ng-model="listObj.staff">
+            <div class="input-group-btn">
+                <button ng-click="search()" type="button" class="btn btn-info no-shadow">查询</button>
+            </div> -->
+            <!-- /input-group-btn -->
+        <!-- </div> -->
+        <!-- /input-group -->
+    </div>
+    <div class="col-sm-8 col-md-8 ">
+        <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addModal" ng-click="addFun()">添加</button>
     </div>
     <table class="table table-striped table-responsive table-hover" id="dataTable">
         <thead>
@@ -13,49 +23,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>#1001</td>
-                <td>Leather Bag</td>
-                <td>Oct 08,2013</td>
+            <tr ng-repeat="(key, value) in array.result">
+                <td>{{value.username}}</td>
+                <td>{{value.name}}</td>
+                <td>{{value.orgName}}</td>
                 <td>
-                    <button type="button" class="btn btn-info">修改</button>
-                    <button type="button" class="btn btn-danger">删除</button>
-                </td>
-            </tr>
-            <tr>
-                <td>#1001</td>
-                <td>Leather Bag</td>
-                <td>Oct 08,2013</td>
-                <td>
-                    <button type="button" class="btn btn-info">修改</button>
-                    <button type="button" class="btn btn-danger">删除</button>
-                </td>
-            </tr>
-            <tr>
-                <td>#1001</td>
-                <td>Leather Bag</td>
-                <td>Oct 08,2013</td>
-                <td>
-                    <button type="button" class="btn btn-info">修改</button>
-                    <button type="button" class="btn btn-danger">删除</button>
-                </td>
-            </tr>
-            <tr>
-                <td>#1001</td>
-                <td>Leather Bag</td>
-                <td>Oct 08,2013</td>
-                <td>
-                    <button type="button" class="btn btn-info">修改</button>
-                    <button type="button" class="btn btn-danger">删除</button>
-                </td>
-            </tr>
-            <tr>
-                <td>#1001</td>
-                <td>Leather Bag</td>
-                <td>Oct 08,2013</td>
-                <td>
-                    <button type="button" class="btn btn-info">修改</button>
-                    <button type="button" class="btn btn-danger">删除</button>
+                    <button ng-click="edit()" type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal">修改</button>
+                    <button ng-click="del()" type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModal">删除</button>
                 </td>
             </tr>
         </tbody>
@@ -63,57 +37,56 @@
     <!-- /table -->
     <!-- pagination -->
     <div class="col-md-12">
-        <ul class="pagination col-md-9">
-            <li class="disabled"><a href="">«</a></li>
-            <li class="disabled">
+        <ul class="pagination col-md-9 col-sm-9">
+            <li ng-click="listObj.page=1"><a href="">«</a></li>
+            <li ng-click="prePage()">
                 <a href="">
                     <</a>
             </li>
-            <li class="active"><a href="">1</a></li>
-            <li><a href="">2</a></li>
-            <li><a href="">3</a></li>
-            <li><a href="">4</a></li>
-            <li><a href="">5</a></li>
-            <li><a href="">></a></li>
-            <li><a href="">»</a></li>
             <li>
-                <button type="button" class="btn btn-sm btn-success">刷新</button>
+                <input style="display: inline-block;width: 65px;height: 32px;float: left;" min="1" max="{{array.total/listObj.limit+1}}" type="number" class="form-control" ng-model="listObj.page" value="listObj.page">
+            </li>
+            <li ng-click="nextPage()"><a href="">></a></li>
+            <li ng-click="lastPage()"><a href="">»</a></li>
+            <li>
+                <button type="button" ng-click="refresh()" class="btn btn-sm btn-success"><i class="fa fa-refresh" aria-hidden="true"></i></button>
             </li>
         </ul>
-        <ul class="pagination col-md-3">
-            <li><a>显示311-161条,共800条</a></li>
+        <ul class="pagination col-md-3 col-sm-3">
+            <li><a>显示{{listObj.page < 2 ? 1:(listObj.limit*(listObj.page-1))}}-{{(listObj.limit*(listObj.page-1)+listObj.limit)}}条,共{{array.total}}条</a></li>
         </ul>
     </div>
     <!-- /pagination -->
-    <!-- modal -->
-    <div class="modal fade" id="normalModal" aria-hidden="true" style="display: none;">
+    <!-- 新增 modal -->
+    <div class="modal fade" id="addModal" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">添加用户</h4>
+                    <h4 class="modal-title">添加</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <label for="inputUserName" class="col-lg-2 control-label">用户名:</label>
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" id="inputUserName" placeholder="用户名">
+                    <form class="form-horizontal" role="form" name="myForm" novalidate="novalidate">
+                        <div class="form-group" >
+                            <label for="inputTitle" class="col-lg-2 control-label">用户名:</label>
+                            <div class="col-lg-10 " ng-class="{'has-error':myForm.username.$error.required&&myForm.username.$dirty,'has-success':myForm.username.$valid&&myForm.username.$dirty}">
+                                <input type="text" required class="form-control" id="inputTitle" placeholder="用户名" ng-model="addObj.username" name="username" ng-model-option="{updataOn:'blur',debounce :'500'}">
                             </div>
                             <!-- /.col -->
                         </div>
                         <div class="form-group">
-                            <label for="inputName" class="col-lg-2 control-label">姓名:</label>
+                            <label  class="col-lg-2 control-label">姓名:</label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" id="inputName" placeholder="姓名">
+                                <input type="text" required class="form-control"  placeholder="姓名" ng-model="addObj.name" name="name" ng-model-option="{updataOn:'blur',debounce :'500'}">
                             </div>
                             <!-- /.col -->
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">部门:</label>
                             <div class="col-lg-10">
-                                <select class="form-control">
-                                    <option>根组织</option>
+                                <select class="form-control" required ng-model="departArr.name" name="depart" ng-model-option="{updataOn:'blur',debounce :'500'}">
+                                <option>{{departArr.name}}</option>}
+                                option
                                 </select>
                             </div>
                             <!-- /.col -->
@@ -121,32 +94,100 @@
                         <div class="form-group">
                             <label for="inputPassword" class="col-lg-2 control-label">密码:</label>
                             <div class="col-lg-10">
-                                <input type="password" class="form-control" id="inputPassword" placeholder="密码">
+                                <input type="password" required class="form-control" id="inputPassword" placeholder="密码" ng-model="addObj.password" name="password" ng-model-option="{updataOn:'blur',debounce :'500'}">
                             </div>
                             <!-- /.col -->
                         </div>
                         <div class="form-group">
-                            <label for="inputPasswordConfirm" class="col-lg-2 control-label">确认密码:</label>
+                            <label  class="col-lg-2 control-label">确认密码:</label>
                             <div class="col-lg-10">
-                                <input type="password" class="form-control" id="inputPasswordConfirm" placeholder="确认密码">
+                                <input type="password" required class="form-control"  placeholder="确认密码" name="passwordConfirm" ng-model-option="{updataOn:'blur',debounce :'500'}">
                             </div>
                             <!-- /.col -->
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">角色:</label>
                             <div class="col-lg-10">
-                                <select class="form-control">
-                                    <option>根组织</option>
+                                <select name="role" required class="form-control" ng-options="value as value.name for value in roleArr" ng-model="value" ng-change="roleChange(value)" ng-model-option="{updataOn:'blur',debounce :'500'}">
                                 </select>
                             </div>
                             <!-- /.col -->
                         </div>
+                        
                         <!-- /form-group -->
                     </form>
                 </div>
                 <div class="modal-footer">
                     <!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
-                    <button type="button" class="btn btn-primary col-md-12">确定</button>
+                    <button class="btn btn-primary col-md-12" ng-click="add()" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /modal -->
+    <!-- 修改 modal -->
+    <div class="modal fade" id="editModal" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">添加</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputTitle" class="col-lg-2 control-label">用户名:</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="inputTitle" placeholder="用户名" ng-model="editUsername" readonly="">
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <div class="form-group">
+                            <label for="inputTitle" class="col-lg-2 control-label">姓名:</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="inputTitle" placeholder="姓名" ng-model="editObj.name">
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">部门:</label>
+                            <div class="col-lg-10">
+                                <select class="form-control" ng-model="departArr.name">
+                                <option>{{departArr.name}}</option>}
+                                option
+                                </select>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="col-lg-2 control-label">密码:</label>
+                            <div class="col-lg-10">
+                                <input type="password" class="form-control" id="inputPassword" placeholder="留空则不修改密码" ng-model="editObj.password">
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPasswordConfirm" class="col-lg-2 control-label">确认密码:</label>
+                            <div class="col-lg-10">
+                                <input type="password" class="form-control" id="inputPasswordConfirm" placeholder="留空则不修改密码">
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">角色:</label>
+                            <div class="col-lg-10">
+                                <select class="form-control" ng-options="value as value.name for value in roleArr" ng-model="value" ng-change="roleChange(value)">
+                                </select>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        
+                        <!-- /form-group -->
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
+                    <button class="btn btn-primary col-md-12" ng-click="editConfirm()" data-dismiss="modal">确定</button>
                 </div>
             </div>
         </div>

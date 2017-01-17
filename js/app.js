@@ -126,7 +126,7 @@ angular.module('app', ['app.controllers', 'app.services','ui.router', 'oc.lazyLo
                 views: {
                     'content': {
                         templateUrl: 'templates/usermanage.html',
-                        controller: 'mainCtrl'
+                        controller: 'usermanageCtrl'
                     }
                 }
             })
@@ -136,7 +136,7 @@ angular.module('app', ['app.controllers', 'app.services','ui.router', 'oc.lazyLo
                 views: {
                     'content': {
                         templateUrl: 'templates/rolemanage.html',
-                        controller: 'mainCtrl'
+                        controller: 'rolemanageCtrl'
                     }
                 }
             })
