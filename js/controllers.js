@@ -11,6 +11,7 @@ angular.module('app.controllers', [])
 					console.log(arguments);
 					console.log(data.data.result.token);
 					sessionStorage.setItem('token', data.data.result.token);
+					sessionStorage.setItem('userInfo', JSON.stringify(data.data.result.user));
 					if (data.data.result.token) {
 						$state.go('main');
 					}
@@ -22,53 +23,76 @@ angular.module('app.controllers', [])
 	})
 	//main 主页面控制
 	.controller('mainCtrl', function($scope, $state) {
-        //控制侧边栏折叠,头部隐藏显示
-        $(function	()	{
+		//获取用户信息
+		$scope.userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+		console.log($scope.userInfo);
+		//退出登录
+		$scope.logout = function() {
+				//sweetalert
+				swal({
+						title: "确认退出?",
+						type: "warning",
+						showCancelButton: true,
+						confirmButtonColor: "#DD6B55",
+						confirmButtonText: "退出",
+						closeOnConfirm: false,
+						showLoaderOnConfirm: true,
+					},
+					function() {
+						sessionStorage.removeItem('token');
+						sessionStorage.removeItem('userInfo');
+						swal("退出!", "", "success");
+						setTimeout(function() {
+							swal.close();
+							$state.go('login');
+						}, 1000)
+					});
+			}
+			//控制侧边栏折叠,头部隐藏显示
+		$(function() {
 
-            //控制侧边栏折叠
-            $('.sidebar-menu .openable > a').click(function()	{
+			//控制侧边栏折叠
+			$('.sidebar-menu .openable > a').click(function() {
 
-                if(!$('aside').hasClass('sidebar-mini') || Modernizr.mq('(max-width: 991px)'))	{
-                    if( $(this).parent().children('.submenu').is(':hidden') ) {
-                        $(this).parent().siblings().removeClass('open').children('.submenu').slideUp(200);
-                        $(this).parent().addClass('open').children('.submenu').slideDown(200);
-                    }
-                    else	{
-                        $(this).parent().removeClass('open').children('.submenu').slideUp(200);
-                    }
-                }
-                return false;
+				if (!$('aside').hasClass('sidebar-mini') || Modernizr.mq('(max-width: 991px)')) {
+					if ($(this).parent().children('.submenu').is(':hidden')) {
+						$(this).parent().siblings().removeClass('open').children('.submenu').slideUp(200);
+						$(this).parent().addClass('open').children('.submenu').slideDown(200);
+					} else {
+						$(this).parent().removeClass('open').children('.submenu').slideUp(200);
+					}
+				}
+				return false;
 
-            });
+			});
 
-            //Open active menu
-            if(!$('.sidebar-menu').hasClass('sidebar-mini') || Modernizr.mq('(max-width: 767px)'))	{
-                $('.openable.open').children('.submenu').slideDown(200);
-            }
+			//Open active menu
+			if (!$('.sidebar-menu').hasClass('sidebar-mini') || Modernizr.mq('(max-width: 767px)')) {
+				$('.openable.open').children('.submenu').slideDown(200);
+			}
 
-            //顶部三杠按钮切换侧边栏隐藏显示
-            $('#sidebarToggleLG').click(function()	{
-                if($('.wrapper').hasClass('display-right'))	{
-                    $('.wrapper').removeClass('display-right');
-                    $('.sidebar-right').removeClass('active');
-                }
-                else	{
-                    //$('.nav-header').toggleClass('hide');
-                    $('.top-nav').toggleClass('sidebar-mini');
-                    $('aside').toggleClass('sidebar-mini');
-                    $('footer').toggleClass('sidebar-mini');
-                    $('.main-container').toggleClass('sidebar-mini');
+			//顶部三杠按钮切换侧边栏隐藏显示
+			$('#sidebarToggleLG').click(function() {
+				if ($('.wrapper').hasClass('display-right')) {
+					$('.wrapper').removeClass('display-right');
+					$('.sidebar-right').removeClass('active');
+				} else {
+					//$('.nav-header').toggleClass('hide');
+					$('.top-nav').toggleClass('sidebar-mini');
+					$('aside').toggleClass('sidebar-mini');
+					$('footer').toggleClass('sidebar-mini');
+					$('.main-container').toggleClass('sidebar-mini');
 
-                    $('.main-menu').find('.openable').removeClass('open');
-                    $('.main-menu').find('.submenu').removeAttr('style');
-                }
-            });
+					$('.main-menu').find('.openable').removeClass('open');
+					$('.main-menu').find('.submenu').removeAttr('style');
+				}
+			});
 
-            $('#sidebarToggleSM').click(function()	{
-                $('aside').toggleClass('active');
-                $('.wrapper').toggleClass('display-left');
-            });
-        });
+			$('#sidebarToggleSM').click(function() {
+				$('aside').toggleClass('active');
+				$('.wrapper').toggleClass('display-left');
+			});
+		});
 	})
 	// Declare申报页面控制
 	.controller('declareCtrl', function($scope, $state, DeclareServe) {
@@ -123,7 +147,30 @@ angular.module('app.controllers', [])
 				.then(function(data) {
 					console.log(data);
 					if (data.data.success) {
-						alert('成功');
+						swal({
+							title: "成功",
+							text: "",
+							timer: 1000,
+							type: "success",
+							showConfirmButton: false
+						});
+					} else if (data.data.error.code) {
+						swal({
+								title: data.data.error.message,
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "确认",
+								closeOnConfirm: false,
+								showLoaderOnConfirm: true,
+							},
+							function() {
+								swal("跳转……", "", "success");
+								setTimeout(function() {
+									swal.close();
+									$state.go('login');
+								}, 1000)
+							});
 					}
 				}, function(error) {
 					console.log(error);
@@ -150,6 +197,24 @@ angular.module('app.controllers', [])
 				.then(function(data) {
 					console.log(data);
 					$scope.array = data.data;
+					if (data.data.error.code) {
+						swal({
+								title: data.data.error.message,
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "确认",
+								closeOnConfirm: false,
+								showLoaderOnConfirm: true,
+							},
+							function() {
+								swal("跳转……", "", "success");
+								setTimeout(function() {
+									swal.close();
+									$state.go('login');
+								}, 1000)
+							});
+					}
 				}, function(error) {
 					console.log(error);
 				})
@@ -178,6 +243,23 @@ angular.module('app.controllers', [])
 							type: "success",
 							showConfirmButton: false
 						});
+					} else if (data.data.error.code) {
+						swal({
+								title: data.data.error.message,
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "确认",
+								closeOnConfirm: false,
+								showLoaderOnConfirm: true,
+							},
+							function() {
+								swal("跳转……", "", "success");
+								setTimeout(function() {
+									swal.close();
+									$state.go('login');
+								}, 1000)
+							});
 					};
 				}, function(error) {
 					console.log(error);
@@ -212,6 +294,23 @@ angular.module('app.controllers', [])
 									swal.close();
 								}, 1000)
 								$scope.refresh();
+							} else if (data.data.error.code) {
+								swal({
+										title: data.data.error.message,
+										type: "warning",
+										showCancelButton: true,
+										confirmButtonColor: "#DD6B55",
+										confirmButtonText: "确认",
+										closeOnConfirm: false,
+										showLoaderOnConfirm: true,
+									},
+									function() {
+										swal("跳转……", "", "success");
+										setTimeout(function() {
+											swal.close();
+											$state.go('login');
+										}, 1000)
+									});
 							};
 						}, function(error) {
 							console.log(error);
@@ -262,6 +361,23 @@ angular.module('app.controllers', [])
 							type: "success",
 							showConfirmButton: false
 						});
+					} else if (data.data.error.code) {
+						swal({
+								title: data.data.error.message,
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "确认",
+								closeOnConfirm: false,
+								showLoaderOnConfirm: true,
+							},
+							function() {
+								swal("跳转……", "", "success");
+								setTimeout(function() {
+									swal.close();
+									$state.go('login');
+								}, 1000)
+							});
 					};
 				}, function(error) {
 					console.log(error);
@@ -284,6 +400,23 @@ angular.module('app.controllers', [])
 					if (data.data.success) {
 						$scope.detailArr = data.data.result;
 						console.log(data);
+					} else if (data.data.error.code) {
+						swal({
+								title: data.data.error.message,
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "确认",
+								closeOnConfirm: false,
+								showLoaderOnConfirm: true,
+							},
+							function() {
+								swal("跳转……", "", "success");
+								setTimeout(function() {
+									swal.close();
+									$state.go('login');
+								}, 1000)
+							});
 					};
 				}, function(error) {
 					console.log(error);
@@ -335,6 +468,24 @@ angular.module('app.controllers', [])
 				.then(function(data) {
 					console.log(data);
 					$scope.array = data.data;
+					if (data.data.error.code) {
+						swal({
+								title: data.data.error.message,
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "确认",
+								closeOnConfirm: false,
+								showLoaderOnConfirm: true,
+							},
+							function() {
+								swal("跳转……", "", "success");
+								setTimeout(function() {
+									swal.close();
+									$state.go('login');
+								}, 1000)
+							});
+					}
 				}, function(error) {
 					console.log(error);
 				})
@@ -363,6 +514,23 @@ angular.module('app.controllers', [])
 							type: "success",
 							showConfirmButton: false
 						});
+					} else if (data.data.error.code) {
+						swal({
+								title: data.data.error.message,
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "确认",
+								closeOnConfirm: false,
+								showLoaderOnConfirm: true,
+							},
+							function() {
+								swal("跳转……", "", "success");
+								setTimeout(function() {
+									swal.close();
+									$state.go('login');
+								}, 1000)
+							});
 					};
 				}, function(error) {
 					console.log(error);
@@ -397,6 +565,23 @@ angular.module('app.controllers', [])
 									swal.close();
 								}, 1000)
 								$scope.refresh();
+							} else if (data.data.error.code) {
+								swal({
+										title: data.data.error.message,
+										type: "warning",
+										showCancelButton: true,
+										confirmButtonColor: "#DD6B55",
+										confirmButtonText: "确认",
+										closeOnConfirm: false,
+										showLoaderOnConfirm: true,
+									},
+									function() {
+										swal("跳转……", "", "success");
+										setTimeout(function() {
+											swal.close();
+											$state.go('login');
+										}, 1000)
+									});
 							};
 						}, function(error) {
 							console.log(error);
@@ -447,6 +632,23 @@ angular.module('app.controllers', [])
 							type: "success",
 							showConfirmButton: false
 						});
+					} else if (data.data.error.code) {
+						swal({
+								title: data.data.error.message,
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "确认",
+								closeOnConfirm: false,
+								showLoaderOnConfirm: true,
+							},
+							function() {
+								swal("跳转……", "", "success");
+								setTimeout(function() {
+									swal.close();
+									$state.go('login');
+								}, 1000)
+							});
 					};
 				}, function(error) {
 					console.log(error);
@@ -469,6 +671,23 @@ angular.module('app.controllers', [])
 					if (data.data.success) {
 						$scope.detailArr = data.data.result;
 						console.log(data);
+					} else if (data.data.error.code) {
+						swal({
+								title: data.data.error.message,
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "确认",
+								closeOnConfirm: false,
+								showLoaderOnConfirm: true,
+							},
+							function() {
+								swal("跳转……", "", "success");
+								setTimeout(function() {
+									swal.close();
+									$state.go('login');
+								}, 1000)
+							});
 					};
 				}, function(error) {
 					console.log(error);
@@ -520,6 +739,24 @@ angular.module('app.controllers', [])
 				.then(function(data) {
 					console.log(data);
 					$scope.array = data.data;
+					if (data.data.error.code) {
+						swal({
+								title: data.data.error.message,
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "确认",
+								closeOnConfirm: false,
+								showLoaderOnConfirm: true,
+							},
+							function() {
+								swal("跳转……", "", "success");
+								setTimeout(function() {
+									swal.close();
+									$state.go('login');
+								}, 1000)
+							});
+					}
 				}, function(error) {
 					console.log(error);
 				})
@@ -574,10 +811,30 @@ angular.module('app.controllers', [])
 			UsermanageServe.add($scope.addObj)
 				.then(function(data) {
 					console.log(data);
-					swal("添加成功!", "", "success");
-					setTimeout(function() {
-						swal.close();
-					}, 1000)
+					if (data.data.success) {
+						swal("添加成功!", "", "success");
+						setTimeout(function() {
+							swal.close();
+						}, 1000)
+						$scope.refresh();
+					} else if (data.data.error.code) {
+						swal({
+								title: data.data.error.message,
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "确认",
+								closeOnConfirm: false,
+								showLoaderOnConfirm: true,
+							},
+							function() {
+								swal("跳转……", "", "success");
+								setTimeout(function() {
+									swal.close();
+									$state.go('login');
+								}, 1000)
+							});
+					}
 				}, function(error) {
 					console.log(error);
 				})
@@ -612,6 +869,23 @@ angular.module('app.controllers', [])
 									swal.close();
 								}, 1000)
 								$scope.refresh();
+							} else if (data.data.error.code) {
+								swal({
+										title: data.data.error.message,
+										type: "warning",
+										showCancelButton: true,
+										confirmButtonColor: "#DD6B55",
+										confirmButtonText: "确认",
+										closeOnConfirm: false,
+										showLoaderOnConfirm: true,
+									},
+									function() {
+										swal("跳转……", "", "success");
+										setTimeout(function() {
+											swal.close();
+											$state.go('login');
+										}, 1000)
+									});
 							};
 						}, function(error) {
 							console.log(error);
@@ -662,6 +936,23 @@ angular.module('app.controllers', [])
 							type: "success",
 							showConfirmButton: false
 						});
+					} else if (data.data.error.code) {
+						swal({
+								title: data.data.error.message,
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "确认",
+								closeOnConfirm: false,
+								showLoaderOnConfirm: true,
+							},
+							function() {
+								swal("跳转……", "", "success");
+								setTimeout(function() {
+									swal.close();
+									$state.go('login');
+								}, 1000)
+							});
 					};
 				}, function(error) {
 					console.log(error);
@@ -701,8 +992,7 @@ angular.module('app.controllers', [])
 		});
 	})
 	//usermanage用户管理页面控制结束
-
-// rolemanage角色管理页面控制
+	// rolemanage角色管理页面控制
 	.controller('rolemanageCtrl', function($scope, $state, $timeout, RolemanageServe) {
 		//获取列表params 对象
 		$scope.listObj = {
@@ -745,17 +1035,36 @@ angular.module('app.controllers', [])
 			RolemanageServe.add($scope.addObj.token, $scope.addObj.roleName, $scope.addObj.functionCodes)
 				.then(function(data) {
 					console.log(data);
-					swal("添加成功!", "", "success");
-					setTimeout(function() {
-							swal.close();
-						}, 1000)
-						//清除选中状态
-					$('#addModal [type="checkbox"]').each(function(index, el) {
-						el.checked=false;
-					})
-					functionCodesArr = []; //成功后清除参数的对象
-					$scope.addObj.roleName = ''; //成功后清除参数的对象
-
+					if (data.data.success) {
+						swal("添加成功!", "", "success");
+						setTimeout(function() {
+								swal.close();
+							}, 1000)
+							//清除选中状态
+						$('#addModal [type="checkbox"]').each(function(index, el) {
+							el.checked = false;
+						})
+						functionCodesArr = []; //成功后清除参数的对象
+						$scope.addObj.roleName = ''; //成功后清除参数的对象
+						$scope.refresh();
+					} else if (data.data.error.code) {
+						swal({
+								title: data.data.error.message,
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "确认",
+								closeOnConfirm: false,
+								showLoaderOnConfirm: true,
+							},
+							function() {
+								swal("跳转……", "", "success");
+								setTimeout(function() {
+									swal.close();
+									$state.go('login');
+								}, 1000)
+							});
+					}
 				}, function(error) {
 					console.log(error);
 					swal({
@@ -797,6 +1106,23 @@ angular.module('app.controllers', [])
 									swal.close();
 								}, 1000)
 								$scope.refresh();
+							} else if (data.data.error.code) {
+								swal({
+										title: data.data.error.message,
+										type: "warning",
+										showCancelButton: true,
+										confirmButtonColor: "#DD6B55",
+										confirmButtonText: "确认",
+										closeOnConfirm: false,
+										showLoaderOnConfirm: true,
+									},
+									function() {
+										swal("跳转……", "", "success");
+										setTimeout(function() {
+											swal.close();
+											$state.go('login');
+										}, 1000)
+									});
 							};
 						}, function(error) {
 							console.log(error);
@@ -810,8 +1136,8 @@ angular.module('app.controllers', [])
 				token: sessionStorage.getItem('token'),
 				roleId: this.value.id //角色ID
 			};
-			$scope.editObj.roleId=this.value.id;//下方editObj内roleId赋值
-			$scope.editObj.roleName = this.value.name;//下方editObj内roleName赋值
+			$scope.editObj.roleId = this.value.id; //下方editObj内roleId赋值
+			$scope.editObj.roleName = this.value.name; //下方editObj内roleName赋值
 			console.log(this.value);
 			RolemanageServe.getById(getObj)
 				.then(function(data) {
@@ -821,12 +1147,29 @@ angular.module('app.controllers', [])
 						var getCodeArr = data.data.result.functions;
 						//获取到的角色 checked状态,同步到dom
 						$('#editModal [type="checkbox"]').each(function(index, element) {
-							getCodeArr.forEach(function (el,i) {
-								if (element.title==el.code) {
-									element.checked=true;
+							getCodeArr.forEach(function(el, i) {
+								if (element.title == el.code) {
+									element.checked = true;
 								}
 							})
 						});
+					} else if (data.data.error.code) {
+						swal({
+								title: data.data.error.message,
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "确认",
+								closeOnConfirm: false,
+								showLoaderOnConfirm: true,
+							},
+							function() {
+								swal("跳转……", "", "success");
+								setTimeout(function() {
+									swal.close();
+									$state.go('login');
+								}, 1000)
+							});
 					};
 				}, function(er) {
 					console.log(er);
@@ -836,7 +1179,7 @@ angular.module('app.controllers', [])
 		$scope.editObj = {
 			token: sessionStorage.getItem('token'), //  令牌
 			roleName: '', //    角色名
-			roleId:'',
+			roleId: '',
 			functionCodes: ''
 		};
 		//修改确认按钮函数 
@@ -848,7 +1191,7 @@ angular.module('app.controllers', [])
 				}
 			});
 			$scope.editObj.functionCodes = functionCodesArr.join('&functionCodes=');
-			RolemanageServe.edit($scope.editObj.token, $scope.editObj.roleName,$scope.editObj.roleId, $scope.editObj.functionCodes)
+			RolemanageServe.edit($scope.editObj.token, $scope.editObj.roleName, $scope.editObj.roleId, $scope.editObj.functionCodes)
 				.then(function(data) {
 					console.log(data);
 					if (data.data.success) {
@@ -861,6 +1204,23 @@ angular.module('app.controllers', [])
 							type: "success",
 							showConfirmButton: false
 						});
+					} else if (data.data.error.code) {
+						swal({
+								title: data.data.error.message,
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "确认",
+								closeOnConfirm: false,
+								showLoaderOnConfirm: true,
+							},
+							function() {
+								swal("跳转……", "", "success");
+								setTimeout(function() {
+									swal.close();
+									$state.go('login');
+								}, 1000)
+							});
 					};
 				}, function(error) {
 					console.log(error);
@@ -902,197 +1262,281 @@ angular.module('app.controllers', [])
 	//rolemanage角色管理页面控制结束
 
 
-    //精确查询precisequery
-    .controller('precisequeryCtrl', function($scope, $state,PrecisequeryServe) {
-        $scope.organizArr=[{organiz:'根组织',key:'1'}];
-        $scope.token=sessionStorage.getItem("token");
-        console.log($scope.token);
-        $scope.preciseSearch=function () {
-            $scope.precisequeryobj={
-                token:$scope.token,//令牌
-                staff:$scope.staff,//申报人
-                page:1,//当前页
-                start:0,//从哪个开始
-                limit:10,//每页显示多少个
-                staffOrgId:$scope.organization.key//所属部门(根组织)
-            }
+//精确查询precisequery
+.controller('precisequeryCtrl', function($scope, $state, PrecisequeryServe) {
+		$scope.organizArr = [{ organiz: '根组织', key: '1' }];
+		$scope.token = sessionStorage.getItem("token");
+		console.log($scope.token);
+		$scope.preciseSearch = function() {
+			$scope.precisequeryobj = {
+				token: $scope.token, //令牌
+				staff: $scope.staff, //申报人
+				page: 1, //当前页
+				start: 0, //从哪个开始
+				limit: 10, //每页显示多少个
+				staffOrgId: 1 //所属部门(根组织)
+			}
 
-            PrecisequeryServe.Preciselist($scope.precisequeryobj)
-                .then(function (data) {
-                    console.log(data);
-                    $scope.preciseArr=data.data.result;
-                    $scope.pagearr=[];
-                    for(var i=0;i<Math.ceil(data.data.result.length/10);i++){
-                        $scope.pagearr.push({
-                            index:i,
-                            iscurrent:i==0?true:false
-                        })
-                    }
-                    Page();
-                }, function (error) {
-                    console.log(error);
-                })
+			PrecisequeryServe.Preciselist($scope.precisequeryobj)
+				.then(function(data) {
+					console.log(data);
+					if (data.data.success) {
+						$scope.preciseArr = data.data.result;
+						$scope.pagearr = [];
+						for (var i = 0; i < Math.ceil(data.data.result.length / 10); i++) {
+							$scope.pagearr.push({
+								index: i,
+								iscurrent: i == 0 ? true : false
+							})
+						}
+						Page();
+					} else if (data.data.error.code) {
+						swal({
+								title: data.data.error.message,
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "确认",
+								closeOnConfirm: false,
+								showLoaderOnConfirm: true,
+							},
+							function() {
+								swal("跳转……", "", "success");
+								setTimeout(function() {
+									swal.close();
+									$state.go('login');
+								}, 1000)
+							});
+					}
+				}, function(error) {
+					console.log(error);
+				})
 
-        }
-        function Page() {
-            $scope.start=1;
-            $scope.changePage=function ($index) {
-                $scope.start=($scope.start<3?3:$scope.start>$scope.pagearr.length-2?$scope.pagearr.length-2:$scope.start)+($index-2);
-                $scope.pagearr.forEach(function (value,i,arr) {
-                    value.iscurrent=false;
-                })
-                $scope.pagearr[$scope.start-1].iscurrent=true;
-                console.log($scope.start);
+		}
+		$scope.preciseSearch();
 
-            }
-            $scope.previous=function () {
-                if ($scope.start>1){
-                    $scope.pagearr.forEach(function (value,i,arr) {
-                        value.iscurrent=false;
-                    })
-                    $scope.start--;
-                    $scope.pagearr[$scope.start-1].iscurrent=true;
-                    console.log($scope.start);
-                }
-            }
-            $scope.next=function () {
-                if ($scope.start<$scope.pagearr.length){
-                    $scope.pagearr.forEach(function (value,i,arr) {
-                        value.iscurrent=false;
-                    })
-                    $scope.start++;
-                    $scope.pagearr[$scope.start-1].iscurrent=true;
-                    console.log($scope.start);
+		function Page() {
+			$scope.start = 1;
+			$scope.changePage = function($index) {
+				$scope.start = ($scope.start < 3 ? 3 : $scope.start > $scope.pagearr.length - 2 ? $scope.pagearr.length - 2 : $scope.start) + ($index - 2);
+				$scope.pagearr.forEach(function(value, i, arr) {
+					value.iscurrent = false;
+				})
+				$scope.pagearr[$scope.start - 1].iscurrent = true;
+				console.log($scope.start);
 
-                }
-            }
-        }
+			}
+			$scope.previous = function() {
+				if ($scope.start > 1) {
+					$scope.pagearr.forEach(function(value, i, arr) {
+						value.iscurrent = false;
+					})
+					$scope.start--;
+					$scope.pagearr[$scope.start - 1].iscurrent = true;
+					console.log($scope.start);
+				}
+			}
+			$scope.next = function() {
+				if ($scope.start < $scope.pagearr.length) {
+					$scope.pagearr.forEach(function(value, i, arr) {
+						value.iscurrent = false;
+					})
+					$scope.start++;
+					$scope.pagearr[$scope.start - 1].iscurrent = true;
+					console.log($scope.start);
 
-    })
-    //组合查询combinequery
-    .controller('combinequeryCtrl', function($scope, $state,PrecisequeryServe) {
-        $scope.token=sessionStorage.getItem("token");
-        $scope.typeArr=[{
-            type:'全部',key:'0'}, {
-            type:'婚嫁',key:'1'}, {
-            type:'丧葬',key:'2'}]
-        $scope.peopleCountArr=[{
-            countRange:"全部",countMin:"0",countMax:"0"},{
-            countRange:"0-50人",countMin:"0",countMax:"50"},{
-            countRange:"50-100人",countMin:"50",countMax:"100"},{
-            countRange:"100-150人",countMin:"100",countMax:"150"},{
-            countRange:"150-200人",countMin:"150",countMax:"200"}]
-        $scope.combineSearch=function () {
-            var combinequeryobj={
-                token:$scope.token,//令牌
-                page:1,//当前页
-                start:0,//从哪个开始
-                limit:10,//每页显示多少个
-                eventType:$scope.typeSelect.key,//申报类型,全部:0,婚嫁:1,丧葬:2
-                peopleCountMin:$scope.peopleCountSelect.countMin,//最少宴请人数
-                peopleCountMax:$scope.peopleCountSelect.countMax,//最大宴请人数
-                eventCreateTimeFrom:$scope.CreateTimeFrom,//申报开始时间
-                eventCreateTimeTo:$scope.CreateTimeTo,//申报结束时间
-                eventTimeFrom:$scope.TimeFrom,//宴请开始时间
-                eventTimeTo:$scope.TimeTo,//宴请结束时间
-            }
-            PrecisequeryServe.Preciselist(combinequeryobj)
-                .then(function (data) {
-                    console.log(data);
-                    $scope.combineArr=data.data.result;
+				}
+			}
+		}
 
-                    $scope.pagearr=[];
-                    for(var i=0;i<Math.ceil(data.data.result.length/10);i++){
-                        $scope.pagearr.push({
-                            index:i,
-                            iscurrent:i==0?true:false
-                        })
-                    }
-                    Page();
-                }, function (error) {
-                    console.log(error);
-                })
+	})
+	//组合查询combinequery
+	.controller('combinequeryCtrl', function($scope, $state, PrecisequeryServe) {
+		$scope.token = sessionStorage.getItem("token");
+		$scope.typeArr = [{
+			type: '全部',
+			key: '0'
+		}, {
+			type: '婚嫁',
+			key: '1'
+		}, {
+			type: '丧葬',
+			key: '2'
+		}]
+		$scope.peopleCountArr = [{
+			countRange: "全部",
+			countMin: "0",
+			countMax: "0"
+		}, {
+			countRange: "0-50人",
+			countMin: "0",
+			countMax: "50"
+		}, {
+			countRange: "50-100人",
+			countMin: "50",
+			countMax: "100"
+		}, {
+			countRange: "100-150人",
+			countMin: "100",
+			countMax: "150"
+		}, {
+			countRange: "150-200人",
+			countMin: "150",
+			countMax: "200"
+		}]
+		$scope.combineSearch = function() {
+			var combinequeryobj = {
+				token: $scope.token, //令牌
+				page: 1, //当前页
+				start: 0, //从哪个开始
+				limit: 10, //每页显示多少个
+				eventType: $scope.typeSelect.key, //申报类型,全部:0,婚嫁:1,丧葬:2
+				peopleCountMin: $scope.peopleCountSelect.countMin, //最少宴请人数
+				peopleCountMax: $scope.peopleCountSelect.countMax, //最大宴请人数
+				eventCreateTimeFrom: $scope.CreateTimeFrom, //申报开始时间
+				eventCreateTimeTo: $scope.CreateTimeTo, //申报结束时间
+				eventTimeFrom: $scope.TimeFrom, //宴请开始时间
+				eventTimeTo: $scope.TimeTo, //宴请结束时间
+			}
+			PrecisequeryServe.Preciselist(combinequeryobj)
+				.then(function(data) {
+					console.log(data);
+					if (data.data.success) {
+						$scope.combineArr = data.data.result;
+						$scope.pagearr = [];
+						for (var i = 0; i < Math.ceil(data.data.result.length / 10); i++) {
+							$scope.pagearr.push({
+								index: i,
+								iscurrent: i == 0 ? true : false
+							})
+						}
+						Page();
+					} else if (data.data.error.code) {
+						swal({
+								title: data.data.error.message,
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "确认",
+								closeOnConfirm: false,
+								showLoaderOnConfirm: true,
+							},
+							function() {
+								swal("跳转……", "", "success");
+								setTimeout(function() {
+									swal.close();
+									$state.go('login');
+								}, 1000)
+							});
+					}
+				}, function(error) {
+					console.log(error);
+				})
 
-        }
-        function Page() {
-            $scope.start=1;
-            $scope.changePage=function ($index) {
-                $scope.start=($scope.start<3?3:$scope.start>$scope.pagearr.length-2?$scope.pagearr.length-2:$scope.start)+($index-2);
-                $scope.pagearr.forEach(function (value,i,arr) {
-                    value.iscurrent=false;
-                })
-                $scope.pagearr[$scope.start-1].iscurrent=true;
-                console.log($scope.start);
+		}
+		// $scope.combineSearch();
 
-            }
-            $scope.previous=function () {
-                if ($scope.start>1){
-                    $scope.pagearr.forEach(function (value,i,arr) {
-                        value.iscurrent=false;
-                    })
-                    $scope.start--;
-                    $scope.pagearr[$scope.start-1].iscurrent=true;
-                    console.log($scope.start);
-                }
-            }
-            $scope.next=function () {
-                if ($scope.start<$scope.pagearr.length){
-                    $scope.pagearr.forEach(function (value,i,arr) {
-                        value.iscurrent=false;
-                    })
-                    $scope.start++;
-                    $scope.pagearr[$scope.start-1].iscurrent=true;
-                    console.log($scope.start);
+		function Page() {
+			$scope.start = 1;
+			$scope.changePage = function($index) {
+				$scope.start = ($scope.start < 3 ? 3 : $scope.start > $scope.pagearr.length - 2 ? $scope.pagearr.length - 2 : $scope.start) + ($index - 2);
+				$scope.pagearr.forEach(function(value, i, arr) {
+					value.iscurrent = false;
+				})
+				$scope.pagearr[$scope.start - 1].iscurrent = true;
+				console.log($scope.start);
 
-                }
-            }
-        }
+			}
+			$scope.previous = function() {
+				if ($scope.start > 1) {
+					$scope.pagearr.forEach(function(value, i, arr) {
+						value.iscurrent = false;
+					})
+					$scope.start--;
+					$scope.pagearr[$scope.start - 1].iscurrent = true;
+					console.log($scope.start);
+				}
+			}
+			$scope.next = function() {
+				if ($scope.start < $scope.pagearr.length) {
+					$scope.pagearr.forEach(function(value, i, arr) {
+						value.iscurrent = false;
+					})
+					$scope.start++;
+					$scope.pagearr[$scope.start - 1].iscurrent = true;
+					console.log($scope.start);
 
-    })
-    //数量统计
-    .controller('statisticCtrl', function($scope, $state,StatisticServe) {
-        $scope.token=sessionStorage.getItem("token");
-        console.log($scope.token);
-        $scope.statisticSearch=function () {
-            var statisticobj={
-                token:$scope.token,//令牌
-                eventCreateTimeFrom:$scope.CreateTimeFrom,//申报开始时间
-                eventCreateTimeTo:$scope.CreateTimeTo,//申报结束时间
-                eventTimeFrom:$scope.TimeFrom,//宴请开始时间
-                eventTimeTo:$scope.TimeTo//宴请结束时间
-            }
+				}
+			}
+		}
 
-            StatisticServe.statisticlist(statisticobj).then(function (data) {
-                console.log(data);
-                $scope.statisticArr=data.data.result[0];
-                chart();
-            }, function (error) {
-                console.log(error);
-            })
-        }
-        function chart() {
-            var myChart = echarts.init(document.getElementById('chart'));
-            // 指定图表的配置项和数据
-            var option = {
-                title: {
-                    text: '类型数量统计'
-                },
-                color: ['#3398DB'],
-                tooltip: {},
-                legend: {
-                    data:['人数','类型']
-                },
-                xAxis: {
-                    data: ["婚嫁","丧葬"]
-                },
-                yAxis: {},
-                series: [{
-                    name: '人数',
-                    type: 'bar',
-                    data: [$scope.statisticArr.type1Count, $scope.statisticArr.type2Count]
-                }]
-            };
-            // 使用刚指定的配置项和数据显示图表。
-            myChart.setOption(option);
-        }
-    })
+	})
+	//数量统计
+	.controller('statisticCtrl', function($scope, $state, StatisticServe) {
+		$scope.token = sessionStorage.getItem("token");
+		console.log($scope.token);
+		$scope.statisticSearch = function() {
+			var statisticobj = {
+				token: $scope.token, //令牌
+				eventCreateTimeFrom: $scope.CreateTimeFrom, //申报开始时间
+				eventCreateTimeTo: $scope.CreateTimeTo, //申报结束时间
+				eventTimeFrom: $scope.TimeFrom, //宴请开始时间
+				eventTimeTo: $scope.TimeTo //宴请结束时间
+			}
+
+			StatisticServe.statisticlist(statisticobj)
+				.then(function(data) {
+					console.log(data);
+					if (data.data.success) {
+						$scope.statisticArr = data.data.result[0];
+						chart();
+					} else if (data.data.error.code) {
+						swal({
+								title: data.data.error.message,
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "确认",
+								closeOnConfirm: false,
+								showLoaderOnConfirm: true,
+							},
+							function() {
+								swal("跳转……", "", "success");
+								setTimeout(function() {
+									swal.close();
+									$state.go('login');
+								}, 1000)
+							});
+					}
+				}, function(error) {
+					console.log(error);
+				})
+		}
+		$scope.statisticSearch();
+
+		function chart() {
+			var myChart = echarts.init(document.getElementById('chart'));
+			// 指定图表的配置项和数据
+			var option = {
+				title: {
+					text: '类型数量统计'
+				},
+				color: ['#3398DB'],
+				tooltip: {},
+				legend: {
+					data: ['人数', '类型']
+				},
+				xAxis: {
+					data: ["婚嫁", "丧葬"]
+				},
+				yAxis: {},
+				series: [{
+					name: '人数',
+					type: 'bar',
+					data: [$scope.statisticArr.type1Count, $scope.statisticArr.type2Count]
+				}]
+			};
+			// 使用刚指定的配置项和数据显示图表。
+			myChart.setOption(option);
+		}
+	})
