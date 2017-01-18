@@ -19,12 +19,12 @@
                                 <li class="user-avatar">
                                     <!-- <img src="images/profile/profile1.jpg" alt="" class="img-circle"> -->
                                     <div class="user-content">
-                                        <h5 class="no-m-bottom">管理员</h5>
+                                        <h5 class="no-m-bottom">{{userInfo.role.name}}</h5>
                                     </div>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="">退出</a>
+                                    <a href="" ng-click="logout()">退出</a>
                                 </li>
                             </ul>
                         </li>
@@ -44,7 +44,7 @@
                             <a href="" id="userToggle" data-toggle="dropdown">
                                 <!-- <img src="images/profile/profile1.jpg" alt="" class="img-circle inline-block user-profile-pic"> -->
                                 <div class="user-detail inline-block">
-                                    管理员
+                                    {{'你好 '+userInfo.organization.name+' '+userInfo.name}}
                                     <i class="fa fa-angle-down"></i>
                                 </div>
                             </a>
@@ -52,7 +52,7 @@
                                 <div class="panel-body paddingTB-sm">
                                     <ul>
                                         <li>
-                                            <a href="">
+                                            <a href="" ng-click="logout()">
                                                 <i class="fa fa-power-off fa-lg"></i><span class="m-left-xs">退出</span>
                                             </a>
                                         </li>
@@ -202,7 +202,7 @@
                             </li>
                         </ul>
                     </div>
-                    <a href="" class="pull-right font-18"><i class="ion-log-out"></i></a>
+                    <a ng-click="logout()" href="" class="pull-right font-18"><i class="ion-log-out"></i></a>
                 </div>
                 <!-- 左下角信息 结束 -->
 
