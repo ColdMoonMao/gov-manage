@@ -1540,3 +1540,295 @@ angular.module('app.controllers', [])
 			myChart.setOption(option);
 		}
 	})
+
+	// approve审批页面控制
+	.controller('approveCtrl',function ($scope,$state,$timeout,ApproveServe,GlobalServe) {
+		$scope.userList={
+			token: sessionStorage.getItem('token') ,      	//	令牌
+			staff: '' , 		//	申报人
+			auditStatus: -1,		//	审核状态 -1：待审核 1：通过 2：拒绝
+			page: 1 ,			//  当前页数
+			start: 0 , 		//	从第几个开始
+			limit: 10, 			//	每页显示多少个
+
+
+		};
+		$scope.modList={
+			token: sessionStorage.getItem('token') ,      	//	令牌
+			eventId: '' , 		//	申报人
+			status: '1',		//	审核状态 1：通过 2：拒绝
+			// content: '' ,			//  审批意见内容
+		};
+
+		$scope.sureList={
+			token: sessionStorage.getItem('token') ,      	//	令牌
+			eventId: '' , 		//	申报人id
+			status: 1,		//	审核状态 1：通过 2：拒绝
+			content: '' ,			//  审批意见内容
+		}
+		//改变审核状态
+		$scope.selChange=function () {
+			// console.log(event);
+			console.log(event.target.selectedIndex);
+			if(event.target.selectedIndex==0){
+				$scope.userList.auditStatus=-1
+			}
+			else {
+				$scope.userList.auditStatus=event.target.selectedIndex;
+			}
+
+		};
+
+		$scope.search=function () {
+			$scope.refresh();
+		};
+		//刷新
+		$scope.refresh = function() {
+			ApproveServe.userList($scope.userList)
+				.then(function(data) {
+					console.log(data);
+
+					$scope.list=data.data.result;
+					$scope.array=data.data;
+
+				}, function(error) {
+					// console.log(error);
+				})
+			// console.log(GlobalServe.token);
+		};
+		$scope.refresh();
+
+		//通过按钮函数
+		$scope.pass=function (index) {
+			console.log(index)
+			$scope.index=index;
+			$scope.id=$scope.list[index].id;
+			// console.log($scope.id);
+			$scope.modList.eventId=$scope.id;
+
+
+			ApproveServe.modList($scope.modList)
+				.then(function(data) {
+					console.log(data);
+
+				}, function(error) {
+					console.log(error);
+				})
+			// console.log(GlobalServe.token);
+		}
+		//通过模态框的确定函数
+		$scope.sure=function () {
+			// $('#myModal').modal('toggle');
+			// console.log($scope.index)
+			// $scope.list[$scope.index].auditStatus=1;
+			//获取eventId
+			$scope.id=$scope.list[$scope.index].id;;
+			$scope.sureList.eventId=$scope.id;
+
+			console.log($scope.sureList.eventId)
+			//请求接口
+			ApproveServe.sureList($scope.sureList)
+				.then(function(data) {
+					console.log(data);
+					$scope.refresh();
+				}, function(error) {
+					console.log(error);
+				});
+		}
+		//拒绝按钮函数
+		$scope.refuse=function (index) {
+			console.log(index)
+			$scope.index=index;
+			$scope.id=$scope.list[index].id;
+			// console.log($scope.id);
+			$scope.modList.eventId=$scope.id;
+			$scope.sureList.status=2;
+
+			ApproveServe.modList($scope.modList)
+				.then(function(data) {
+					console.log(data);
+
+				}, function(error) {
+					console.log(error);
+				})
+		}
+		//拒绝模态框确定函数
+		$scope.del=function () {
+			$scope.sure()
+
+		}
+
+		//下一页
+		$scope.nextPage = function() {
+			if ($scope.userList.page < $scope.array.total / $scope.userList.limit) {
+				$scope.userList.page++;
+			}
+		};
+		//上一页
+		$scope.prePage = function() {
+			if ($scope.userList.page > 1) {
+				$scope.userList.page--;
+			}
+		};
+		//最后一页
+		$scope.lastPage = function() {
+			console.log(Math.floor($scope.array.total/$scope.userList.limit));
+			$scope.userList.page=Math.floor($scope.array.total/$scope.userList.limit)+1;
+		};
+		//监控页码变化.300ms后更新列表
+		$scope.$watch('userList.page', function(newValue) {
+			$scope.userList.start = $scope.userList.limit * ($scope.userList.page - 1);
+			$timeout(function() {
+				$scope.search();
+				$scope.$apply()
+			}, 300);
+		});
+
+	})
+
+	//公示页面控制
+	.controller('publicityCtrl',function ($scope,$state,$timeout,publicityServe,GlobalServe) {
+		$scope.pubList={
+			token: sessionStorage.getItem('token') ,      	//	令牌
+			staff: '' , 		//	申报人
+			bulletinStatus: -1,		//	公示状态 -1：未公示 1：已公示
+			page: 1 ,			//  当前页数
+			start: 0 , 		//	从第几个开始
+			limit: 10, 			//	每页显示多少个
+
+
+		};
+		$scope.modList={
+			token: sessionStorage.getItem('token') ,      	//	令牌
+			eventId: '' , 		//	申报人
+			status: '1',		//	审核状态 1：通过 2：拒绝
+			// content: '' ,			//  审批意见内容
+		};
+
+		$scope.sureList={
+			token: sessionStorage.getItem('token') ,      	//	令牌
+			eventId: '' , 		//	申报人id
+			status: 1,		//	审核状态 1：通过 2：拒绝
+			content: '' ,			//  审批意见内容
+		}
+		//改变审核状态
+		$scope.selChange=function () {
+			// console.log(event);
+			console.log(event.target.selectedIndex);
+			if(event.target.selectedIndex==0){
+				$scope.pubList.bulletinStatus=-1
+			}
+			else {
+				$scope.pubList.bulletinStatus=event.target.selectedIndex;
+			}
+
+		};
+
+		$scope.search=function () {
+			$scope.refresh();
+		};
+		//刷新
+		$scope.refresh = function() {
+
+			publicityServe.pubList($scope.pubList)
+				.then(function(data) {
+					console.log(data);
+					$scope.bulle=data.config.params.bulletinStatus
+					// console.log($scope.bulle)
+					$scope.list=data.data.result;
+					$scope.arr=data.data;
+
+				}, function(error) {
+					// console.log(error);
+				})
+			// console.log(GlobalServe.token);
+		};
+		$scope.refresh();
+
+		//通过按钮函数
+		$scope.pass=function (index) {
+			console.log(index)
+			$scope.index=index;
+			$scope.id=$scope.list[index].id;
+			// console.log($scope.id);
+			$scope.modList.eventId=$scope.id;
+
+
+			publicityServe.modList($scope.modList)
+				.then(function(data) {
+					console.log(data);
+
+				}, function(error) {
+					console.log(error);
+				})
+			// console.log(GlobalServe.token);
+		}
+		//通过模态框的确定函数
+		$scope.sure=function () {
+			// $('#myModal').modal('toggle');
+			// console.log($scope.index)
+			// $scope.list[$scope.index].auditStatus=1;
+			//获取eventId
+			$scope.id=$scope.list[$scope.index].id;;
+			$scope.sureList.eventId=$scope.id;
+
+			console.log($scope.sureList.eventId)
+			//请求接口
+			publicityServe.sureList($scope.sureList)
+				.then(function(data) {
+					console.log(data);
+					$scope.refresh();
+				}, function(error) {
+					console.log(error);
+				});
+		}
+		//拒绝按钮函数
+		$scope.refuse=function (index) {
+			console.log(index)
+			$scope.index=index;
+			$scope.id=$scope.list[index].id;
+			// console.log($scope.id);
+			$scope.modList.eventId=$scope.id;
+			$scope.sureList.status=2;
+
+			publicityServe.modList($scope.modList)
+				.then(function(data) {
+					console.log(data);
+
+				}, function(error) {
+					console.log(error);
+				})
+		}
+		//拒绝模态框确定函数
+		$scope.del=function () {
+			$scope.sure()
+
+		}
+
+		//下一页
+		$scope.nextPage = function() {
+			if ($scope.pubList.page < $scope.arr.total / $scope.pubList.limit) {
+				$scope.pubList.page++;
+			}
+		};
+		//上一页
+		$scope.prePage = function() {
+			if ($scope.pubList.page > 1) {
+				$scope.pubList.page--;
+			}
+		};
+		//最后一页
+		$scope.lastPage = function() {
+			console.log(Math.floor($scope.arr.total/$scope.pubList.limit));
+			$scope.pubList.page=Math.floor($scope.arr.total/$scope.pubList.limit)+1;
+		};
+		//监控页码变化.300ms后更新列表
+		$scope.$watch('pubList.page', function(newValue) {
+			$scope.pubList.start = $scope.pubList.limit * ($scope.pubList.page - 1);
+			$timeout(function() {
+				$scope.search();
+				$scope.$apply()
+			}, 300);
+		});
+
+	})

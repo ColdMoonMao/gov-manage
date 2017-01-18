@@ -29,7 +29,7 @@ angular.module('app', ['app.controllers', 'app.services','ui.router'])
                 views: {
                     'content': {
                         templateUrl: 'templates/approve.html',
-                        controller: 'mainCtrl'
+                        controller: 'approveCtrl'
                     }
                 }
             })
@@ -39,7 +39,7 @@ angular.module('app', ['app.controllers', 'app.services','ui.router'])
                 views: {
                     'content': {
                         templateUrl: 'templates/publicity.html',
-                        controller: 'mainCtrl'
+                        controller: 'publicityCtrl'
                     }
                 }
             })

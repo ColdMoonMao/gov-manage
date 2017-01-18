@@ -1,1 +1,168 @@
-publicity公示
+<!--publicity公示-->
+<div>
+    <!--//内容-->
+    <div class="inbox-wrapper">
+
+        <div class="row m-bottom-md">
+            <div class="col-sm-12 m-bottom-sm">
+                <h4 class="no-margin header-text">
+                    公示
+                </h4>
+            </div>
+
+        </div>
+
+        <div class="smart-widget">
+            <div class="smart-widget-inner">
+
+                <div class="smart-widget-body">
+                    <form class="form-inline no-margin">
+                        <div class="form-group">
+                            <label class="">申报人:</label>
+                            <input type="text" class="form-control" ng-model="userList.staff">
+                            <select class="form-control" ng-model="sel" ng-init="sel='未公示'" ng-change="selChange()">
+                                <option>未公示</option>
+                                <option>已公示</option>
+
+
+
+                            </select>
+                        </div><!-- /form-group -->
+
+                        <button type="submit" class="btn btn-sm btn-success" ng-click="search()">查询</button>
+                    </form>
+                </div>
+
+            </div><!-- ./smart-widget-inner -->
+        </div>
+        <!--</div>-->
+
+        <div>
+            <table class="table table-striped no-margin">
+                <thead>
+                <tr>
+                    <th class="text-left">申报人</th>
+                    <th class="text-left">部门</th>
+                    <th class="text-left">类型</th>
+                    <th class="text-left">人数</th>
+                    <th class="text-left">申报时间</th>
+                    <th class="text-left">宴请时间</th>
+                    <th class="text-left">状态</th>
+                    <th class="text-left">操作</th>
+                </tr>
+                </thead>
+
+                <tr ng-repeat="item in list">
+                    <td>{{item.staff}}</td>
+                    <td>{{item.staffOrgName}}</td>
+                    <td>{{item.eventType==1?'婚嫁':'丧葬'}}</td>
+                    <td>{{item.peopleCount}}</td>
+                    <td>{{item.createTime}}</td>
+                    <td>{{item.eventDate}}</td>
+                    <td>
+                        {{bulle==1?'已公示':'未公示'}}
+                        <!--{{$scope.pubList.bulletinStatus==0?'未公示':'已公示'&&$scope.pubList.bulletinStatus==-1?'未公示':'已公示'&&$scope.pubList.bulletinStatus==null?'未公示':'已公示'}}-->
+                    </td>
+                    <td>
+                        <!--<button class="btn  btn-primary btn-sm">确认</button>-->
+                        <!--<button class="btn btn-danger btn-sm">拒绝</button>-->
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                data-target="#myModal" ng-click="pass($index)">
+                            公示内容
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span
+                                                aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                                        </button>
+                                        <h4 class="modal-title" id="myModalLabel">意见</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <textarea class="col-sm-12 " placeholder="意见内容"
+                                                  ng-model="sureList.content"></textarea>
+                                    </div>
+                                    <hr>
+                                    <div class="modal-footer">
+                                        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                        <button type="button" class="btn btn-primary btn-sm col-sm-12" ng-click="sure()"
+                                                data-dismiss="modal">确认
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+                                data-target="#myModal" ng-click="refuse($index)">
+                            公示结果
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span
+                                                aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                                        </button>
+                                        <h4 class="modal-title" id="myModalLabel1">意见</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <textarea class="col-sm-12 "></textarea>
+                                    </div>
+                                    <hr>
+                                    <div class="modal-footer">
+                                        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                        <button type="button" class="btn btn-primary" ng-click="del()"
+                                                data-dismiss="modal">确认
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+    </div><!-- ./inbox-body -->
+</div><!-- ./inbox-wrapper -->
+<!--页码-->
+<div class="col-md-12">
+    <ul class="pagination col-md-9 col-sm-9">
+        <li ng-click="userList.page=1"><a href="">«</a></li>
+        <li ng-click="prePage()">
+            <a href="">
+                <</a>
+        </li>
+        <li>
+            <input style="display: inline-block;width: 65px;height: 32px;float: left;" min="1"
+                   max="{{arr.total/pubList.limit+1}}" type="number" class="form-control" ng-model="pubList.page"
+                   value="userList.page">
+        </li>
+        <li ng-click="nextPage()"><a href="">></a></li>
+        <li ng-click="lastPage()"><a href="">»</a></li>
+        <li>
+            <button type="button" ng-click="refresh()" class="btn btn-sm btn-success"><i class="fa fa-refresh"
+                                                                                         aria-hidden="true"></i>
+            </button>
+        </li>
+    </ul>
+    <ul class="pagination col-md-3 col-sm-3">
+        <li><a>显示{{pubList.page < 2 ? 1:(pubList.limit*(pubList.page-1))}}-{{(pubList.limit*(pubList.page-1)) +
+            pubList.limit}}条,共{{arr.total}}条</a></li>
+    </ul>
+</div>
+
+
+
+
