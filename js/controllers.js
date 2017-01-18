@@ -1266,6 +1266,32 @@ angular.module('app.controllers', [])
 	.controller('precisequeryCtrl', function($scope, $state, PrecisequeryServe) {
 			$scope.organizArr = [{ organiz: '根组织', key: '1' }];
 			$scope.token = sessionStorage.getItem("token");
+        $scope.menuArr=[{
+            name:'申报人',
+            isrotate:true
+        },{
+            name:'部门',
+            isrotate:true
+        },{
+            name:'类型',
+            isrotate:true
+        },{
+            name:'人数',
+            isrotate:true
+        },{
+            name:'申报时间',
+            isrotate:true
+        },{
+            name:'宴请时间',
+            isrotate:true
+        },{
+            name:'状态',
+            isrotate:true
+        },{
+            name:'批示意见',
+            isrotate:true
+        }]
+			$scope.attrArr=['staff','staffOrgName','eventType','peopleCount','createTime','eventDate','auditStatus','auditContent']
 			console.log($scope.token);
 			$scope.preciseSearch = function() {
 				$scope.precisequeryobj = {
@@ -1314,7 +1340,15 @@ angular.module('app.controllers', [])
 
 			}
 			$scope.preciseSearch();
-
+        //排序
+        $scope.orderToggle=function (index) {
+            $scope.x=($scope.x=="+"?"-":"+");
+            $scope.attr=$scope.attrArr[index];
+            $scope.menuArr.forEach(function(value, i, arr) {
+                value.isrotate =i==index?$scope.menuArr[index].isrotate:true;
+            })
+            $scope.menuArr[index].isrotate=!$scope.menuArr[index].isrotate;
+        }
 			function Page() {
 				$scope.start = 1;
 				$scope.changePage = function($index) {
@@ -1353,7 +1387,33 @@ angular.module('app.controllers', [])
 	//组合查询combinequery
 	.controller('combinequeryCtrl', function($scope, $state, PrecisequeryServe) {
 		$scope.token = sessionStorage.getItem("token");
-		$scope.typeArr = [{
+        $scope.attrArr=['staff','staffOrgName','eventType','peopleCount','createTime','eventDate','auditStatus','auditContent']
+        $scope.menuArr=[{
+        	name:'申报人',
+            isrotate:true
+		},{
+            name:'部门',
+            isrotate:true
+        },{
+            name:'类型',
+            isrotate:true
+        },{
+            name:'人数',
+            isrotate:true
+        },{
+            name:'申报时间',
+            isrotate:true
+        },{
+            name:'宴请时间',
+            isrotate:true
+        },{
+            name:'状态',
+            isrotate:true
+        },{
+            name:'批示意见',
+            isrotate:true
+        }]
+        $scope.typeArr = [{
 			type: '全部',
 			key: '0'
 		}, {
@@ -1434,7 +1494,16 @@ angular.module('app.controllers', [])
 				})
 
 		}
-
+		//排序
+        $scope.orderToggle=function (index) {
+            $scope.x=($scope.x=="+"?"-":"+");
+            $scope.attr=$scope.attrArr[index];
+            $scope.menuArr.forEach(function(value, i, arr) {
+                value.isrotate =i==index?$scope.menuArr[index].isrotate:true;
+            })
+            $scope.menuArr[index].isrotate=!$scope.menuArr[index].isrotate;
+        }
+        //分页
 		function Page() {
 			$scope.start = 1;
 			$scope.changePage = function($index) {
