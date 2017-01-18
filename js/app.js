@@ -1,4 +1,4 @@
-angular.module('app', ['app.controllers', 'app.services','ui.router', 'oc.lazyLoad'])
+angular.module('app', ['app.controllers', 'app.services','ui.router'])
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
             //login登录页面
@@ -12,23 +12,6 @@ angular.module('app', ['app.controllers', 'app.services','ui.router', 'oc.lazyLo
                 url: '/main',
                 controller: 'mainCtrl',
                 templateUrl: 'templates/main.html',
-                resolve: {
-                    main: ['$ocLazyLoad', function($ocLazyLoad) {
-                        // you can lazy load files for an existing module
-                        return $ocLazyLoad.load({
-                            name: 'main',
-                            files: [
-                                'lib/js/jquery-1.11.1.min.js',
-                                'lib/bower_components/bootstrap/js/bootstrap.min.js',
-                                'lib/js/jquery.slimscroll.min.js',
-                                'lib/js/jquery.popupoverlay.min.js',
-                                'lib/js/modernizr.min.js',
-                                'lib/js/simplify.js'
-                            ],
-                            cache:true
-                        });
-                    }]
-                }
             })
             //declare申报页面
             .state('main.declare', {
@@ -76,7 +59,7 @@ angular.module('app', ['app.controllers', 'app.services','ui.router', 'oc.lazyLo
                 views: {
                     'content': {
                         templateUrl: 'templates/precisequery.html',
-                        controller: 'mainCtrl'
+                        controller: 'precisequeryCtrl'
                     }
                 }
             })
@@ -86,7 +69,7 @@ angular.module('app', ['app.controllers', 'app.services','ui.router', 'oc.lazyLo
                 views: {
                     'content': {
                         templateUrl: 'templates/combinequery.html',
-                        controller: 'mainCtrl'
+                        controller: 'combinequeryCtrl'
                     }
                 }
             })
@@ -96,7 +79,7 @@ angular.module('app', ['app.controllers', 'app.services','ui.router', 'oc.lazyLo
                 views: {
                     'content': {
                         templateUrl: 'templates/statistic.html',
-                        controller: 'mainCtrl'
+                        controller: 'statisticCtrl'
                     }
                 }
             })

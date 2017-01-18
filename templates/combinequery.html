@@ -1,1 +1,88 @@
-combinequery组合查询
+<!--combinequery组合查询-->
+
+
+<div >
+    <!--当前位置-->
+    <ul class="breadcrumb">
+        <li><span class="primary-font"><i class="icon-home"></i></span><a href="index.html">婚丧事宜申报</a></li>
+        <li>申报管理</li>
+        <li>查询统计</li>
+        <li>组合查询</li>
+    </ul>
+    <!--查询-->
+    <div class="smart-widget">
+        <div class="smart-widget-inner">
+            <div class="smart-widget-body">
+                <form class="form-inline no-margin">
+                    <div class="form-group">
+                        <label >申报类型:</label>
+                        <select class="form-control" ng-init="typeSelect=typeArr[0]" ng-model="typeSelect" ng-options="obj.type for obj in typeArr">
+
+                        </select>
+                    </div><!-- /form-group -->
+                    <div class="form-group" style="margin-left: 20px">
+                        <label >宴请人数:</label>
+                        <select class="form-control" ng-init="peopleCountSelect=peopleCountArr[0]" ng-model="peopleCountSelect" ng-options="peopleCount.countRange for peopleCount in peopleCountArr">
+                        </select>
+                    </div><!-- /form-group -->
+                    <button type="submit" class="btn btn-sm btn-success" ng-click="combineSearch()">查询</button>
+                </form>
+                <br/>
+                <form class="form-inline no-margin">
+                    <div class="form-group">
+                        <label >申报时间:</label>
+                        <input type="date" class="form-control" ng-model="CreateTimeFrom ">
+                        <label >至:</label>
+                        <input type="date" class="form-control" ng-model="CreateTimeTo">
+                    </div><!-- /form-group -->
+                    <div class="form-group" style="margin-left: 20px">
+                        <label>宴请时间:</label>
+                        <input type="date" class="form-control" ng-model="TimeFrom">
+                        <label >至:</label>
+                        <input type="date" class="form-control" ng-model="TimeTo">
+                    </div><!-- /form-group -->
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+    <!--数据列表-->
+    <table class="table table-striped no-margin" >
+        <thead>
+        <tr>
+            <th>申报人</th>
+            <th>部门</th>
+            <th>类型</th>
+            <th>人数</th>
+            <th>申报时间</th>
+            <th>宴请时间</th>
+            <th>状态</th>
+            <th>批示意见</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr  ng-repeat="obj in combineArr|limitTo:10:(start-1)*10">
+            <td>{{obj.staff}}</td>
+            <td>{{obj.staffOrgName}}</td>
+            <td>{{obj.eventType==2?"丧葬":"婚嫁"}}</td>
+            <td>{{obj.peopleCount}}</td>
+            <td>{{obj.createTime}}</td>
+            <td>{{obj.eventDate}}</td>
+            <td>{{obj.auditStatus==-1?"待审核":obj.auditStatus==1?"通过":obj.auditStatus==2?"拒绝":"待审核"}}</td>
+            <td>{{obj.auditContent}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <!--分页-->
+    <nav id="pagenav" style="text-align: center">
+        <ul class="pagination pagination-lg">
+            <li ng-click="previous()"><a>&laquo;</a></li>
+            <li ng-repeat="page in pagearr|limitTo:5:(start<3?0:start>pagearr.length-3?pagearr.length-5:start-3)" ng-click="changePage($index)" class={{page.iscurrent?'active':''}}><span>{{page.index+1}}</span></li>
+            <li ng-click="next()"><a>&raquo;</a></li>
+        </ul>
+    </nav>
+
+
+</div><!-- ./padding-md -->
