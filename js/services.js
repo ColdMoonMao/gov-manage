@@ -534,7 +534,7 @@ angular.module('app.services', [])
                 var deferred = $q.defer();
                 $http({
                     method: 'POST',
-                    url:   GlobalConfig.url.api.eventAudit.getByEvent,
+                    url:   GlobalConfig.url.api.eventBulletin.getByEvent,
                     params: params,
                     responseType: 'json',
                     timeout: 30000
@@ -552,7 +552,7 @@ angular.module('app.services', [])
                 var deferred=$q.defer();
                 $http({
                     method:'POST',
-                    url: GlobalConfig.url.api.event.audit,
+                    url: GlobalConfig.url.api.eventBulletin.add,
                     params:params,
                     responseType:'json',
                     timeoit:30000

@@ -81,11 +81,19 @@
                                         <button type="button" class="close" data-dismiss="modal"><span
                                                 aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                                         </button>
-                                        <h4 class="modal-title" id="myModalLabel">意见</h4>
+                                        <h4 class="modal-title" id="myModalLabel"></h4>
                                     </div>
                                     <div class="modal-body">
-                                        <textarea class="col-sm-12 " placeholder="意见内容"
-                                                  ng-model="sureList.content"></textarea>
+                                        <div>
+                                            <span>内容:</span>
+                                            <textarea class="col-sm-12 " ng-model="sureList.content"></textarea>
+                                        </div>
+                                        <div>
+                                            <span>附件:</span>
+                                            <input type="file">
+                                            <div ng-bind="attachmentPath"></div>
+                                        </div>
+
                                     </div>
                                     <hr>
                                     <div class="modal-footer">
@@ -100,7 +108,7 @@
 
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
-                                data-target="#myModal" ng-click="refuse($index)">
+                                data-target="#myModal1" ng-click="refuse($index)">
                             公示结果
                         </button>
 
@@ -116,7 +124,23 @@
                                         <h4 class="modal-title" id="myModalLabel1">意见</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <textarea class="col-sm-12 "></textarea>
+                                        <div>
+                                            <span>结果:</span>
+                                            <form action="" method="get">
+                                                <label><input name="Fruit" type="radio" value="" checked/>通过 </label>
+                                                <label><input name="Fruit" type="radio" value="" />有异议 </label>
+                                            </form>
+
+                                        </div>
+                                        <div>
+                                            <span>内容:</span>
+                                            <textarea class="col-sm-12 " ng-model="sureList.content"></textarea>
+                                        </div>
+                                        <div>
+                                            <span>附件:</span>
+                                            <input type="file">
+                                            <div ng-bind="attachmentPath"></div>
+                                        </div>
                                     </div>
                                     <hr>
                                     <div class="modal-footer">

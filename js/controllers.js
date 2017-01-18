@@ -1701,17 +1701,17 @@ angular.module('app.controllers', [])
 		$scope.modList={
 			token: sessionStorage.getItem('token') ,      	//	令牌
 			eventId: '' , 		//	申报人
-			status: '1',		//	审核状态 1：通过 2：拒绝
-			// content: '' ,			//  审批意见内容
+			status: -1,		//	公示状态 1：已公示 -1：未公示
+			// content: '' ,			//  公示意见内容
 		};
 
 		$scope.sureList={
 			token: sessionStorage.getItem('token') ,      	//	令牌
 			eventId: '' , 		//	申报人id
-			status: 1,		//	审核状态 1：通过 2：拒绝
-			content: '' ,			//  审批意见内容
+			status: 1,		//	公示状态 1：公示内容 2：公示结果
+			content: '' ,			//  公示意见内容
 		}
-		//改变审核状态
+		//改变公示状态
 		$scope.selChange=function () {
 			// console.log(event);
 			console.log(event.target.selectedIndex);
@@ -1745,8 +1745,9 @@ angular.module('app.controllers', [])
 		};
 		$scope.refresh();
 
-		//通过按钮函数
+		//公示内容按钮函数
 		$scope.pass=function (index) {
+			$scope.sureList.content=" ";
 			console.log(index)
 			$scope.index=index;
 			$scope.id=$scope.list[index].id;
@@ -1757,13 +1758,20 @@ angular.module('app.controllers', [])
 			publicityServe.modList($scope.modList)
 				.then(function(data) {
 					console.log(data);
-
+					$scope.bulletinStatus=data.config.params.bulletinStatus;
+                     if($scope.bulletinStatus=1){
+                     	$scope.sureList.content=data.data.result.content;
+						 $scope.attachmentPath=data.data.result.attachmentPath;
+						 if($scope.attachmentPath==null){
+							 $scope.attachmentPath="无";
+						 }
+					 }
 				}, function(error) {
 					console.log(error);
 				})
 			// console.log(GlobalServe.token);
 		}
-		//通过模态框的确定函数
+		//公示内容模态框的确定函数
 		$scope.sure=function () {
 			// $('#myModal').modal('toggle');
 			// console.log($scope.index)
@@ -1771,8 +1779,9 @@ angular.module('app.controllers', [])
 			//获取eventId
 			$scope.id=$scope.list[$scope.index].id;;
 			$scope.sureList.eventId=$scope.id;
-
 			console.log($scope.sureList.eventId)
+
+
 			//请求接口
 			publicityServe.sureList($scope.sureList)
 				.then(function(data) {
@@ -1782,8 +1791,9 @@ angular.module('app.controllers', [])
 					console.log(error);
 				});
 		}
-		//拒绝按钮函数
+		//公示结果按钮函数
 		$scope.refuse=function (index) {
+			$scope.sureList.content=" ";
 			console.log(index)
 			$scope.index=index;
 			$scope.id=$scope.list[index].id;
@@ -1799,7 +1809,7 @@ angular.module('app.controllers', [])
 					console.log(error);
 				})
 		}
-		//拒绝模态框确定函数
+		//公示结果模态框确定函数
 		$scope.del=function () {
 			$scope.sure()
 
