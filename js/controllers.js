@@ -14,7 +14,6 @@ angular.module('app.controllers', [])
 							sessionStorage.setItem('token', data.data.result.token);
 							sessionStorage.setItem('userInfo', JSON.stringify(data.data.result.user));
 							if (data.data.result.token) {
-								document.body.style.backgroundImage = "";
 								$state.go('main');
 							}
 						} else {
@@ -41,6 +40,7 @@ angular.module('app.controllers', [])
 				})
 		};
 		// $scope.bg();
+		//登录背景图片获取
 		$.ajax({
 				url: 'http://bing.ioliu.cn/v1/rand',
 				type: 'GET',
@@ -54,9 +54,9 @@ angular.module('app.controllers', [])
 			})
 			.done(function() {
 				console.log(arguments, "success");
-				$scope.bgiSet = arguments["0"].data.url;
-				// $('#bgiSet').css('backgroud','url("'+arguments["0"].data.url+'"+)');
-				document.body.style.backgroundImage = "url('" + arguments["0"].data.url + "')";
+				$scope.bgiSet ="url('" + arguments["0"].data.url + "')";
+				// $('#bgsetEl').css('backgroudImage',"url('" + arguments["0"].data.url + "')");
+				// document.body.style.backgroundImage = "url('" + arguments["0"].data.url + "')";
 			})
 			.fail(function() {
 				console.log("error");

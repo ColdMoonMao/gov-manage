@@ -6,10 +6,13 @@
 	/* login */
 	.login{
 		background-position: center;
-		background-size: auto;
+		background-size: cover;
 		background-position: center;
-		background-color: rgba(0, 0, 0, 0.35);
 		height: 768px;
+	}
+	.login>div{
+		background-color: rgba(0, 0, 0, 0.6);
+
 	}
 	.sign-in-wrapper .login-brand{
 		color: #ddd;
