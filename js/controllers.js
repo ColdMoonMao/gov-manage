@@ -1903,6 +1903,7 @@ angular.module('app.controllers', [])
 			.then(function(data) {
 				console.log(data);
 				$scope.bulle = data.config.params.bulletinStatus
+				$scope.bulletinStatus=data.config.params.bulletinStatus;
 					// console.log($scope.bulle)
 				$scope.list = data.data.result;
 				$scope.arr = data.data;
@@ -1927,10 +1928,11 @@ angular.module('app.controllers', [])
 			publicityServe.modList($scope.modList)
 				.then(function(data) {
 					console.log(data);
-
-					$scope.bulletinStatus=data.config.params.bulletinStatus;
+					$scope.bulletinStatus=$scope.bulletinStatus;
+					console.log($scope.bulletinStatus)
                      if($scope.bulletinStatus==1){
                      	$scope.sureList.content=data.data.result.content;
+						 console.log($scope.sureList.content)
 						 $scope.attachmentPath=data.data.result.attachmentPath;
 						 if($scope.attachmentPath==null){
 							 $scope.attachmentPath="无";
@@ -1950,8 +1952,8 @@ angular.module('app.controllers', [])
 			//获取eventId
 			$scope.id = $scope.list[$scope.index].id;;
 			$scope.sureList.eventId = $scope.id;
-			console.log($scope.sureList.eventId)
-
+			console.log($scope.sureList.eventId);
+		$scope.sureList.content=$scope.sureList.content;
 
 			//请求接口
 			publicityServe.sureList($scope.sureList)
