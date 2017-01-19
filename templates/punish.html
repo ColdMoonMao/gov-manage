@@ -15,16 +15,16 @@
     </div>
     <table class="table table-striped table-responsive table-hover" id="dataTable">
         <thead>
-            <tr>
-                <th class="col-md-2">被通报人</th>
-                <th class="col-md-2">被通报人部门</th>
-                <th class="col-md-2">标题</th>
-                <th class="col-md-2">时间</th>
+            <tr ng-init="isrotatestaff=true,isrotatestaffOrgName=true,isrotatetitle=true,isrotatecreateTime=true,">
+                <th ng-click="orderFun()" class="col-md-2">被通报人<span class="caret" style="transform:rotate({{isrotatestaff?0:180}}deg)"></span></th>
+                <th ng-click="orderFun()" class="col-md-2">被通报人部门<span class="caret" style="transform:rotate({{isrotatestaffOrgName?0:180}}deg)"></span></th>
+                <th ng-click="orderFun()" class="col-md-2">标题<span class="caret" style="transform:rotate({{isrotatetitle?0:180}}deg)"></span></th>
+                <th ng-click="orderFun()" class="col-md-2">时间<span class="caret" style="transform:rotate({{isrotatecreateTime?0:180}}deg)"></span></th>
                 <th class="col-md-2">操作</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="(key, value) in array.result" ng-dblclick="get()">
+            <tr ng-init="reverse=true" ng-repeat="(key, value) in array.result |orderBy:exp:reverse" ng-dblclick="get()">
                 <td>{{value.staff}}</td>
                 <td>{{value.staffOrgName}}</td>
                 <td>{{value.title}}</td>

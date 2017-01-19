@@ -15,15 +15,15 @@
     </div>
     <table class="table table-striped table-responsive table-hover" id="dataTable">
         <thead>
-            <tr>
-                <th class="col-md-4">用户名</th>
-                <th class="col-md-3">姓名</th>
-                <th class="col-md-3">部门</th>
+            <tr ng-init="isrotateusername=true,isrotatename=true,isrotateorgName=true">
+                <th ng-click="orderFun()" class="col-md-4">用户名<span class="caret" style="transform:rotate({{isrotateusername?0:180}}deg)"></span></th>
+                <th ng-click="orderFun()" class="col-md-3">姓名<span class="caret" style="transform:rotate({{isrotatename?0:180}}deg)"></span></th>
+                <th ng-click="orderFun()" class="col-md-3">部门<span class="caret" style="transform:rotate({{isrotateorgName?0:180}}deg)"></span></th>
                 <th class="col-md-2 ">操作</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="(key, value) in array.result">
+            <tr ng-init="reverse=true" ng-repeat="(key, value) in array.result |orderBy:exp:reverse">
                 <td>{{value.username}}</td>
                 <td>{{value.name}}</td>
                 <td>{{value.orgName}}</td>

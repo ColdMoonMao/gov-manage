@@ -15,13 +15,13 @@
 	</div>
 	<table class="table table-striped table-responsive table-hover" id="dataTable">
 		<thead>
-			<tr>
-				<th class="col-md-10 col-xs-10">角色名</th>
-				<th class="col-md-2 col-xs-2">操作</th>
+			<tr ng-init="isrotate=true">
+				<th ng-click="orderFun()" class="col-md-10 col-xs-10" class="caret"> 角色名<span class="caret" style="transform:rotate({{isrotate?0:180}}deg)"></span></th>
+				<th class="col-md-2 col-xs-2" >操作</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="(key, value) in array.result">
+			<tr ng-init="reverse=true" ng-repeat="(key, value) in array.result |orderBy:exp:reverse">
 				<td>{{value.name}}</td>
 				<td>
 					<button data-target="#editModal" ng-click="edit()" type="button" class="btn btn-info" data-toggle="modal" >修改</button>
