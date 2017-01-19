@@ -1,5 +1,24 @@
 /* Empty. Add your own CSS if you like */
-
+	html,body{
+		margin: 0;
+		padding: 0;
+	}
+	/* login */
+	.login{
+		background-position: center;
+		background-size: auto;
+		background-position: center;
+		background-color: rgba(0, 0, 0, 0.35);
+		height: 768px;
+	}
+	.sign-in-wrapper .login-brand{
+		color: #ddd;
+		font-weight: bold;
+	}
+	.login button{
+		width: 100%;
+	}
+	/* /login */
 /* @media (min-width: 768px) { */
 	.declare .form-group {
 		margin: 3px 0;

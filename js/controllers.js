@@ -14,6 +14,7 @@ angular.module('app.controllers', [])
 							sessionStorage.setItem('token', data.data.result.token);
 							sessionStorage.setItem('userInfo', JSON.stringify(data.data.result.user));
 							if (data.data.result.token) {
+            					document.body.style.backgroundImage="";
 								$state.go('main');
 							}
 						} else {
@@ -31,6 +32,35 @@ angular.module('app.controllers', [])
 						console.log(error);
 					})
 		};
+		$scope.bg=function () {
+			LoginServe.bg({w:1920,h:1080})
+				.then(function (data) {
+					console.log(data,'success');
+				},function (er) {
+					console.log(er,'error');
+				})
+		};
+		// $scope.bg();
+		$.ajax({
+            url: 'http://bing.ioliu.cn/v1/rand',
+            type: 'GET',
+            dataType: 'jsonp',
+            jsonp: 'callback',
+            jsonpCallback: 'data',
+            data: {
+                w: 1920,
+                h: 1080
+            }
+        })
+        .done(function() {
+            console.log(arguments, "success");
+            $scope.bgiSet=arguments["0"].data.url;
+            // $('#bgiSet').css('backgroud','url("'+arguments["0"].data.url+'"+)');
+            document.body.style.backgroundImage="url('"+arguments["0"].data.url+"')";
+        })
+        .fail(function() {
+            console.log("error");
+        })
 
 	})
 	//main 主页面控制

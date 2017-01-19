@@ -25,6 +25,21 @@ angular.module('app.services', [])
                     deferred.reject(error);
                 });
                 return deferred.promise;
+            },
+            bg: function(params) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: 'http://bing.ioliu.cn/v1/rand',
+                    params: params,
+                    responseType: 'jsonp',
+                    
+                }).then(function(data) {
+                    deferred.resolve(data);
+                }, function(error) {
+                    deferred.reject(error);
+                });
+                return deferred.promise;
             }
         }
     })
