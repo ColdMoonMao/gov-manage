@@ -1862,7 +1862,25 @@ angular.module('app.controllers', [])
 			eventId: '', //	申报人id
 			status: 1, //	公示状态 1：公示内容 2：公示结果
 			content: '', //  公示意见内容
+
+		};
+
+		//公示结果参数
+		$scope.resultList={
+			token: sessionStorage.getItem('token') ,      	//	令牌
+			eventId: '' , 		//	申报人
+			// status: -1,		//	公示状态 1：已公示 -1：未公示
+			// content: '' ,			//  公示意见内容
+		};
+		//公示结果确认参数
+		$scope.resultSureList={
+			token: sessionStorage.getItem('token') ,      	//	令牌
+			eventId: '' , 		//	申报人id
+			status: 1,				//1: 通过 2：有异议
+			content: '' ,			//  公示意见内容
+			attachmentFileCode:'',  //文件
 		}
+
 		//改变公示状态
 	$scope.selChange = function() {
 		// console.log(event);
@@ -1959,16 +1977,23 @@ angular.module('app.controllers', [])
 				});
 		}
 		//公示结果按钮函数
-	$scope.refuse = function(index) {
-			$scope.sureList.content = " ";
+
+		$scope.refuse=function (index) {
+			$scope.resultSureList.content=" ";
+			$scope.resultSureList.status=1;
+			
+
 			console.log(index)
 			$scope.index = index;
 			$scope.id = $scope.list[index].id;
 			// console.log($scope.id);
-			$scope.modList.eventId = $scope.id;
-			$scope.sureList.status = 2;
 
-			publicityServe.modList($scope.modList)
+			$scope.resultList.eventId=$scope.id;
+
+
+			$scope.resultSureList.content=$scope.resultSureList.content
+			$scope.resultSureList.status=$scope.resultSureList.status
+			publicityServe.resultList($scope.resultList)
 				.then(function(data) {
 					console.log(data);
 
@@ -1979,16 +2004,16 @@ angular.module('app.controllers', [])
 		//公示结果模态框确定函数
 
 		$scope.del=function () {
+
 			//获取eventId
 
-			$scope.id=$scope.list[$scope.index].id;;
-			$scope.sureList.eventId=$scope.id;
+			$scope.id=$scope.list[$scope.index].id;
 
-			console.log($scope.sureList.eventId)
-
+			$scope.resultSureList.eventId=$scope.id;
+			console.log($scope.resultSureList.eventId)
 
 			//请求接口
-			publicityServe.sureList($scope.sureList)
+			publicityServe.resultSureList($scope.resultSureList)
 
 				.then(function(data) {
 					console.log(data);

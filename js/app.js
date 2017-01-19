@@ -49,7 +49,7 @@ angular.module('app', ['app.controllers', 'app.services','ui.router'])
                 views: {
                     'content': {
                         templateUrl: 'templates/supervision.html',
-                        controller: 'mainCtrl'
+                        controller: 'supervisionCtrl'
                     }
                 }
             })

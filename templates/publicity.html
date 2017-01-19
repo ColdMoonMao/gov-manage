@@ -127,14 +127,14 @@
                                         <div>
                                             <span>结果:</span>
                                             <form action="" method="get">
-                                                <label><input name="Fruit" type="radio" value="" checked/>通过 </label>
-                                                <label><input name="Fruit" type="radio" value="" />有异议 </label>
+                                                <label><input name="Fruit" type="radio" ng-model="resultSureList.status" value="1" />通过 </label>
+                                                <label><input name="Fruit" type="radio" ng-model="resultSureList.status" value="2" />有异议 </label>
                                             </form>
 
                                         </div>
                                         <div>
                                             <span>内容:</span>
-                                            <textarea class="col-sm-12 " ng-model="sureList.content"></textarea>
+                                            <textarea class="col-sm-12 " ng-model="resultSureList.content"></textarea>
                                         </div>
                                         <div>
                                             <span>附件:</span>
