@@ -232,6 +232,7 @@ angular.module('app.controllers', [])
 			timepicker: false,
 			format: 'Y-m-d',
 			closeOnDateSelect: true,
+			value:new Date(),
 			onSelectDate: function(ct, $i) {
 				// alert(ct.dateFormat('d/m/Y'))
 				$scope.declare.eventDate = ct;
