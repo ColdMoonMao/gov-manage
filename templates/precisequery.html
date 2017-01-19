@@ -29,28 +29,21 @@
     </div>
     <!--数据列表-->
     <table class="table table-striped no-margin" >
+        <!--表头菜单-->
         <thead>
         <tr>
-            <th>申报人</th>
-            <th>部门</th>
-            <th>类型</th>
-            <th>人数</th>
-            <th>申报时间</th>
-            <th>宴请时间</th>
-            <th>状态</th>
-            <th>批示意见</th>
-
+            <th ng-repeat=" menu in menuArr" ng-click="orderToggle($index)">{{menu.name}}<span class="caret" style="transform:rotate({{menu.isrotate?0:180}}deg)"></span></th>
         </tr>
         </thead>
         <tbody>
-        <tr  ng-repeat="obj in preciseArr|limitTo:10:(start-1)*10">
+        <tr  ng-repeat="obj in preciseArr|limitTo:10:(start-1)*10 | orderBy:x+attr">
             <td>{{obj.staff}}</td>
             <td>{{obj.staffOrgName}}</td>
             <td>{{obj.eventType==2?"丧葬":"婚嫁"}}</td>
             <td>{{obj.peopleCount}}</td>
             <td>{{obj.createTime}}</td>
             <td>{{obj.eventDate}}</td>
-            <td>{{obj.auditStatus==-1?"待审核":obj.auditStatus==1?"通过":obj.auditStatus==2?"拒绝":"待审核"}}</td>
+            <td>{{obj.auditStatus==1?"通过":obj.auditStatus==2?"拒绝":"待审核"}}</td>
             <td>{{obj.auditContent}}</td>
         </tr>
         </tbody>

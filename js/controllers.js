@@ -14,7 +14,7 @@ angular.module('app.controllers', [])
 							sessionStorage.setItem('token', data.data.result.token);
 							sessionStorage.setItem('userInfo', JSON.stringify(data.data.result.user));
 							if (data.data.result.token) {
-            					document.body.style.backgroundImage="";
+								document.body.style.backgroundImage = "";
 								$state.go('main');
 							}
 						} else {
@@ -32,35 +32,35 @@ angular.module('app.controllers', [])
 						console.log(error);
 					})
 		};
-		$scope.bg=function () {
-			LoginServe.bg({w:1920,h:1080})
-				.then(function (data) {
-					console.log(data,'success');
-				},function (er) {
-					console.log(er,'error');
+		$scope.bg = function() {
+			LoginServe.bg({ w: 1920, h: 1080 })
+				.then(function(data) {
+					console.log(data, 'success');
+				}, function(er) {
+					console.log(er, 'error');
 				})
 		};
 		// $scope.bg();
 		$.ajax({
-            url: 'http://bing.ioliu.cn/v1/rand',
-            type: 'GET',
-            dataType: 'jsonp',
-            jsonp: 'callback',
-            jsonpCallback: 'data',
-            data: {
-                w: 1920,
-                h: 1080
-            }
-        })
-        .done(function() {
-            console.log(arguments, "success");
-            $scope.bgiSet=arguments["0"].data.url;
-            // $('#bgiSet').css('backgroud','url("'+arguments["0"].data.url+'"+)');
-            document.body.style.backgroundImage="url('"+arguments["0"].data.url+"')";
-        })
-        .fail(function() {
-            console.log("error");
-        })
+				url: 'http://bing.ioliu.cn/v1/rand',
+				type: 'GET',
+				dataType: 'jsonp',
+				jsonp: 'callback',
+				jsonpCallback: 'data',
+				data: {
+					w: 1920,
+					h: 1080
+				}
+			})
+			.done(function() {
+				console.log(arguments, "success");
+				$scope.bgiSet = arguments["0"].data.url;
+				// $('#bgiSet').css('backgroud','url("'+arguments["0"].data.url+'"+)');
+				document.body.style.backgroundImage = "url('" + arguments["0"].data.url + "')";
+			})
+			.fail(function() {
+				console.log("error");
+			})
 
 	})
 	//main 主页面控制
@@ -188,10 +188,10 @@ angular.module('app.controllers', [])
 		$scope.confirm = function() {
 			//上传文件
 			DeclareServe.upload($scope.declare.attachmentFileCode)
-				.then(function (data) {
-					console.log(data,'文件');
-				},function (er) {
-					console.log(er,'文件 er');
+				.then(function(data) {
+					console.log(data, '文件');
+				}, function(er) {
+					console.log(er, '文件 er');
 				})
 			DeclareServe.submit($scope.declare)
 				.then(function(data) {
@@ -232,7 +232,7 @@ angular.module('app.controllers', [])
 			timepicker: false,
 			format: 'Y-m-d',
 			closeOnDateSelect: true,
-			value:new Date(),
+			value: new Date(),
 			onSelectDate: function(ct, $i) {
 				// alert(ct.dateFormat('d/m/Y'))
 				$scope.declare.eventDate = ct;
@@ -1327,12 +1327,36 @@ angular.module('app.controllers', [])
 		});
 	})
 	//rolemanage角色管理页面控制结束
-
-
-//精确查询precisequery
-.controller('precisequeryCtrl', function($scope, $state, PrecisequeryServe) {
+	//精确查询precisequery
+	.controller('precisequeryCtrl', function($scope, $state, PrecisequeryServe) {
 		$scope.organizArr = [{ organiz: '根组织', key: '1' }];
 		$scope.token = sessionStorage.getItem("token");
+		$scope.menuArr = [{
+			name: '申报人',
+			isrotate: true
+		}, {
+			name: '部门',
+			isrotate: true
+		}, {
+			name: '类型',
+			isrotate: true
+		}, {
+			name: '人数',
+			isrotate: true
+		}, {
+			name: '申报时间',
+			isrotate: true
+		}, {
+			name: '宴请时间',
+			isrotate: true
+		}, {
+			name: '状态',
+			isrotate: true
+		}, {
+			name: '批示意见',
+			isrotate: true
+		}]
+		$scope.attrArr = ['staff', 'staffOrgName', 'eventType', 'peopleCount', 'createTime', 'eventDate', 'auditStatus', 'auditContent']
 		console.log($scope.token);
 		$scope.preciseSearch = function() {
 			$scope.precisequeryobj = {
@@ -1357,7 +1381,7 @@ angular.module('app.controllers', [])
 							})
 						}
 						Page();
-					} else if (data.data.error) {
+					} else if (data.data.error.code) {
 						swal({
 								title: data.data.error.message,
 								type: "warning",
@@ -1381,6 +1405,15 @@ angular.module('app.controllers', [])
 
 		}
 		$scope.preciseSearch();
+		//排序
+		$scope.orderToggle = function(index) {
+			$scope.x = ($scope.x == "+" ? "-" : "+");
+			$scope.attr = $scope.attrArr[index];
+			$scope.menuArr.forEach(function(value, i, arr) {
+				value.isrotate = i == index ? $scope.menuArr[index].isrotate : true;
+			})
+			$scope.menuArr[index].isrotate = !$scope.menuArr[index].isrotate;
+		}
 
 		function Page() {
 			$scope.start = 1;
@@ -1420,6 +1453,32 @@ angular.module('app.controllers', [])
 	//组合查询combinequery
 	.controller('combinequeryCtrl', function($scope, $state, PrecisequeryServe) {
 		$scope.token = sessionStorage.getItem("token");
+		$scope.attrArr = ['staff', 'staffOrgName', 'eventType', 'peopleCount', 'createTime', 'eventDate', 'auditStatus', 'auditContent']
+		$scope.menuArr = [{
+			name: '申报人',
+			isrotate: true
+		}, {
+			name: '部门',
+			isrotate: true
+		}, {
+			name: '类型',
+			isrotate: true
+		}, {
+			name: '人数',
+			isrotate: true
+		}, {
+			name: '申报时间',
+			isrotate: true
+		}, {
+			name: '宴请时间',
+			isrotate: true
+		}, {
+			name: '状态',
+			isrotate: true
+		}, {
+			name: '批示意见',
+			isrotate: true
+		}]
 		$scope.typeArr = [{
 			type: '全部',
 			key: '0'
@@ -1452,7 +1511,7 @@ angular.module('app.controllers', [])
 			countMax: "200"
 		}]
 		$scope.combineSearch = function() {
-				var combinequeryobj = {
+				$scope.combinequeryobj = {
 					token: $scope.token, //令牌
 					page: 1, //当前页
 					start: 0, //从哪个开始
@@ -1465,7 +1524,7 @@ angular.module('app.controllers', [])
 					eventTimeFrom: $scope.TimeFrom, //宴请开始时间
 					eventTimeTo: $scope.TimeTo, //宴请结束时间
 				}
-				PrecisequeryServe.Preciselist(combinequeryobj)
+				PrecisequeryServe.Preciselist($scope.combinequeryobj)
 					.then(function(data) {
 						console.log(data);
 						if (data.data.success) {
@@ -1478,7 +1537,7 @@ angular.module('app.controllers', [])
 								})
 							}
 							Page();
-						} else if (data.data.error) {
+						} else if (data.data.error.code) {
 							swal({
 									title: data.data.error.message,
 									type: "warning",
@@ -1501,8 +1560,16 @@ angular.module('app.controllers', [])
 					})
 
 			}
-			// $scope.combineSearch();
-
+			//排序
+		$scope.orderToggle = function(index) {
+				$scope.x = ($scope.x == "+" ? "-" : "+");
+				$scope.attr = $scope.attrArr[index];
+				$scope.menuArr.forEach(function(value, i, arr) {
+					value.isrotate = i == index ? $scope.menuArr[index].isrotate : true;
+				})
+				$scope.menuArr[index].isrotate = !$scope.menuArr[index].isrotate;
+			}
+			//分页
 		function Page() {
 			$scope.start = 1;
 			$scope.changePage = function($index) {
@@ -1536,6 +1603,10 @@ angular.module('app.controllers', [])
 				}
 			}
 		}
+		// 跳转到页面先执行一次,延迟0.5秒执行,否则会下拉框选择内容没加载
+		setTimeout(function() {
+			$scope.combineSearch();
+		}, 500);
 
 	})
 	//数量统计
