@@ -8,6 +8,8 @@
 		background-position: center;
 		background-size: cover;
 		background-position: center;
+		/* background-image: url('../img/default-BG.jpg'); */
+		background-color: rgba(87, 211, 247, 1.0);
 		height: 768px;
 	}
 	.login>div{

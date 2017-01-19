@@ -6,8 +6,12 @@ angular.module('app.controllers', [])
 			password: ''
 		}
 		$scope.login = function() {
+			//loading 效果
+			$.LoadingOverlay("show");
 			LoginServe.login($scope.user)
 				.then(function(data) {
+						//loading 效果
+						$.LoadingOverlay("hide");
 						if (data.data.result) {
 							console.log(arguments);
 							// console.log(data.data.result.token);
@@ -54,7 +58,7 @@ angular.module('app.controllers', [])
 			})
 			.done(function() {
 				console.log(arguments, "success");
-				$scope.bgiSet ="url('" + arguments["0"].data.url + "')";
+				$scope.bgiSet = "url('" + arguments["0"].data.url + "')";
 				// $('#bgsetEl').css('backgroudImage',"url('" + arguments["0"].data.url + "')");
 				// document.body.style.backgroundImage = "url('" + arguments["0"].data.url + "')";
 			})
@@ -70,6 +74,7 @@ angular.module('app.controllers', [])
 		console.log($scope.userInfo);
 		//退出登录
 		$scope.logout = function() {
+
 				//sweetalert
 				swal({
 						title: "确认退出?",
@@ -186,6 +191,8 @@ angular.module('app.controllers', [])
 		};
 		//确认申报按钮
 		$scope.confirm = function() {
+			//loading 效果
+			$.LoadingOverlay("show");
 			//上传文件
 			DeclareServe.upload($scope.declare.attachmentFileCode)
 				.then(function(data) {
@@ -195,6 +202,8 @@ angular.module('app.controllers', [])
 				})
 			DeclareServe.submit($scope.declare)
 				.then(function(data) {
+					//loading 效果
+					$.LoadingOverlay("hide");
 					console.log(data);
 					if (data.data.success) {
 						swal({
@@ -260,8 +269,12 @@ angular.module('app.controllers', [])
 			$scope.search();
 		}
 		$scope.search = function() {
+			//loading 效果
+			$.LoadingOverlay("show");
 			NotifServe.list($scope.listObj)
 				.then(function(data) {
+					//loading 效果
+					$.LoadingOverlay("hide");
 					console.log(data);
 					$scope.array = data.data;
 					if (data.data.error) {
@@ -286,7 +299,7 @@ angular.module('app.controllers', [])
 					console.log(error);
 				})
 		};
-		$scope.refresh();
+		// $scope.search();
 		//新增通报 params
 		$scope.addObj = {
 			token: sessionStorage.getItem('token'), //  令牌
@@ -297,8 +310,12 @@ angular.module('app.controllers', [])
 		};
 		//新增通报 添加函数
 		$scope.add = function() {
+			//loading 效果
+			$.LoadingOverlay("show");
 			NotifServe.add($scope.addObj)
 				.then(function(data) {
+					//loading 效果
+					$.LoadingOverlay("hide");
 					console.log(data);
 					if (data.data.success) {
 						$('#normalModal').modal('hide');
@@ -515,26 +532,26 @@ angular.module('app.controllers', [])
 			}, 300);
 		});
 		//排序
-		$scope.orderFun=function () {
-			if (event.target.innerText=='被通报人') {
-				$scope.exp='staff';
-				$scope.reverse=!$scope.reverse;
-				$scope.isrotatestaff=!$scope.isrotatestaff;
+		$scope.orderFun = function() {
+			if (event.target.innerText == '被通报人') {
+				$scope.exp = 'staff';
+				$scope.reverse = !$scope.reverse;
+				$scope.isrotatestaff = !$scope.isrotatestaff;
 			}
-			if (event.target.innerText=='被通报人部门') {
-				$scope.exp='staffOrgName';
-				$scope.reverse=!$scope.reverse;
-				$scope.isrotatestaffOrgName=!$scope.isrotatestaffOrgName;
+			if (event.target.innerText == '被通报人部门') {
+				$scope.exp = 'staffOrgName';
+				$scope.reverse = !$scope.reverse;
+				$scope.isrotatestaffOrgName = !$scope.isrotatestaffOrgName;
 			}
-			if (event.target.innerText=='标题') {
-				$scope.exp='title';
-				$scope.reverse=!$scope.reverse;
-				$scope.isrotatetitle=!$scope.isrotatetitle;
+			if (event.target.innerText == '标题') {
+				$scope.exp = 'title';
+				$scope.reverse = !$scope.reverse;
+				$scope.isrotatetitle = !$scope.isrotatetitle;
 			}
-			if (event.target.innerText=='时间') {
-				$scope.exp='createTime';
-				$scope.reverse=!$scope.reverse;
-				$scope.isrotatecreateTime=!$scope.isrotatecreateTime;
+			if (event.target.innerText == '时间') {
+				$scope.exp = 'createTime';
+				$scope.reverse = !$scope.reverse;
+				$scope.isrotatecreateTime = !$scope.isrotatecreateTime;
 			}
 		}
 	})
@@ -554,8 +571,12 @@ angular.module('app.controllers', [])
 			$scope.search();
 		}
 		$scope.search = function() {
+			//loading 效果
+			$.LoadingOverlay("show");
 			PunishServe.list($scope.listObj)
 				.then(function(data) {
+					//loading 效果
+					$.LoadingOverlay("hide");
 					console.log(data);
 					$scope.array = data.data;
 					if (data.data.error) {
@@ -580,7 +601,7 @@ angular.module('app.controllers', [])
 					console.log(error);
 				})
 		};
-		$scope.refresh();
+		// $scope.refresh();
 		//新增通报 params
 		$scope.addObj = {
 			token: sessionStorage.getItem('token'), //  令牌
@@ -809,26 +830,26 @@ angular.module('app.controllers', [])
 			}, 300);
 		});
 		//排序
-		$scope.orderFun=function () {
-			if (event.target.innerText=='被通报人') {
-				$scope.exp='staff';
-				$scope.reverse=!$scope.reverse;
-				$scope.isrotatestaff=!$scope.isrotatestaff;
+		$scope.orderFun = function() {
+			if (event.target.innerText == '被通报人') {
+				$scope.exp = 'staff';
+				$scope.reverse = !$scope.reverse;
+				$scope.isrotatestaff = !$scope.isrotatestaff;
 			}
-			if (event.target.innerText=='被通报人部门') {
-				$scope.exp='staffOrgName';
-				$scope.reverse=!$scope.reverse;
-				$scope.isrotatestaffOrgName=!$scope.isrotatestaffOrgName;
+			if (event.target.innerText == '被通报人部门') {
+				$scope.exp = 'staffOrgName';
+				$scope.reverse = !$scope.reverse;
+				$scope.isrotatestaffOrgName = !$scope.isrotatestaffOrgName;
 			}
-			if (event.target.innerText=='标题') {
-				$scope.exp='title';
-				$scope.reverse=!$scope.reverse;
-				$scope.isrotatetitle=!$scope.isrotatetitle;
+			if (event.target.innerText == '标题') {
+				$scope.exp = 'title';
+				$scope.reverse = !$scope.reverse;
+				$scope.isrotatetitle = !$scope.isrotatetitle;
 			}
-			if (event.target.innerText=='时间') {
-				$scope.exp='createTime';
-				$scope.reverse=!$scope.reverse;
-				$scope.isrotatecreateTime=!$scope.isrotatecreateTime;
+			if (event.target.innerText == '时间') {
+				$scope.exp = 'createTime';
+				$scope.reverse = !$scope.reverse;
+				$scope.isrotatecreateTime = !$scope.isrotatecreateTime;
 			}
 		}
 	})
@@ -848,8 +869,12 @@ angular.module('app.controllers', [])
 			$scope.search();
 		}
 		$scope.search = function() {
+			//loading 效果
+			$.LoadingOverlay("show");
 			UsermanageServe.list($scope.listObj)
 				.then(function(data) {
+					//loading 效果
+					$.LoadingOverlay("hide");
 					console.log(data);
 					$scope.array = data.data;
 					if (data.data.error) {
@@ -874,7 +899,7 @@ angular.module('app.controllers', [])
 					console.log(error);
 				})
 		};
-		$scope.refresh();
+		// $scope.refresh();
 		//新增 params
 		$scope.addObj = {
 			token: sessionStorage.getItem('token'), //  令牌
@@ -886,9 +911,9 @@ angular.module('app.controllers', [])
 		};
 		//获取部门列表
 		var departObj = {
-			token: sessionStorage.getItem('token'), //  令牌
-		}
-		//获取部门列表
+				token: sessionStorage.getItem('token'), //  令牌
+			}
+			//获取部门列表
 		function getDepartList() {
 			UsermanageServe.depart(departObj)
 				.then(function(data) {
@@ -904,10 +929,10 @@ angular.module('app.controllers', [])
 
 		//获取角色列表
 		var roleObj = {
-			token: sessionStorage.getItem('token'), //  令牌
-			roleId: 0 //  当用户角色id
-		}
-		//获取角色列表
+				token: sessionStorage.getItem('token'), //  令牌
+				roleId: 0 //  当用户角色id
+			}
+			//获取角色列表
 		function getRoleList() {
 			UsermanageServe.role(roleObj)
 				.then(function(data) {
@@ -1046,7 +1071,7 @@ angular.module('app.controllers', [])
 					$scope.editUsername = this.value.username;
 				}
 			}
-		//修改确认按钮函数
+			//修改确认按钮函数
 		$scope.editConfirm = function() {
 			UsermanageServe.edit($scope.editObj)
 				.then(function(data) {
@@ -1116,21 +1141,21 @@ angular.module('app.controllers', [])
 			}, 300);
 		});
 		//排序
-		$scope.orderFun=function () {
-			if (event.target.innerText=='用户名') {
-				$scope.exp='username';
-				$scope.reverse=!$scope.reverse;
-				$scope.isrotateusername=!$scope.isrotateusername;
+		$scope.orderFun = function() {
+			if (event.target.innerText == '用户名') {
+				$scope.exp = 'username';
+				$scope.reverse = !$scope.reverse;
+				$scope.isrotateusername = !$scope.isrotateusername;
 			}
-			if (event.target.innerText=='姓名') {
-				$scope.exp='name';
-				$scope.reverse=!$scope.reverse;
-				$scope.isrotatename=!$scope.isrotatename;
+			if (event.target.innerText == '姓名') {
+				$scope.exp = 'name';
+				$scope.reverse = !$scope.reverse;
+				$scope.isrotatename = !$scope.isrotatename;
 			}
-			if (event.target.innerText=='部门') {
-				$scope.exp='orgName';
-				$scope.reverse=!$scope.reverse;
-				$scope.isrotateorgName=!$scope.isrotateorgName;
+			if (event.target.innerText == '部门') {
+				$scope.exp = 'orgName';
+				$scope.reverse = !$scope.reverse;
+				$scope.isrotateorgName = !$scope.isrotateorgName;
 			}
 		}
 	})
@@ -1150,15 +1175,19 @@ angular.module('app.controllers', [])
 			$scope.search();
 		}
 		$scope.search = function() {
+			//loading 效果
+			$.LoadingOverlay("show");
 			RolemanageServe.list($scope.listObj)
 				.then(function(data) {
+					//loading 效果
+					$.LoadingOverlay("hide");
 					console.log(data);
 					$scope.array = data.data;
 				}, function(error) {
 					console.log(error);
 				})
 		};
-		$scope.refresh();
+		// $scope.refresh();
 		//新增 params
 		$scope.addObj = {
 			token: sessionStorage.getItem('token'), //  令牌
@@ -1402,11 +1431,11 @@ angular.module('app.controllers', [])
 			}, 300);
 		});
 		//排序
-		$scope.orderFun=function () {
-			if (event.target.innerText=='角色名') {
-				$scope.exp='name';
-				$scope.reverse=!$scope.reverse;
-				$scope.isrotate=!$scope.isrotate;
+		$scope.orderFun = function() {
+			if (event.target.innerText == '角色名') {
+				$scope.exp = 'name';
+				$scope.reverse = !$scope.reverse;
+				$scope.isrotate = !$scope.isrotate;
 			}
 		}
 	})
@@ -1444,16 +1473,19 @@ angular.module('app.controllers', [])
 		console.log($scope.token);
 		$scope.preciseSearch = function() {
 			$scope.precisequeryobj = {
-				token: $scope.token, //令牌
-				staff: $scope.staff, //申报人
-				page: 1, //当前页
-				start: 0, //从哪个开始
-				limit: 10, //每页显示多少个
-				staffOrgId: 1 //所属部门(根组织)
-			}
-
+					token: $scope.token, //令牌
+					staff: $scope.staff, //申报人
+					page: 1, //当前页
+					start: 0, //从哪个开始
+					limit: 10, //每页显示多少个
+					staffOrgId: 1 //所属部门(根组织)
+				}
+				//loading 效果
+			$.LoadingOverlay("show");
 			PrecisequeryServe.Preciselist($scope.precisequeryobj)
 				.then(function(data) {
+					//loading 效果
+					$.LoadingOverlay("hide");
 					console.log(data);
 					if (data.data.success) {
 						$scope.preciseArr = data.data.result;
@@ -1596,20 +1628,24 @@ angular.module('app.controllers', [])
 		}]
 		$scope.combineSearch = function() {
 				$scope.combinequeryobj = {
-					token: $scope.token, //令牌
-					page: 1, //当前页
-					start: 0, //从哪个开始
-					limit: 10, //每页显示多少个
-					eventType: $scope.typeSelect.key, //申报类型,全部:0,婚嫁:1,丧葬:2
-					peopleCountMin: $scope.peopleCountSelect.countMin, //最少宴请人数
-					peopleCountMax: $scope.peopleCountSelect.countMax, //最大宴请人数
-					eventCreateTimeFrom: $scope.CreateTimeFrom, //申报开始时间
-					eventCreateTimeTo: $scope.CreateTimeTo, //申报结束时间
-					eventTimeFrom: $scope.TimeFrom, //宴请开始时间
-					eventTimeTo: $scope.TimeTo, //宴请结束时间
-				}
+						token: $scope.token, //令牌
+						page: 1, //当前页
+						start: 0, //从哪个开始
+						limit: 10, //每页显示多少个
+						eventType: $scope.typeSelect.key, //申报类型,全部:0,婚嫁:1,丧葬:2
+						peopleCountMin: $scope.peopleCountSelect.countMin, //最少宴请人数
+						peopleCountMax: $scope.peopleCountSelect.countMax, //最大宴请人数
+						eventCreateTimeFrom: $scope.CreateTimeFrom, //申报开始时间
+						eventCreateTimeTo: $scope.CreateTimeTo, //申报结束时间
+						eventTimeFrom: $scope.TimeFrom, //宴请开始时间
+						eventTimeTo: $scope.TimeTo, //宴请结束时间
+					}
+					//loading 效果
+				$.LoadingOverlay("show");
 				PrecisequeryServe.Preciselist($scope.combinequeryobj)
 					.then(function(data) {
+						//loading 效果
+						$.LoadingOverlay("hide");
 						console.log(data);
 						if (data.data.success) {
 							$scope.combineArr = data.data.result;
@@ -1699,15 +1735,18 @@ angular.module('app.controllers', [])
 		console.log($scope.token);
 		$scope.statisticSearch = function() {
 			var statisticobj = {
-				token: $scope.token, //令牌
-				eventCreateTimeFrom: $scope.CreateTimeFrom, //申报开始时间
-				eventCreateTimeTo: $scope.CreateTimeTo, //申报结束时间
-				eventTimeFrom: $scope.TimeFrom, //宴请开始时间
-				eventTimeTo: $scope.TimeTo //宴请结束时间
-			}
-
+					token: $scope.token, //令牌
+					eventCreateTimeFrom: $scope.CreateTimeFrom, //申报开始时间
+					eventCreateTimeTo: $scope.CreateTimeTo, //申报结束时间
+					eventTimeFrom: $scope.TimeFrom, //宴请开始时间
+					eventTimeTo: $scope.TimeTo //宴请结束时间
+				}
+				//loading 效果
+			$.LoadingOverlay("show");
 			StatisticServe.statisticlist(statisticobj)
 				.then(function(data) {
+					//loading 效果
+					$.LoadingOverlay("hide");
 					console.log(data);
 					if (data.data.success) {
 						$scope.statisticArr = data.data.result[0];
@@ -1805,8 +1844,12 @@ angular.module('app.controllers', [])
 	};
 	//刷新
 	$scope.refresh = function() {
+		//loading 效果
+		$.LoadingOverlay("show");
 		ApproveServe.userList($scope.userList)
 			.then(function(data) {
+				//loading 效果
+				$.LoadingOverlay("hide");
 				console.log(data);
 
 				$scope.list = data.data.result;
@@ -1817,7 +1860,7 @@ angular.module('app.controllers', [])
 			})
 			// console.log(GlobalServe.token);
 	};
-	$scope.refresh();
+	// $scope.refresh();
 
 	//通过按钮函数
 	$scope.pass = function(index) {
@@ -1982,9 +2025,12 @@ angular.module('app.controllers', [])
 	};
 	//刷新
 	$scope.refresh = function() {
-
+		//loading 效果
+		$.LoadingOverlay("show");
 		publicityServe.pubList($scope.pubList)
 			.then(function(data) {
+				//loading 效果
+				$.LoadingOverlay("hide");
 				console.log(data);
 				$scope.bulle = data.config.params.bulletinStatus
 				$scope.bulletinStatus = data.config.params.bulletinStatus;
@@ -1997,7 +2043,7 @@ angular.module('app.controllers', [])
 			})
 			// console.log(GlobalServe.token);
 	};
-	$scope.refresh();
+	// $scope.refresh();
 
 	//公示内容按钮函数
 	$scope.pass = function(index) {
@@ -2064,11 +2110,9 @@ angular.module('app.controllers', [])
 		}
 		//公示结果按钮函数
 
-
-		$scope.refuse=function (index) {
-			$scope.resultSureList.content=" ";
-			$scope.resultSureList.status='1';
-
+	$scope.refuse = function(index) {
+			$scope.resultSureList.content = " ";
+			$scope.resultSureList.status = 1;
 
 
 			console.log(index)
@@ -2093,65 +2137,66 @@ angular.module('app.controllers', [])
 
 	$scope.del = function() {
 
-				//获取eventId
+		//获取eventId
 
-				$scope.id = $scope.list[$scope.index].id;
+		$scope.id = $scope.list[$scope.index].id;
 
-				$scope.resultSureList.eventId = $scope.id;
-				console.log($scope.resultSureList.eventId)
+		$scope.resultSureList.eventId = $scope.id;
+		console.log($scope.resultSureList.eventId)
 
-				//请求接口
-				publicityServe.resultSureList($scope.resultSureList)
+		//请求接口
+		publicityServe.resultSureList($scope.resultSureList)
 
-					.then(function (data) {
-						console.log(data);
-						swal({
-							title: "公示结果成功",
-							text: "",
-							timer: 1000,
-							type: "success",
-							showConfirmButton: false
-						});
-						$scope.refresh();
-
-					}, function (error) {
-						swal({
-							title: "登录授权过期",
-							text: "",
-							timer: 1000,
-							type: "error",
-							showConfirmButton: false
-						});
-						console.log(error);
-					});
-
-			}
-
-			//下一页
-			$scope.nextPage = function () {
-				if ($scope.pubList.page < $scope.arr.total / $scope.pubList.limit) {
-					$scope.pubList.page++;
-				}
-			};
-			//上一页
-			$scope.prePage = function () {
-				if ($scope.pubList.page > 1) {
-					$scope.pubList.page--;
-				}
-			};
-			//最后一页
-			$scope.lastPage = function () {
-				console.log(Math.floor($scope.arr.total / $scope.pubList.limit));
-				$scope.pubList.page = Math.floor($scope.arr.total / $scope.pubList.limit) + 1;
-			};
-			//监控页码变化.300ms后更新列表
-			$scope.$watch('pubList.page', function (newValue) {
-				$scope.pubList.start = $scope.pubList.limit * ($scope.pubList.page - 1);
-				$timeout(function () {
-					$scope.search();
-					$scope.$apply()
-				}, 300);
+		.then(function(data) {
+			console.log(data);
+			swal({
+				title: "公示结果成功",
+				text: "",
+				timer: 1000,
+				type: "success",
+				showConfirmButton: false
 			});
+			$scope.refresh();
+
+		}, function(error) {
+			swal({
+				title: "登录授权过期",
+				text: "",
+				timer: 1000,
+				type: "error",
+				showConfirmButton: false
+			});
+			console.log(error);
+		});
+
+	}
+
+	//下一页
+	$scope.nextPage = function() {
+		if ($scope.pubList.page < $scope.arr.total / $scope.pubList.limit) {
+			$scope.pubList.page++;
+		}
+	};
+	//上一页
+	$scope.prePage = function() {
+		if ($scope.pubList.page > 1) {
+			$scope.pubList.page--;
+		}
+	};
+	//最后一页
+	$scope.lastPage = function() {
+		console.log(Math.floor($scope.arr.total / $scope.pubList.limit));
+		$scope.pubList.page = Math.floor($scope.arr.total / $scope.pubList.limit) + 1;
+	};
+	//监控页码变化.300ms后更新列表
+	$scope.$watch('pubList.page', function(newValue) {
+		$scope.pubList.start = $scope.pubList.limit * ($scope.pubList.page - 1);
+		$timeout(function() {
+			$scope.search();
+			$scope.$apply()
+		}, 300);
+	});
+
 })
 
 //supervision监督页面控制
@@ -2218,9 +2263,12 @@ angular.module('app.controllers', [])
 	};
 	//刷新
 	$scope.refresh = function() {
-
+		//loading 效果
+		$.LoadingOverlay("show");
 		supervisionServe.pubList($scope.pubList)
 			.then(function(data) {
+				//loading 效果
+				$.LoadingOverlay("hide");
 				console.log(data);
 				$scope.bulle = data.config.params.superviseStatus
 					// console.log($scope.bulle)
@@ -2232,7 +2280,7 @@ angular.module('app.controllers', [])
 			})
 			// console.log(GlobalServe.token);
 	};
-	$scope.refresh();
+	// $scope.refresh();
 
 	//监督报告按钮函数
 	$scope.pass = function(index) {

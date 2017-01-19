@@ -15,7 +15,7 @@
     </div>
     <table class="table table-striped table-responsive table-hover" id="dataTable">
         <thead>
-            <tr ng-init="isrotatestaff=true,isrotatestaffOrgName=true,isrotatetitle=true,isrotatecreateTime=true">
+            <tr ng-init="isrotatestaff=true;isrotatestaffOrgName=true;isrotatetitle=true;isrotatecreateTime=true">
                 <th ng-click="orderFun()" class="col-md-2">被通报人<span class="caret" style="transform:rotate({{isrotatestaff?0:180}}deg)"></span></th>
                 <th ng-click="orderFun()" class="col-md-2">被通报人部门<span class="caret" style="transform:rotate({{isrotatestaffOrgName?0:180}}deg)"></span></th>
                 <th ng-click="orderFun()" class="col-md-2">标题<span class="caret" style="transform:rotate({{isrotatetitle?0:180}}deg)"></span></th>
