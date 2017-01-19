@@ -180,25 +180,31 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="">
-										Inbox
-										<span class="badge badge-danger bounceIn animation-delay2 pull-right">1</span>
+										用户名:
+										<span class="badge badge-danger bounceIn animation-delay2 pull-right">{{userInfo.username}}</span>
 									</a>
                             </li>
                             <li>
                                 <a href="">
-										Notification
-										<span class="badge badge-purple bounceIn animation-delay3 pull-right">2</span>
+										用户ID:
+										<span class="badge badge-purple bounceIn animation-delay3 pull-right">{{userInfo.id}}</span>
 									</a>
                             </li>
                             <li>
                                 <a href="" class="sidebarRight-toggle">
-										Message
-										<span class="badge badge-success bounceIn animation-delay4 pull-right">7</span>
+										用户权限:
+										<span class="badge badge-success bounceIn animation-delay4 pull-right">{{userInfo.role.name}}</span>
 									</a>
+                            </li>
+                            <li>
+                                <a href="" class="sidebarRight-toggle">
+                                        权限数量:
+                                        <span class="badge badge-warning bounceIn animation-delay4 pull-right">{{userInfo.role.functions.length}}</span>
+                                    </a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="">Setting</a>
+                                <a href="" ui-sref=".usermanage">Setting</a>
                             </li>
                         </ul>
                     </div>

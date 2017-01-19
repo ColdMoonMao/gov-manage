@@ -1,25 +1,25 @@
 <div>
 	<h3 class=" m-left-xs header-text">申报</h3>
-	<form class="form-inline no-margin">
-		<div class="form-group">
+	<form class="form-inline no-margin declare">
+		<div class="form-group col-md-3 col-sm-6 col-xs-12">
 			<label class="">申报人:</label>
 			<input type="text" class="form-control" ng-model="declare.staff" ng-init="declare.staff='老王'">
 		</div>
 		<!-- /form-group -->
-		<div class="form-group">
+		<div class="form-group col-md-3 col-sm-6 col-xs-12">
 			<label class="">与申报人关系:</label>
-			<select  ng-init="relation='本人'" ng-model="relation" class="form-control" ng-change="staffRelationshipIndex()">
+			<select ng-init="relation='本人'" ng-model="relation" class="form-control" ng-change="staffRelationshipIndex()">
 				<option>本人</option>
 				<option>直系亲属</option>
 			</select>
 		</div>
 		<!-- /form-group -->
-		<div class="form-group">
-			<label class="">政治面貌</label>
+		<div class="form-group col-md-3 col-sm-6 col-xs-12">
+			<label class="">政治面貌:</label>
 			<input ng-init="declare.staffPoliticalStatus='党员'" type="text" class="form-control" ng-model="declare.staffPoliticalStatus">
 		</div>
 		<!-- /form-group -->
-		<div class="form-group">
+		<div class="form-group col-md-3 col-sm-6 col-xs-12">
 			<label class="">单位职务:</label>
 			<select ng-init="staffJob='县级党员干部'" class="form-control" ng-model="staffJob" ng-change="staffJobIndex()">
 				<option>县级党员干部</option>
@@ -29,17 +29,17 @@
 			</select>
 		</div>
 		<!-- /form-group -->
-		<div class="form-group">
+		<div class="form-group col-md-3 col-sm-6 col-xs-12">
 			<label class="">配偶:</label>
 			<input ng-init="declare.staffSpouse='小马'" type="text" class="form-control" ng-model="declare.staffSpouse">
 		</div>
 		<!-- /form-group -->
-		<div class="form-group">
+		<div class="form-group col-md-3 col-sm-6 col-xs-12">
 			<label class="">联系电话:</label>
 			<input ng-init="declare.staffPhone=123456" type="text" class="form-control" ng-model="declare.staffPhone">
 		</div>
 		<!-- /form-group -->
-		<div class="form-group">
+		<div class="form-group col-md-3 col-sm-6 col-xs-12">
 			<label class="">操办事项:</label>
 			<select ng-init="eventType='婚嫁'" class="form-control" ng-model="eventType" ng-change="eventTypeIndex()">
 				<option>婚嫁</option>
@@ -47,58 +47,58 @@
 			</select>
 		</div>
 		<!-- /form-group -->
-		<div class="form-group">
+		<div class="form-group col-md-3 col-sm-6 col-xs-12">
 			<label class="">操办次数:</label>
 			<input ng-init="declare.eventCount=2" type="number" value="1" class="form-control" ng-model="declare.eventCount">
 		</div>
 		<!-- /form-group -->
-		<div class="form-group">
+		<div class="form-group col-md-3 col-sm-6 col-xs-12">
 			<label class="control-label">操办时间:</label>
 			<div class="input-group">
-				<input ng-init="" id="datetimepicker1" type="date" class="form-control" ng-model="declare.eventDate">
-				<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+				<input ng-init="" id="datetimepicker" type="text" class="form-control">
+				<span id="datetimepickerIcon" class="input-group-addon"><i class="fa fa-calendar"></i></span>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group col-md-3 col-sm-6 col-xs-12">
 			<label class="">操办地点:</label>
 			<input ng-init="declare.location='中南海'" type="text" class="form-control" ng-model="declare.location" value="地点">
 		</div>
-		<div class="form-group">
+		<div class="form-group col-md-3 col-sm-6 col-xs-12">
 			<label class="">操办桌数:</label>
 			<input ng-init="declare.tableCount=60" type="number" value="50" class="form-control" ng-model="declare.tableCount">
 		</div>
-		<div class="form-group">
+		<div class="form-group col-md-3 col-sm-6 col-xs-12">
 			<label class="">参加人数:</label>
 			<input ng-init="declare.peopleCount=200" type="number" value="50" class="form-control" ng-model="declare.peopleCount">
 		</div>
-		<div class="form-group">
+		<div class="form-group col-md-3 col-sm-6 col-xs-12">
 			<label class="">邀请范围:</label>
 			<input ng-init="declare.peopleRange='朋友'" type="text" class="form-control" ng-model="declare.peopleRange">
 		</div>
-		<div class="form-group">
+		<div class="form-group col-md-3 col-sm-6 col-xs-12">
 			<label class="">用车数量:</label>
 			<input ng-init="declare.carCount=20" type="number" value="10" class="form-control" ng-model="declare.carCount">
 		</div>
-		<div class="form-group">
+		<div class="form-group col-md-3 col-sm-6 col-xs-12">
 			<label class="">用车来源:</label>
 			<input ng-init="declare.carSource='火星'" type="text" class="form-control" ng-model="declare.carSource" value="自备">
 		</div>
 		<!-- /form-group -->
-		<div class="form-group">
+		<div class="form-group col-md-3 col-sm-6 col-xs-12">
 			<label class="">所属部门:</label>
 			<select ng-init="staffOrgId='根组织'" class="form-control" ng-model="staffOrgId" ng-change="staffOrgIdIndex()">
 				<option>根组织</option>
 			</select>
 		</div>
-		<div class="form-group">
-			<label class="control-label">宴请名单</label>
+		<div class="form-group col-md-3 col-sm-6 col-xs-12">
+			<label class="control-label">宴请名单:</label>
 			<input ng-init="" type="file" class="form-control" ng-model='declare.attachmentFileCode'>
 		</div>
-		<div class="form-group">
+		<div class="form-group col-md-6 col-sm-6 col-xs-12">
 			<label class=" control-label">本人承诺:</label>
-			<textarea ng-init="declare.selfPromise='本人承诺'" class="form-control" rows="3" cols="100" ng-model="declare.selfPromise"></textarea>
+			<textarea ng-init="declare.selfPromise='本人承诺'" class="form-control textarea" rows="3" cols="90" ng-model="declare.selfPromise"></textarea>
 		</div>
-		<div class="form-group">
+		<div class="form-group col-md-3 col-sm-6 col-xs-12">
 			<label class="">承诺人:</label>
 			<input ng-init="declare.promisePeople='承诺人'" type="text" class="form-control" ng-model="declare.promisePeople">
 		</div>
