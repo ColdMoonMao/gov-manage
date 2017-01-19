@@ -2064,9 +2064,11 @@ angular.module('app.controllers', [])
 		}
 		//公示结果按钮函数
 
-	$scope.refuse = function(index) {
-			$scope.resultSureList.content = " ";
-			$scope.resultSureList.status = 1;
+
+		$scope.refuse=function (index) {
+			$scope.resultSureList.content=" ";
+			$scope.resultSureList.status='1';
+
 
 
 			console.log(index)
@@ -2091,66 +2093,65 @@ angular.module('app.controllers', [])
 
 	$scope.del = function() {
 
-		//获取eventId
+				//获取eventId
 
-		$scope.id = $scope.list[$scope.index].id;
+				$scope.id = $scope.list[$scope.index].id;
 
-		$scope.resultSureList.eventId = $scope.id;
-		console.log($scope.resultSureList.eventId)
+				$scope.resultSureList.eventId = $scope.id;
+				console.log($scope.resultSureList.eventId)
 
-		//请求接口
-		publicityServe.resultSureList($scope.resultSureList)
+				//请求接口
+				publicityServe.resultSureList($scope.resultSureList)
 
-		.then(function(data) {
-			console.log(data);
-			swal({
-				title: "公示结果成功",
-				text: "",
-				timer: 1000,
-				type: "success",
-				showConfirmButton: false
+					.then(function (data) {
+						console.log(data);
+						swal({
+							title: "公示结果成功",
+							text: "",
+							timer: 1000,
+							type: "success",
+							showConfirmButton: false
+						});
+						$scope.refresh();
+
+					}, function (error) {
+						swal({
+							title: "登录授权过期",
+							text: "",
+							timer: 1000,
+							type: "error",
+							showConfirmButton: false
+						});
+						console.log(error);
+					});
+
+			}
+
+			//下一页
+			$scope.nextPage = function () {
+				if ($scope.pubList.page < $scope.arr.total / $scope.pubList.limit) {
+					$scope.pubList.page++;
+				}
+			};
+			//上一页
+			$scope.prePage = function () {
+				if ($scope.pubList.page > 1) {
+					$scope.pubList.page--;
+				}
+			};
+			//最后一页
+			$scope.lastPage = function () {
+				console.log(Math.floor($scope.arr.total / $scope.pubList.limit));
+				$scope.pubList.page = Math.floor($scope.arr.total / $scope.pubList.limit) + 1;
+			};
+			//监控页码变化.300ms后更新列表
+			$scope.$watch('pubList.page', function (newValue) {
+				$scope.pubList.start = $scope.pubList.limit * ($scope.pubList.page - 1);
+				$timeout(function () {
+					$scope.search();
+					$scope.$apply()
+				}, 300);
 			});
-			$scope.refresh();
-
-		}, function(error) {
-			swal({
-				title: "登录授权过期",
-				text: "",
-				timer: 1000,
-				type: "error",
-				showConfirmButton: false
-			});
-			console.log(error);
-		});
-
-	}
-
-	//下一页
-	$scope.nextPage = function() {
-		if ($scope.pubList.page < $scope.arr.total / $scope.pubList.limit) {
-			$scope.pubList.page++;
-		}
-	};
-	//上一页
-	$scope.prePage = function() {
-		if ($scope.pubList.page > 1) {
-			$scope.pubList.page--;
-		}
-	};
-	//最后一页
-	$scope.lastPage = function() {
-		console.log(Math.floor($scope.arr.total / $scope.pubList.limit));
-		$scope.pubList.page = Math.floor($scope.arr.total / $scope.pubList.limit) + 1;
-	};
-	//监控页码变化.300ms后更新列表
-	$scope.$watch('pubList.page', function(newValue) {
-		$scope.pubList.start = $scope.pubList.limit * ($scope.pubList.page - 1);
-		$timeout(function() {
-			$scope.search();
-			$scope.$apply()
-		}, 300);
-	});
-
 })
 
 //supervision监督页面控制

@@ -1,4 +1,3 @@
-
 <div>
 
     <!--//内容-->
@@ -24,7 +23,6 @@
                             <select class="form-control" ng-model="sel" ng-init="sel='未监督'" ng-change="selChange()">
                                 <option>未监督</option>
                                 <option>已监督</option>
-
 
 
                             </select>
@@ -85,24 +83,54 @@
                                         <h4 class="modal-title" id="myModalLabel"></h4>
                                     </div>
                                     <div class="modal-body">
-                                        <div>
-                                            <span>标题:</span>
-                                            <textarea class="col-sm-12 " ng-model="sureList.title"></textarea>
+                                        <!--<div>-->
+                                        <!--<span>标题:</span>-->
+                                        <!--<textarea class="col-sm-12 " ng-model="sureList.title"></textarea>-->
+                                        <!--</div>-->
+
+                                        <!--<div>-->
+                                        <!--<span>内容:</span>-->
+                                        <!--<textarea class="col-sm-12 " ng-model="sureList.content"></textarea>-->
+                                        <!--</div>-->
+
+
+                                        <!--</div>-->
+                                        <!--<hr>-->
+                                        <!--<div class="modal-footer">-->
+                                        <!--&lt;!&ndash;<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>&ndash;&gt;-->
+                                        <!--<button type="button" class="btn btn-primary btn-sm col-sm-12" ng-click="sure()"-->
+                                        <!--data-dismiss="modal">确认-->
+                                        <!--</button>-->
+
+                                        <div class="smart-widget-body">
+                                            <form class="form-horizontal no-margin" id="type-constraint"
+                                                  data-validate="parsley" novalidate>
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">标题：</label>
+                                                    <div class="col-lg-10">
+                                                        <input type="text" class="form-control input-sm"
+                                                               data-parsley-minlength="6"
+                                                               ng-model="sureList.title">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">内容：</label>
+                                                    <div class="col-lg-10">
+                                                        <textarea type="text" class="form-control input-sm"
+                                                                  data-parsley-minlength="6"
+                                                                  ng-model="sureList.content"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <div class="text-right m-top-md">
+                                                        <button type="submit" class="btn btn-info col-sm-12" about=""
+                                                                ng-click="sure()" data-dismiss="modal">确定
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
-
-                                        <div>
-                                            <span>内容:</span>
-                                            <textarea class="col-sm-12 " ng-model="sureList.content"></textarea>
-                                        </div>
-
-
-                                    </div>
-                                    <hr>
-                                    <div class="modal-footer">
-                                        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                                        <button type="button" class="btn btn-primary btn-sm col-sm-12" ng-click="sure()"
-                                                data-dismiss="modal">确认
-                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -126,65 +154,87 @@
                                         <h4 class="modal-title" id="myModalLabel1">意见</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <div>
-                                            <span>礼金超标:</span>
+                                        <div class="row">
+                                        <span class="col-lg-2">礼金超标:</span>
 
-                                            <form action="" method="get">
-                                                <label><input name="Fruit" type="radio" ng-model="registerSureList.isCashGiftOutOfLimits" value="1" />是 </label>
-                                                <label><input name="Fruit" type="radio" ng-model="registerSureList.isCashGiftOutOfLimits" value="0" />否 </label>
-                                            </form>
-                                        </div>
-
-                                        <div>
-
-                                            <span>使用公车:</span>
-                                            <form action="" method="get">
-                                                <label><input name="Fruit" type="radio" ng-model="registerSureList.isUsePublicCar" value="1" />是 </label>
-                                                <label><input name="Fruit" type="radio" ng-model="registerSureList.isUsePublicCar" value="0"/>否 </label>
-                                            </form>
-                                        </div>
-                                        <div>
-                                            <span>使用公产:</span>
-                                            <form action="" method="get">
-                                                <label><input name="Fruit" type="radio" ng-model="registerSureList.isUsePublicGoods" value="1" />是 </label>
-                                                <label><input name="Fruit" type="radio" ng-model="registerSureList.isUsePublicGoods" value="0" />否 </label>
-                                            </form>
-                                        </div>
-                                        <div>
-                                            <span>使用公物:</span>
-                                            <form action="" method="get" >
-                                                <label><input name="Fruit" type="radio" ng-model="registerSureList.isUsePublicAsserts" value="1" />是 </label>
-                                                <label><input name="Fruit" type="radio" ng-model="registerSureList.isUsePublicAsserts" value="0" />否 </label>
-                                            </form>
-                                        </div>
-                                        <div>
-                                            <span>使用公款:</span>
-                                            <form action="" method="get">
-                                                <label><input name="Fruit" type="radio" ng-model="registerSureList.isUsePublicMoney" value="1" />是 </label>
-                                                <label><input name="Fruit" type="radio" ng-model="registerSureList.isUsePublicMoney" value="0" />否 </label>
-                                            </form>
+                                        <form action="" method="get" class="col-lg-10">
+                                        <label><input name="Fruit" type="radio" ng-model="registerSureList.isCashGiftOutOfLimits" value="1" />是 </label>
+                                        <label><input name="Fruit" type="radio" ng-model="registerSureList.isCashGiftOutOfLimits" value="0" />否 </label>
+                                        </form>
                                         </div>
 
-                                        <div>
-                                            <span>附件:</span>
-                                            <input type="file">
-                                            <div ng-bind="attachmentFileCode"></div>
+                                        <div class="row">
+                                        <span class="col-lg-2">使用公车:</span>
+                                        <form action="" method="get" class="col-lg-10">
+                                        <label><input name="Fruit" type="radio" ng-model="registerSureList.isUsePublicCar" value="1" />是 </label>
+                                        <label><input name="Fruit" type="radio" ng-model="registerSureList.isUsePublicCar" value="0"/>否 </label>
+                                        </form>
                                         </div>
-                                        <div>
-                                            <span>其他问题:</span>
-                                            <textarea class="col-sm-12 " ng-model="registerSureList.otherQuestion"></textarea>
+
+                                        <div class="row">
+                                        <span class="col-lg-2">使用公产:</span>
+                                        <form action="" method="get" class="col-lg-10">
+                                        <label><input name="Fruit" type="radio" ng-model="registerSureList.isUsePublicGoods" value="1" />是 </label>
+                                        <label><input name="Fruit" type="radio" ng-model="registerSureList.isUsePublicGoods" value="0" />否 </label>
+                                        </form>
                                         </div>
-                                        <div>
-                                            <span>意见内容:</span>
-                                            <textarea class="col-sm-12 " ng-model="registerSureList.content"></textarea>
+
+                                        <div class="row">
+                                        <span class="col-lg-2">使用公物:</span>
+                                        <form action="" method="get" class="col-lg-10">
+                                        <label><input name="Fruit" type="radio" ng-model="registerSureList.isUsePublicAsserts" value="1" />是 </label>
+                                        <label><input name="Fruit" type="radio" ng-model="registerSureList.isUsePublicAsserts" value="0" />否 </label>
+                                        </form>
                                         </div>
-                                    </div>
-                                    <hr>
-                                    <div class="modal-footer">
-                                        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                                        <button type="button" class="btn btn-primary" ng-click="del()"
-                                                data-dismiss="modal">确认
-                                        </button>
+
+                                        <div class="row">
+                                        <span class="col-lg-2">使用公款:</span>
+                                        <form action="" method="get" class="col-lg-10">
+                                        <label><input name="Fruit" type="radio" ng-model="registerSureList.isUsePublicMoney" value="1" />是 </label>
+                                        <label><input name="Fruit" type="radio" ng-model="registerSureList.isUsePublicMoney" value="0" />否 </label>
+                                        </form>
+                                        </div>
+
+
+
+                                        <div class="smart-widget-body">
+                                            <form class="form-horizontal no-margin" id="type-constraint1"
+                                                  data-validate="parsley" novalidate>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">附件：</label>
+                                                    <div class="col-lg-10">
+                                                        <input type="file" class="form-control input-sm"
+                                                               data-parsley-maxlength="6">
+
+                                                    </div><!-- /.col -->
+                                                    <div ng-bind="attachmentFileCode"></div>
+                                                </div><!-- /form-group -->
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">其他问题：</label>
+                                                    <div class="col-lg-10">
+                                                        <textarea type="text" class="form-control input-sm" data-parsley-minlength="6"
+                                                                 ng-model="registerSureList.otherQuestion"></textarea>
+                                                    </div><!-- /.col -->
+                                                </div><!-- /form-group -->
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-2">意见内容：</label>
+                                                    <div class="col-lg-10">
+                                                        <textarea type="text" class="form-control input-sm" data-parsley-minlength="6"
+                                                            ng-model="registerSureList.content"></textarea>
+                                                    </div><!-- /.col -->
+                                                </div><!-- /form-group -->
+
+                                                <div class="modal-footer">
+                                                    <div class="text-right m-top-md">
+                                                        <button type="submit" class="btn btn-info col-sm-12" about=""
+                                                                ng-click="del()" data-dismiss="modal">确定
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
