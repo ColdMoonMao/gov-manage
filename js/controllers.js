@@ -1328,83 +1328,33 @@ angular.module('app.controllers', [])
 	//rolemanage角色管理页面控制结束
 
 
-	//精确查询precisequery
-	.controller('precisequeryCtrl', function($scope, $state, PrecisequeryServe) {
-			$scope.organizArr = [{ organiz: '根组织', key: '1' }];
-			$scope.token = sessionStorage.getItem("token");
-        $scope.menuArr=[{
-            name:'申报人',
-            isrotate:true
-        },{
-            name:'部门',
-            isrotate:true
-        },{
-            name:'类型',
-            isrotate:true
-        },{
-            name:'人数',
-            isrotate:true
-        },{
-            name:'申报时间',
-            isrotate:true
-        },{
-            name:'宴请时间',
-            isrotate:true
-        },{
-            name:'状态',
-            isrotate:true
-        },{
-            name:'批示意见',
-            isrotate:true
-        }]
-			$scope.attrArr=['staff','staffOrgName','eventType','peopleCount','createTime','eventDate','auditStatus','auditContent']
-			console.log($scope.token);
-			$scope.preciseSearch = function() {
-				$scope.precisequeryobj = {
-					token: $scope.token, //令牌
-					staff: $scope.staff, //申报人
-					page: 1, //当前页
-					start: 0, //从哪个开始
-					limit: 10, //每页显示多少个
-					staffOrgId: 1 //所属部门(根组织)
-				}
+//精确查询precisequery
+.controller('precisequeryCtrl', function($scope, $state, PrecisequeryServe) {
+		$scope.organizArr = [{ organiz: '根组织', key: '1' }];
+		$scope.token = sessionStorage.getItem("token");
+		console.log($scope.token);
+		$scope.preciseSearch = function() {
+			$scope.precisequeryobj = {
+				token: $scope.token, //令牌
+				staff: $scope.staff, //申报人
+				page: 1, //当前页
+				start: 0, //从哪个开始
+				limit: 10, //每页显示多少个
+				staffOrgId: 1 //所属部门(根组织)
+			}
 
-				PrecisequeryServe.Preciselist($scope.precisequeryobj)
-					.then(function(data) {
-						console.log(data);
-						if (data.data.success) {
-							$scope.preciseArr = data.data.result;
-							$scope.pagearr = [];
-							for (var i = 0; i < Math.ceil(data.data.result.length / 10); i++) {
-								$scope.pagearr.push({
-									index: i,
-									iscurrent: i == 0 ? true : false
-								})
-							}
-							Page();
-						} else if (data.data.error.code) {
-							swal({
-									title: data.data.error.message,
-									type: "warning",
-									showCancelButton: true,
-									confirmButtonColor: "#DD6B55",
-									confirmButtonText: "确认",
-									closeOnConfirm: false,
-									showLoaderOnConfirm: true,
-								},
-								function() {
-									swal("跳转……", "", "success");
-									setTimeout(function() {
-										swal.close();
-										$state.go('login');
-									}, 1000)
-								});
+			PrecisequeryServe.Preciselist($scope.precisequeryobj)
+				.then(function(data) {
+					console.log(data);
+					if (data.data.success) {
+						$scope.preciseArr = data.data.result;
+						$scope.pagearr = [];
+						for (var i = 0; i < Math.ceil(data.data.result.length / 10); i++) {
+							$scope.pagearr.push({
+								index: i,
+								iscurrent: i == 0 ? true : false
+							})
 						}
-<<<<<<< HEAD
-					}, function(error) {
-						console.log(error);
-					})
-=======
 						Page();
 					} else if (data.data.error) {
 						swal({
@@ -1440,84 +1390,36 @@ angular.module('app.controllers', [])
 				})
 				$scope.pagearr[$scope.start - 1].iscurrent = true;
 				console.log($scope.start);
->>>>>>> 865378d6d22d09c92890ff9d97684f2b8acfa85e
 
 			}
-			$scope.preciseSearch();
-        //排序
-        $scope.orderToggle=function (index) {
-            $scope.x=($scope.x=="+"?"-":"+");
-            $scope.attr=$scope.attrArr[index];
-            $scope.menuArr.forEach(function(value, i, arr) {
-                value.isrotate =i==index?$scope.menuArr[index].isrotate:true;
-            })
-            $scope.menuArr[index].isrotate=!$scope.menuArr[index].isrotate;
-        }
-			function Page() {
-				$scope.start = 1;
-				$scope.changePage = function($index) {
-					$scope.start = ($scope.start < 3 ? 3 : $scope.start > $scope.pagearr.length - 2 ? $scope.pagearr.length - 2 : $scope.start) + ($index - 2);
+			$scope.previous = function() {
+				if ($scope.start > 1) {
 					$scope.pagearr.forEach(function(value, i, arr) {
 						value.iscurrent = false;
 					})
+					$scope.start--;
+					$scope.pagearr[$scope.start - 1].iscurrent = true;
+					console.log($scope.start);
+				}
+			}
+			$scope.next = function() {
+				if ($scope.start < $scope.pagearr.length) {
+					$scope.pagearr.forEach(function(value, i, arr) {
+						value.iscurrent = false;
+					})
+					$scope.start++;
 					$scope.pagearr[$scope.start - 1].iscurrent = true;
 					console.log($scope.start);
 
 				}
-				$scope.previous = function() {
-					if ($scope.start > 1) {
-						$scope.pagearr.forEach(function(value, i, arr) {
-							value.iscurrent = false;
-						})
-						$scope.start--;
-						$scope.pagearr[$scope.start - 1].iscurrent = true;
-						console.log($scope.start);
-					}
-				}
-				$scope.next = function() {
-					if ($scope.start < $scope.pagearr.length) {
-						$scope.pagearr.forEach(function(value, i, arr) {
-							value.iscurrent = false;
-						})
-						$scope.start++;
-						$scope.pagearr[$scope.start - 1].iscurrent = true;
-						console.log($scope.start);
-
-					}
-				}
 			}
+		}
 
-		})
+	})
 	//组合查询combinequery
 	.controller('combinequeryCtrl', function($scope, $state, PrecisequeryServe) {
 		$scope.token = sessionStorage.getItem("token");
-        $scope.attrArr=['staff','staffOrgName','eventType','peopleCount','createTime','eventDate','auditStatus','auditContent']
-        $scope.menuArr=[{
-        	name:'申报人',
-            isrotate:true
-		},{
-            name:'部门',
-            isrotate:true
-        },{
-            name:'类型',
-            isrotate:true
-        },{
-            name:'人数',
-            isrotate:true
-        },{
-            name:'申报时间',
-            isrotate:true
-        },{
-            name:'宴请时间',
-            isrotate:true
-        },{
-            name:'状态',
-            isrotate:true
-        },{
-            name:'批示意见',
-            isrotate:true
-        }]
-        $scope.typeArr = [{
+		$scope.typeArr = [{
 			type: '全部',
 			key: '0'
 		}, {
@@ -1548,33 +1450,6 @@ angular.module('app.controllers', [])
 			countMin: "150",
 			countMax: "200"
 		}]
-<<<<<<< HEAD
-        $scope.combineSearch = function() {
-			$scope.combinequeryobj = {
-				token: $scope.token, //令牌
-				page: 1, //当前页
-				start: 0, //从哪个开始
-				limit: 10, //每页显示多少个
-				eventType: $scope.typeSelect.key, //申报类型,全部:0,婚嫁:1,丧葬:2
-				peopleCountMin: $scope.peopleCountSelect.countMin, //最少宴请人数
-				peopleCountMax: $scope.peopleCountSelect.countMax, //最大宴请人数
-				eventCreateTimeFrom: $scope.CreateTimeFrom, //申报开始时间
-				eventCreateTimeTo: $scope.CreateTimeTo, //申报结束时间
-				eventTimeFrom: $scope.TimeFrom, //宴请开始时间
-				eventTimeTo: $scope.TimeTo, //宴请结束时间
-			}
-			PrecisequeryServe.Preciselist($scope.combinequeryobj)
-				.then(function(data) {
-					console.log(data);
-					if (data.data.success) {
-						$scope.combineArr = data.data.result;
-						$scope.pagearr = [];
-						for (var i = 0; i < Math.ceil(data.data.result.length / 10); i++) {
-							$scope.pagearr.push({
-								index: i,
-								iscurrent: i == 0 ? true : false
-							})
-=======
 		$scope.combineSearch = function() {
 				var combinequeryobj = {
 					token: $scope.token, //令牌
@@ -1619,29 +1494,14 @@ angular.module('app.controllers', [])
 										$state.go('login');
 									}, 1000)
 								});
->>>>>>> 865378d6d22d09c92890ff9d97684f2b8acfa85e
 						}
 					}, function(error) {
 						console.log(error);
 					})
 
-<<<<<<< HEAD
-		}
-		//排序
-        $scope.orderToggle=function (index) {
-            $scope.x=($scope.x=="+"?"-":"+");
-            $scope.attr=$scope.attrArr[index];
-            $scope.menuArr.forEach(function(value, i, arr) {
-                value.isrotate =i==index?$scope.menuArr[index].isrotate:true;
-            })
-            $scope.menuArr[index].isrotate=!$scope.menuArr[index].isrotate;
-        }
-        //分页
-=======
 			}
 			// $scope.combineSearch();
 
->>>>>>> 865378d6d22d09c92890ff9d97684f2b8acfa85e
 		function Page() {
 			$scope.start = 1;
 			$scope.changePage = function($index) {
@@ -1675,10 +1535,6 @@ angular.module('app.controllers', [])
 				}
 			}
 		}
-		// 跳转到页面先执行一次,延迟0.5秒执行,否则会下拉框选择内容没加载
-		setTimeout(function () {
-            $scope.combineSearch();
-        },500);
 
 	})
 	//数量统计
@@ -1731,7 +1587,7 @@ angular.module('app.controllers', [])
 				title: {
 					text: '类型数量统计'
 				},
-				color: ['#a61af5'],
+				color: ['#3398DB'],
 				tooltip: {},
 				legend: {
 					data: ['人数', '类型']
