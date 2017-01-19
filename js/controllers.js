@@ -1980,15 +1980,17 @@ angular.module('app.controllers', [])
 
 		$scope.del=function () {
 			//获取eventId
-			$scope.id = $scope.list[$scope.index].id;
-			;
-			$scope.sureList.eventId = $scope.id;
+
+			$scope.id=$scope.list[$scope.index].id;;
+			$scope.sureList.eventId=$scope.id;
+
 			console.log($scope.sureList.eventId)
 
 
 			//请求接口
 			publicityServe.sureList($scope.sureList)
-				.then(function (data) {
+
+				.then(function(data) {
 					console.log(data);
 					swal({
 						title: "公示结果成功",
@@ -1998,7 +2000,8 @@ angular.module('app.controllers', [])
 						showConfirmButton: false
 					});
 					$scope.refresh();
-				}, function (error) {
+
+				}, function(error) {
 					swal({
 						title: "登录授权过期",
 						text: "",
