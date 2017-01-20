@@ -1958,6 +1958,7 @@ angular.module('app.controllers', [])
 			$scope.modList.eventId = $scope.id;
 			$scope.modList.status = 2;
 			$scope.sureList.status=2;
+		console.log($scope.sureList.status)
 
 			ApproveServe.modList($scope.modList)
 				.then(function(data) {
@@ -1968,14 +1969,15 @@ angular.module('app.controllers', [])
 				})
 		}
 		//拒绝模态框确定函数
-	$scope.del = function() {
-
+	$scope.refuseSure= function() {
 		$scope.id = $scope.list[$scope.index].id;;
 		$scope.sureList.eventId = $scope.id;
 		$scope.modList.status = 2;
 		$scope.sureList.status =2;
 		console.log($scope.sureList.eventId)
 		//请求接口
+		console.log(123)
+		console.log($scope.sureList.status)
 		ApproveServe.sureList($scope.sureList)
 			.then(function(data) {
 				console.log(data);
