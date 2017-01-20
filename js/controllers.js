@@ -1854,7 +1854,7 @@ angular.module('app.controllers', [])
 	$scope.sureList = {
 			token: sessionStorage.getItem('token'), //	令牌
 			eventId: '', //	申报人id
-			status: 1, //	审核状态 1：通过 2：拒绝
+			status: '1', //	审核状态 1：通过 2：拒绝
 			content: '', //  审批意见内容
 		}
 		//改变审核状态
@@ -1897,13 +1897,14 @@ angular.module('app.controllers', [])
 
 	//通过按钮函数
 	$scope.pass = function(index) {
+		$scope.sureList.content='';
 			console.log(index)
 			$scope.index = index;
 			$scope.id = $scope.list[index].id;
 			// console.log($scope.id);
 			$scope.modList.eventId = $scope.id;
 
-
+		$scope.sureList.status = '1';
 			ApproveServe.modList($scope.modList)
 				.then(function(data) {
 					console.log(data);
@@ -1921,7 +1922,7 @@ angular.module('app.controllers', [])
 			//获取eventId
 			$scope.id = $scope.list[$scope.index].id;;
 			$scope.sureList.eventId = $scope.id;
-
+			$scope.sureList.status = '1';
 			console.log($scope.sureList.eventId)
 				//请求接口
 			ApproveServe.sureList($scope.sureList)
@@ -1949,12 +1950,14 @@ angular.module('app.controllers', [])
 		}
 		//拒绝按钮函数
 	$scope.refuse = function(index) {
+		$scope.sureList.content='';
 			console.log(index)
 			$scope.index = index;
 			$scope.id = $scope.list[index].id;
 			// console.log($scope.id);
 			$scope.modList.eventId = $scope.id;
-			$scope.sureList.status = 2;
+			$scope.modList.status = 2;
+			$scope.sureList.status=2;
 
 			ApproveServe.modList($scope.modList)
 				.then(function(data) {
@@ -1966,7 +1969,35 @@ angular.module('app.controllers', [])
 		}
 		//拒绝模态框确定函数
 	$scope.del = function() {
-		$scope.sure()
+
+		$scope.id = $scope.list[$scope.index].id;;
+		$scope.sureList.eventId = $scope.id;
+		$scope.modList.status = 2;
+		$scope.sureList.status =2;
+		console.log($scope.sureList.eventId)
+		//请求接口
+		ApproveServe.sureList($scope.sureList)
+			.then(function(data) {
+				console.log(data);
+				swal({
+					title: "审批成功",
+					text: "",
+					timer: 1000,
+					type: "success",
+					showConfirmButton: false
+				});
+
+				$scope.refresh();
+			}, function(error) {
+				swal({
+					title: "登录授权过期",
+					text: "",
+					timer: 1000,
+					type: "error",
+					showConfirmButton: false
+				});
+				console.log(error);
+			});
 
 	}
 
@@ -2148,7 +2179,7 @@ angular.module('app.controllers', [])
 
 	$scope.refuse = function(index) {
 			$scope.resultSureList.content = " ";
-			$scope.resultSureList.status = 1;
+			$scope.resultSureList.status = '1';
 
 
 			console.log(index)
@@ -2406,6 +2437,47 @@ angular.module('app.controllers', [])
 			supervisionServe.registerList($scope.registerList)
 				.then(function(data) {
 					console.log(data);
+					if(data.data.result!=null){
+						$scope.registerSureList.content = data.data.result.content;
+						$scope.registerSureList.otherQuestion=data.data.result.otherQuestion;
+						$scope.registerSureList.isCashGiftOutOfLimits=data.data.result.isCashGiftOutOfLimits;
+
+						if($scope.registerSureList.isCashGiftOutOfLimits=true){
+							$scope.registerSureList.isCashGiftOutOfLimits='1'
+						}
+						else{
+							$scope.registerSureList.isCashGiftOutOfLimits='0'
+						}
+
+						if($scope.registerSureList.isUsePublicAssets=true){
+							$scope.registerSureList.isUsePublicAssets='1'
+						}
+						else{
+							$scope.registerSureList.isUsePublicAssets='0'
+						}
+
+						if($scope.registerSureList.isUsePublicCar=true){
+							$scope.registerSureList.isUsePublicCar='1'
+						}
+						else{
+							$scope.registerSureList.isUsePublicCar='0'
+						}
+
+						if($scope.registerSureList.isUsePublicGoods=true){
+							$scope.registerSureList.isUsePublicGoods='1'
+						}
+						else{
+							$scope.registerSureList.isUsePublicGoods='0'
+						}
+
+						if($scope.registerSureList.isUsePublicMoney=true){
+							$scope.registerSureList.isUsePublicMoney='1'
+						}
+						else{
+							$scope.registerSureList.isUsePublicMoney='0'
+						}
+
+					}
 
 				}, function(error) {
 					console.log(error);
