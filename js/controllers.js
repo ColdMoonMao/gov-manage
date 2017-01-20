@@ -7,7 +7,10 @@ angular.module('app.controllers', [])
 		}
 		$scope.login = function() {
 			//loading 效果
-			$.LoadingOverlay("show");
+			$.LoadingOverlay("show", {
+				image: "../img/oval.svg",
+				bgcolor: 'rgba(28,43,54,0.5)'
+			});
 			LoginServe.login($scope.user)
 				.then(function(data) {
 						//loading 效果
@@ -192,7 +195,10 @@ angular.module('app.controllers', [])
 		//确认申报按钮
 		$scope.confirm = function() {
 			//loading 效果
-			$.LoadingOverlay("show");
+			$.LoadingOverlay("show", {
+				image: "../img/oval.svg",
+				bgcolor: 'rgba(28,43,54,0.5)'
+			});
 			//上传文件
 			DeclareServe.upload($scope.declare.attachmentFileCode)
 				.then(function(data) {
@@ -270,7 +276,10 @@ angular.module('app.controllers', [])
 		}
 		$scope.search = function() {
 			//loading 效果
-			$.LoadingOverlay("show");
+			$.LoadingOverlay("show", {
+				image: "../img/oval.svg",
+				bgcolor: 'rgba(28,43,54,0.5)'
+			});
 			NotifServe.list($scope.listObj)
 				.then(function(data) {
 					//loading 效果
@@ -311,7 +320,10 @@ angular.module('app.controllers', [])
 		//新增通报 添加函数
 		$scope.add = function() {
 			//loading 效果
-			$.LoadingOverlay("show");
+			$.LoadingOverlay("show", {
+				image: "../img/oval.svg",
+				bgcolor: 'rgba(28,43,54,0.5)'
+			});
 			NotifServe.add($scope.addObj)
 				.then(function(data) {
 					//loading 效果
@@ -572,7 +584,10 @@ angular.module('app.controllers', [])
 		}
 		$scope.search = function() {
 			//loading 效果
-			$.LoadingOverlay("show");
+			$.LoadingOverlay("show", {
+				image: "../img/oval.svg",
+				bgcolor: 'rgba(28,43,54,0.5)'
+			});
 			PunishServe.list($scope.listObj)
 				.then(function(data) {
 					//loading 效果
@@ -870,7 +885,10 @@ angular.module('app.controllers', [])
 		}
 		$scope.search = function() {
 			//loading 效果
-			$.LoadingOverlay("show");
+			$.LoadingOverlay("show", {
+				image: "../img/oval.svg",
+				bgcolor: 'rgba(28,43,54,0.5)'
+			});
 			UsermanageServe.list($scope.listObj)
 				.then(function(data) {
 					//loading 效果
@@ -1176,7 +1194,10 @@ angular.module('app.controllers', [])
 		}
 		$scope.search = function() {
 			//loading 效果
-			$.LoadingOverlay("show");
+			$.LoadingOverlay("show", {
+				image: "../img/oval.svg",
+				bgcolor: 'rgba(28,43,54,0.5)'
+			});
 			RolemanageServe.list($scope.listObj)
 				.then(function(data) {
 					//loading 效果
@@ -1481,7 +1502,10 @@ angular.module('app.controllers', [])
 					staffOrgId: 1 //所属部门(根组织)
 				}
 				//loading 效果
-			$.LoadingOverlay("show");
+			$.LoadingOverlay("show", {
+				image: "../img/oval.svg",
+				bgcolor: 'rgba(28,43,54,0.5)'
+			});
 			PrecisequeryServe.Preciselist($scope.precisequeryobj)
 				.then(function(data) {
 					//loading 效果
@@ -1641,7 +1665,10 @@ angular.module('app.controllers', [])
 						eventTimeTo: $scope.TimeTo, //宴请结束时间
 					}
 					//loading 效果
-				$.LoadingOverlay("show");
+				$.LoadingOverlay("show", {
+					image: "../img/oval.svg",
+					bgcolor: 'rgba(28,43,54,0.5)'
+				});
 				PrecisequeryServe.Preciselist($scope.combinequeryobj)
 					.then(function(data) {
 						//loading 效果
@@ -1742,7 +1769,10 @@ angular.module('app.controllers', [])
 					eventTimeTo: $scope.TimeTo //宴请结束时间
 				}
 				//loading 效果
-			$.LoadingOverlay("show");
+			$.LoadingOverlay("show", {
+				image: "../img/oval.svg",
+				bgcolor: 'rgba(28,43,54,0.5)'
+			});
 			StatisticServe.statisticlist(statisticobj)
 				.then(function(data) {
 					//loading 效果
@@ -1845,7 +1875,10 @@ angular.module('app.controllers', [])
 	//刷新
 	$scope.refresh = function() {
 		//loading 效果
-		$.LoadingOverlay("show");
+		$.LoadingOverlay("show", {
+			image: "../img/oval.svg",
+			bgcolor: 'rgba(28,43,54,0.5)'
+		});
 		ApproveServe.userList($scope.userList)
 			.then(function(data) {
 				//loading 效果
@@ -2026,7 +2059,10 @@ angular.module('app.controllers', [])
 	//刷新
 	$scope.refresh = function() {
 		//loading 效果
-		$.LoadingOverlay("show");
+		$.LoadingOverlay("show", {
+			image: "../img/oval.svg",
+			bgcolor: 'rgba(28,43,54,0.5)'
+		});
 		publicityServe.pubList($scope.pubList)
 			.then(function(data) {
 				//loading 效果
@@ -2264,7 +2300,10 @@ angular.module('app.controllers', [])
 	//刷新
 	$scope.refresh = function() {
 		//loading 效果
-		$.LoadingOverlay("show");
+		$.LoadingOverlay("show", {
+			image: "../img/oval.svg",
+			bgcolor: 'rgba(28,43,54,0.5)'
+		});
 		supervisionServe.pubList($scope.pubList)
 			.then(function(data) {
 				//loading 效果
