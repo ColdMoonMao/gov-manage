@@ -38,20 +38,25 @@
 
         <div>
             <table class="table table-striped no-margin">
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th class="text-left">申报人</th>-->
+                    <!--<th class="text-left">部门</th>-->
+                    <!--<th class="text-left">类型</th>-->
+                    <!--<th class="text-left">人数</th>-->
+                    <!--<th class="text-left">申报时间</th>-->
+                    <!--<th class="text-left">宴请时间</th>-->
+                    <!--<th class="text-left">状态</th>-->
+                    <!--<th class="text-left">操作</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
                 <thead>
                 <tr>
-                    <th class="text-left">申报人</th>
-                    <th class="text-left">部门</th>
-                    <th class="text-left">类型</th>
-                    <th class="text-left">人数</th>
-                    <th class="text-left">申报时间</th>
-                    <th class="text-left">宴请时间</th>
-                    <th class="text-left">状态</th>
-                    <th class="text-left">操作</th>
+                    <th ng-repeat=" menu in menuArr" ng-click="orderToggle($index)">{{menu.name}}<span class="caret" style="transform:rotate({{menu.isrotate?0:180}}deg)"></span></th>
                 </tr>
                 </thead>
 
-                <tr ng-repeat="item in list">
+                <tr ng-repeat="item in list|limitTo:10:(start-1)*10 | orderBy:x+attr">
                     <td>{{item.staff}}</td>
                     <td>{{item.staffOrgName}}</td>
                     <td>{{item.eventType==1?'婚嫁':'丧葬'}}</td>

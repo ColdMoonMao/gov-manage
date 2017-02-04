@@ -2003,6 +2003,42 @@ angular.module('app.controllers', [])
 
 	}
 
+	$scope.menuArr = [{
+		name: '申报人',
+		isrotate: true
+	}, {
+		name: '部门',
+		isrotate: true
+	}, {
+		name: '类型',
+		isrotate: true
+	}, {
+		name: '人数',
+		isrotate: true
+	}, {
+		name: '申报时间',
+		isrotate: true
+	}, {
+		name: '宴请时间',
+		isrotate: true
+	}, {
+		name: '状态',
+		isrotate: true
+	}, {
+		name: '操作',
+		isrotate: true
+	}]
+	$scope.attrArr = ['staff', 'staffOrgName', 'eventType', 'peopleCount', 'createTime', 'eventDate', 'auditStatus', 'auditContent']
+//排序
+	$scope.orderToggle = function(index) {
+		$scope.x = ($scope.x == "+" ? "-" : "+");
+		$scope.attr = $scope.attrArr[index];
+		$scope.menuArr.forEach(function(value, i, arr) {
+			value.isrotate = i == index ? $scope.menuArr[index].isrotate : true;
+		})
+		$scope.menuArr[index].isrotate = !$scope.menuArr[index].isrotate;
+	}
+
 	//下一页
 	$scope.nextPage = function() {
 		if ($scope.userList.page < $scope.array.total / $scope.userList.limit) {
@@ -2238,6 +2274,42 @@ angular.module('app.controllers', [])
 			console.log(error);
 		});
 
+	}
+
+	$scope.menuArr = [{
+		name: '申报人',
+		isrotate: true
+	}, {
+		name: '部门',
+		isrotate: true
+	}, {
+		name: '类型',
+		isrotate: true
+	}, {
+		name: '人数',
+		isrotate: true
+	}, {
+		name: '申报时间',
+		isrotate: true
+	}, {
+		name: '宴请时间',
+		isrotate: true
+	}, {
+		name: '状态',
+		isrotate: true
+	}, {
+		name: '操作',
+		isrotate: true
+	}]
+	$scope.attrArr = ['staff', 'staffOrgName', 'eventType', 'peopleCount', 'createTime', 'eventDate', 'auditStatus', 'auditContent']
+//排序
+	$scope.orderToggle = function(index) {
+		$scope.x = ($scope.x == "+" ? "-" : "+");
+		$scope.attr = $scope.attrArr[index];
+		$scope.menuArr.forEach(function(value, i, arr) {
+			value.isrotate = i == index ? $scope.menuArr[index].isrotate : true;
+		})
+		$scope.menuArr[index].isrotate = !$scope.menuArr[index].isrotate;
 	}
 
 	//下一页
@@ -2517,6 +2589,42 @@ angular.module('app.controllers', [])
 				console.log(error);
 			});
 
+	}
+
+	$scope.menuArr = [{
+		name: '申报人',
+		isrotate: true
+	}, {
+		name: '部门',
+		isrotate: true
+	}, {
+		name: '类型',
+		isrotate: true
+	}, {
+		name: '人数',
+		isrotate: true
+	}, {
+		name: '申报时间',
+		isrotate: true
+	}, {
+		name: '宴请时间',
+		isrotate: true
+	}, {
+		name: '状态',
+		isrotate: true
+	}, {
+		name: '操作',
+		isrotate: true
+	}]
+	$scope.attrArr = ['staff', 'staffOrgName', 'eventType', 'peopleCount', 'createTime', 'eventDate', 'auditStatus', 'auditContent']
+//排序
+	$scope.orderToggle = function(index) {
+		$scope.x = ($scope.x == "+" ? "-" : "+");
+		$scope.attr = $scope.attrArr[index];
+		$scope.menuArr.forEach(function(value, i, arr) {
+			value.isrotate = i == index ? $scope.menuArr[index].isrotate : true;
+		})
+		$scope.menuArr[index].isrotate = !$scope.menuArr[index].isrotate;
 	}
 
 	//下一页
