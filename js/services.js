@@ -332,6 +332,22 @@ angular.module('app.services', [])
                 });
                 return deferred.promise;
             },
+            //获取用戶信息
+            get: function(params) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'POST',
+                    url: GlobalConfig.url.api.user.getById,
+                    params: params,
+                    responseType: 'json',
+                    timeout: 30000
+                }).then(function(data) {
+                    deferred.resolve(data);
+                }, function(error) {
+                    deferred.reject(error);
+                });
+                return deferred.promise;
+            },
             //编辑用戶
             edit: function(params) {
                 var deferred = $q.defer();

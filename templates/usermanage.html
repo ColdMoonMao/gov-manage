@@ -69,22 +69,22 @@
                     <form class="form-horizontal" role="form" name="myForm" novalidate="novalidate">
                         <div class="form-group" >
                             <label for="inputTitle" class="col-lg-2 control-label">用户名:</label>
-                            <div class="col-lg-10 " ng-class="{'has-error':myForm.username.$error.required&&myForm.username.$dirty,'has-success':myForm.username.$valid&&myForm.username.$dirty}">
-                                <input type="text" required class="form-control" id="inputTitle" placeholder="用户名" ng-model="addObj.username" name="username" ng-model-option="{updataOn:'blur',debounce :'500'}">
+                            <div class="col-lg-10 " ng-class="{'has-error':myForm.username.$error.required,'has-success':myForm.username.$valid}">
+                                <input type="text" required class="form-control" id="inputTitle" placeholder="用户名不能为空" ng-model="addObj.username" name="username" ng-model-option="{updataOn:'blur',debounce :'500'}">
                             </div>
                             <!-- /.col -->
                         </div>
                         <div class="form-group">
                             <label  class="col-lg-2 control-label">姓名:</label>
-                            <div class="col-lg-10">
-                                <input type="text" required class="form-control"  placeholder="姓名" ng-model="addObj.name" name="name" ng-model-option="{updataOn:'blur',debounce :'500'}">
+                            <div class="col-lg-10" ng-class="{'has-error':myForm.name.$error.required,'has-success':myForm.name.$valid}">
+                                <input type="text" required class="form-control"  placeholder="姓名不能为空" ng-model="addObj.name" name="name" ng-model-option="{updataOn:'blur',debounce :'500'}">
                             </div>
                             <!-- /.col -->
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">部门:</label>
-                            <div class="col-lg-10">
-                                <select class="form-control" required ng-model="departArr.name" name="depart" ng-model-option="{updataOn:'blur',debounce :'500'}">
+                            <div class="col-lg-10" ng-class="{'has-error':myForm.depart.$error.required,'has-success':myForm.depart.$valid}">
+                                <select class="form-control" required ng-model="departArr.name" name="depart">
                                 <option>{{departArr.name}}</option>}
                                 option
                                 </select>
@@ -93,22 +93,22 @@
                         </div>
                         <div class="form-group">
                             <label for="inputPassword" class="col-lg-2 control-label">密码:</label>
-                            <div class="col-lg-10">
-                                <input type="password" required class="form-control" id="inputPassword" placeholder="密码" ng-model="addObj.password" name="password" ng-model-option="{updataOn:'blur',debounce :'500'}">
+                            <div class="col-lg-10" ng-class="{'has-error':myForm.password.$error.required,'has-success':myForm.password.$valid}">
+                                <input type="password" required class="form-control" id="inputPassword" placeholder="密码" ng-model="addObj.password" name="password" >
                             </div>
                             <!-- /.col -->
                         </div>
                         <div class="form-group">
                             <label  class="col-lg-2 control-label">确认密码:</label>
-                            <div class="col-lg-10">
-                                <input type="password" required class="form-control"  placeholder="确认密码" name="passwordConfirm" ng-model-option="{updataOn:'blur',debounce :'500'}">
+                            <div class="col-lg-10" ng-class="{'has-error':myForm.passwordConfirm.$error.required,'has-success':myForm.passwordConfirm.$valid}">
+                                <input type="password" required class="form-control" ng-model="addPasswordConfirm"  placeholder="确认密码" name="passwordConfirm">
                             </div>
                             <!-- /.col -->
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">角色:</label>
-                            <div class="col-lg-10">
-                                <select name="role" required class="form-control" ng-options="value as value.name for value in roleArr" ng-model="value" ng-change="roleChange(value)" ng-model-option="{updataOn:'blur',debounce :'500'}">
+                            <div class="col-lg-10" ng-class="{'has-error':myForm.role.$error.required,'has-success':myForm.role.$valid}">
+                                <select name="role" required class="form-control" ng-options="value as value.name for value in roleArr" ng-model="value" ng-change="roleChange(value)">
                                 </select>
                             </div>
                             <!-- /.col -->
@@ -119,7 +119,7 @@
                 </div>
                 <div class="modal-footer">
                     <!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
-                    <button class="btn btn-primary col-md-12" ng-click="add()" data-dismiss="modal">确定</button>
+                    <button class="btn btn-primary col-md-12" ng-click="add()" data-dismiss="modal" ng-disabled="myForm.$invalid">确定</button>
                 </div>
             </div>
         </div>
@@ -131,10 +131,10 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">添加</h4>
+                    <h4 class="modal-title">修改</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" name="editForm">
                         <div class="form-group">
                             <label for="inputTitle" class="col-lg-2 control-label">用户名:</label>
                             <div class="col-lg-10">
@@ -142,17 +142,17 @@
                             </div>
                             <!-- /.col -->
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" >
                             <label for="inputTitle" class="col-lg-2 control-label">姓名:</label>
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" id="inputTitle" placeholder="姓名" ng-model="editObj.name">
+                            <div class="col-lg-10" ng-class="{'has-error':editForm.name.$error.required,'has-success':editForm.name.$valid}">
+                                <input type="text" required class="form-control" id="inputTitle" placeholder="姓名" ng-model="editObj.name" name="name">
                             </div>
                             <!-- /.col -->
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">部门:</label>
-                            <div class="col-lg-10">
-                                <select class="form-control" ng-model="departArr.name">
+                            <div class="col-lg-10" ng-class="{'has-error':editForm.depart.$error.required,'has-success':editForm.depart.$valid}">
+                                <select class="form-control" ng-model="departArr.name" name="depart" required>
                                 <option>{{departArr.name}}</option>}
                                 option
                                 </select>
@@ -161,22 +161,22 @@
                         </div>
                         <div class="form-group">
                             <label for="inputPassword" class="col-lg-2 control-label">密码:</label>
-                            <div class="col-lg-10">
-                                <input type="password" class="form-control" id="inputPassword" placeholder="留空则不修改密码" ng-model="editObj.password">
+                            <div class="col-lg-10" ng-class="{'has-error':editForm.password.$error.required,'has-success':editForm.password.$valid}">
+                                <input type="password"  class="form-control" id="inputPassword" placeholder="留空则不修改密码" ng-model="editObj.password" name="password">
                             </div>
                             <!-- /.col -->
                         </div>
                         <div class="form-group">
                             <label for="inputPasswordConfirm" class="col-lg-2 control-label">确认密码:</label>
-                            <div class="col-lg-10">
-                                <input type="password" class="form-control" id="inputPasswordConfirm" placeholder="留空则不修改密码">
+                            <div class="col-lg-10" ng-class="{'has-error':editForm.passwordConfirm.$error.required,'has-success':editForm.passwordConfirm.$valid}">
+                                <input type="password"  class="form-control" id="inputPasswordConfirm" placeholder="留空则不修改密码" name="passwordConfirm" ng-model="editPasswordConfirm">
                             </div>
                             <!-- /.col -->
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">角色:</label>
-                            <div class="col-lg-10">
-                                <select class="form-control" ng-options="value as value.name for value in roleArr" ng-model="value" ng-change="roleChange(value)">
+                            <div class="col-lg-10" ng-class="{'has-error':editForm.role.$error.required,'has-success':editForm.role.$valid}">
+                                <select  class="form-control" ng-options="value as value.name for value in roleArr" ng-model="value" ng-change="roleChange(value)" name="role">
                                 </select>
                             </div>
                             <!-- /.col -->
@@ -187,7 +187,7 @@
                 </div>
                 <div class="modal-footer">
                     <!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
-                    <button class="btn btn-primary col-md-12" ng-click="editConfirm()" data-dismiss="modal">确定</button>
+                    <button class="btn btn-primary col-md-12" ng-click="editConfirm()" data-dismiss="modal" ng-disabled="editForm.$invalid">确定</button>
                 </div>
             </div>
         </div>

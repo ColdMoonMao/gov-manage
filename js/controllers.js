@@ -172,7 +172,7 @@ angular.module('app.controllers', [])
 		}
 		$scope.declare = {
 			token: sessionStorage.getItem('token'),
-			staff: ' ', //  申报人
+			staff: '', //  申报人
 			staffRelationship: 1, //    与申报人关系 1:本人 2:直系亲属
 			staffPoliticalStatus: '', //    政治面貌
 			staffJob: 1, // 单位职务 1：县级党员干部 2：科级党员干部 3：社区基层干部 4：一般工作人员
@@ -976,36 +976,48 @@ angular.module('app.controllers', [])
 		// };
 		//新增 添加确认函数
 		$scope.add = function() {
-			UsermanageServe.add($scope.addObj)
-				.then(function(data) {
-					console.log(data);
-					if (data.data.success) {
-						swal("添加成功!", "", "success");
-						setTimeout(function() {
-							swal.close();
-						}, 1000)
-						$scope.refresh();
-					} else if (data.data.error) {
-						swal({
-								title: data.data.error.message,
-								type: "warning",
-								showCancelButton: true,
-								confirmButtonColor: "#DD6B55",
-								confirmButtonText: "确认",
-								closeOnConfirm: false,
-								showLoaderOnConfirm: true,
-							},
-							function() {
-								swal("跳转……", "", "success");
-								setTimeout(function() {
-									swal.close();
-									$state.go('login');
-								}, 1000)
-							});
-					}
-				}, function(error) {
-					console.log(error);
-				})
+			if ($scope.addPasswordConfirm == $scope.addObj.password) {
+				UsermanageServe.add($scope.addObj)
+					.then(function(data) {
+						console.log(data);
+						if (data.data.success) {
+							swal("添加成功!", "", "success");
+							setTimeout(function() {
+								swal.close();
+							}, 1000)
+							$scope.refresh();
+						} else if (data.data.error) {
+							swal({
+									title: data.data.error.message,
+									type: "warning",
+									showCancelButton: true,
+									confirmButtonColor: "#DD6B55",
+									confirmButtonText: "确认",
+									closeOnConfirm: false,
+									showLoaderOnConfirm: true,
+								},
+								function() {
+									swal("跳转……", "", "success");
+									setTimeout(function() {
+										swal.close();
+										$state.go('login');
+									}, 1000)
+								});
+						}
+					}, function(error) {
+						console.log(error);
+					})
+			} else {
+				swal({
+					title: '两次密码不一致',
+					type: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "确认",
+					closeOnConfirm: true
+				});
+			}
+
 		};
 		//删除 params
 		$scope.delObj = {
@@ -1072,6 +1084,14 @@ angular.module('app.controllers', [])
 		//修改按钮函数
 		$scope.edit = function() {
 				console.log(this.value);
+				UsermanageServe.get({ token: sessionStorage.getItem('token'), userId: this.value.id })
+					.then(function(data) {
+						console.log(data);
+						$scope.getRole = data.data.result.role;
+						console.log($scope.getRole);
+					}, function() {
+
+					})
 				if (this.value.orgId) {
 					$scope.editObj.orgId = this.value.orgId;
 				}
@@ -1091,48 +1111,60 @@ angular.module('app.controllers', [])
 			}
 			//修改确认按钮函数
 		$scope.editConfirm = function() {
-			UsermanageServe.edit($scope.editObj)
-				.then(function(data) {
-					console.log(data);
-					if (data.data.success) {
-						$('#editModal').modal('hide');
-						$scope.refresh();
+			if ($scope.editPasswordConfirm == $scope.editObj.password) {
+				UsermanageServe.edit($scope.editObj)
+					.then(function(data) {
+						console.log(data);
+						if (data.data.success) {
+							$('#editModal').modal('hide');
+							$scope.refresh();
+							swal({
+								title: "修改完成",
+								text: "",
+								timer: 1000,
+								type: "success",
+								showConfirmButton: false
+							});
+						} else if (data.data.error) {
+							swal({
+									title: data.data.error.message,
+									type: "warning",
+									showCancelButton: true,
+									confirmButtonColor: "#DD6B55",
+									confirmButtonText: "确认",
+									closeOnConfirm: false,
+									showLoaderOnConfirm: true,
+								},
+								function() {
+									swal("跳转……", "", "success");
+									setTimeout(function() {
+										swal.close();
+										$state.go('login');
+									}, 1000)
+								});
+						};
+					}, function(error) {
+						console.log(error);
 						swal({
-							title: "修改完成",
+							title: "修改失败",
 							text: "",
 							timer: 1000,
-							type: "success",
+							type: "warning",
 							showConfirmButton: false
 						});
-					} else if (data.data.error) {
-						swal({
-								title: data.data.error.message,
-								type: "warning",
-								showCancelButton: true,
-								confirmButtonColor: "#DD6B55",
-								confirmButtonText: "确认",
-								closeOnConfirm: false,
-								showLoaderOnConfirm: true,
-							},
-							function() {
-								swal("跳转……", "", "success");
-								setTimeout(function() {
-									swal.close();
-									$state.go('login');
-								}, 1000)
-							});
-					};
-				}, function(error) {
-					console.log(error);
-					swal({
-						title: "修改失败",
-						text: "",
-						timer: 1000,
-						type: "warning",
-						showConfirmButton: false
-					});
-				})
+					})
+			}else {
+				swal({
+					title: '两次密码不一致',
+					type: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "确认",
+					closeOnConfirm: true
+				});
+			}
 		};
+
 		//下一页
 		$scope.nextPage = function() {
 			if ($scope.listObj.page < $scope.array.total / $scope.listObj.limit) {

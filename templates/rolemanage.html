@@ -62,11 +62,11 @@
 					<h4 class="modal-title">添加</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal">
-						<div class="form-group">
+					<form class="form-horizontal" name="addForm">
+						<div class="form-group" >
 							<label for="roleName" class="col-md-1 control-label">角色名:</label>
-							<div class="col-md-11">
-								<input type="text" class="form-control" id="roleName" placeholder="角色名" ng-model="addObj.roleName">
+							<div class="col-md-11" ng-class="{'has-error':addForm.rolename.$error.required,'has-success':addForm.rolename.$valid}">
+								<input type="text" class="form-control" id="roleName" placeholder="角色名不能为空" ng-model="addObj.roleName" required name="rolename">
 							</div>
 							<!-- /.col -->
 						</div>
@@ -394,10 +394,11 @@
 								</div>
 							</div>
 						</div>
+					</form>
 				</div>
 				<div class="modal-footer">
 					<!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
-					<button class="btn btn-primary col-md-12" ng-click="add()" data-dismiss="modal">确定</button>
+					<button class="btn btn-primary col-md-12" ng-click="add()" data-dismiss="modal" ng-disabled="addForm.$invalid">确定</button>
 				</div>
 			</div>
 		</div>
@@ -412,11 +413,11 @@
 					<h4 class="modal-title">修改</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal">
+					<form class="form-horizontal" name="editForm">
 						<div class="form-group">
 							<label for="roleName" class="col-md-1 control-label">角色名:</label>
-							<div class="col-md-11">
-								<input type="text" class="form-control" id="roleName" placeholder="角色名" ng-model="editObj.roleName">
+							<div class="col-md-11" ng-class="{'has-error':editForm.rolename.$error.required,'has-success':editForm.rolename.$valid}">
+								<input type="text" class="form-control" id="roleName" placeholder="角色名不能为空" ng-model="editObj.roleName" required name="rolename">
 							</div>
 							<!-- /.col -->
 						</div>
@@ -744,10 +745,11 @@
 								</div>
 							</div>
 						</div>
+					</form>
 				</div>
 				<div class="modal-footer">
 					<!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
-					<button class="btn btn-primary col-md-12" ng-click="editConfirm()" data-dismiss="modal">确定</button>
+					<button class="btn btn-primary col-md-12" ng-click="editConfirm()" data-dismiss="modal" ng-disabled="editForm.$invalid">确定</button>
 				</div>
 			</div>
 		</div>
