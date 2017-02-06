@@ -2184,7 +2184,7 @@ angular.module('app.controllers', [])
 
 	//公示内容按钮函数
 	$scope.pass = function(index) {
-			$scope.sureList.content = " ";
+			$scope.sureList.content = "";
 			console.log(index)
 			$scope.index = index;
 			$scope.id = $scope.list[index].id;
@@ -2248,7 +2248,7 @@ angular.module('app.controllers', [])
 		//公示结果按钮函数
 
 	$scope.refuse = function(index) {
-			$scope.resultSureList.content = " ";
+			$scope.resultSureList.content = "";
 			// $scope.resultSureList.status = '1';
 
 
@@ -2266,7 +2266,7 @@ angular.module('app.controllers', [])
 				.then(function(data) {
 					console.log(data);
 					if(data.data.result==null){
-						$scope.resultSureList.content = " ";
+						$scope.resultSureList.content = "";
 						$scope.resultSureList.status = '1';
 					}
 					else{

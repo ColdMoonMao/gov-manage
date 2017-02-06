@@ -38,18 +38,7 @@
 
         <div>
             <table class="table table-striped no-margin">
-                <!--<thead>-->
-                <!--<tr>-->
-                    <!--<th class="text-left">申报人</th>-->
-                    <!--<th class="text-left">部门</th>-->
-                    <!--<th class="text-left">类型</th>-->
-                    <!--<th class="text-left">人数</th>-->
-                    <!--<th class="text-left">申报时间</th>-->
-                    <!--<th class="text-left">宴请时间</th>-->
-                    <!--<th class="text-left">状态</th>-->
-                    <!--<th class="text-left">操作</th>-->
-                <!--</tr>-->
-                <!--</thead>-->
+
 
                 <thead>
                 <tr>
@@ -69,9 +58,7 @@
                         <!--{{$scope.pubList.bulletinStatus==0?'未公示':'已公示'&&$scope.pubList.bulletinStatus==-1?'未公示':'已公示'&&$scope.pubList.bulletinStatus==null?'未公示':'已公示'}}-->
                     </td>
                     <td>
-                        <!--<button class="btn  btn-primary btn-sm">确认</button>-->
-                        <!--<button class="btn btn-danger btn-sm">拒绝</button>-->
-                        <!-- Button trigger modal -->
+
                         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                                 data-target="#myModal" ng-click="pass($index)">
                             公示内容
@@ -90,36 +77,20 @@
                                     </div>
                                     <div class="modal-body">
 
-                                        <!--<div>-->
-                                        <!--<span>内容:</span>-->
-                                        <!--<textarea class="col-sm-12 " ng-model="sureList.content"></textarea>-->
-                                        <!--</div>-->
-                                        <!--<div>-->
-                                        <!--<span>附件:</span>-->
-                                        <!--<input type="file">-->
-                                        <!--<div ng-bind="attachmentPath"></div>-->
-                                        <!--</div>-->
 
-                                        <!--</div>-->
-                                        <!--<hr>-->
-                                        <!--<div class="modal-footer">-->
-                                        <!--&lt;!&ndash;<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>&ndash;&gt;-->
-                                        <!--<button type="button" class="btn btn-primary btn-sm col-sm-12" ng-click="sure()"-->
-                                        <!--data-dismiss="modal">确认-->
-                                        <!--</button>-->
                                         <div class="smart-widget-body">
-                                            <form class="form-horizontal no-margin" id="type-constraint1"
-                                                  data-validate="parsley" novalidate>
+                                            <form class="form-horizontal no-margin" id="type-constraint1" novalidate="novalidate"
+                                                  data-validate="parsley" novalidate name="myForm">
 
-                                                <div class="form-group">
+                                                <div class="form-group" >
                                                     <label class="control-label col-lg-2">内容：</label>
-                                                    <div class="col-lg-10">
+                                                    <div class="col-lg-10" ng-class="{'has-error':myForm.content.$error.required,'has-success':myForm.content.$valid}">
                                                     <textarea type="text" class="form-control input-sm"
-                                                              data-parsley-minlength="6"
+                                                              data-parsley-minlength="6" required name="content"
                                                               ng-model="sureList.content"></textarea>
                                                     </div><!-- /.col -->
                                                 </div><!-- /form-group -->
-                                                <div class="form-group">
+                                                <div class="form-group" >
                                                     <label class="control-label col-lg-2">附件：</label>
                                                     <div class="col-lg-10">
                                                         <input type="file" class="form-control input-sm"
@@ -130,7 +101,8 @@
                                                 <div class="modal-footer">
                                                     <div class="text-right m-top-md">
                                                         <button type="submit" class="btn btn-info col-sm-12" about=""
-                                                                ng-click="sure()" data-dismiss="modal">确定
+                                                                ng-click="sure()" data-dismiss="modal"
+                                                                ng-disabled="myForm.$invalid">确定
                                                         </button>
                                                     </div>
                                                 </div>
@@ -163,7 +135,7 @@
 
                                         <div class="smart-widget-body">
                                             <form class="form-horizontal no-margin" id="type-constraint"
-                                                  name="myForm" novalidate="novalidate"
+                                                  name="myForm1" novalidate="novalidate"
                                                   data-validate="parsley" novalidate>
                                                 <div class="form-group">
                                                     <label class="control-label col-lg-2">结果：</label>
@@ -176,13 +148,12 @@
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <div class="form-group"
-                                                     ng-class="{'has-error':myForm.content.$error.required&&myForm.content.$dirty&&myForm.$submitted}">
+                                                <div class="form-group">
                                                     <label class="control-label col-lg-2">内容：</label>
-                                                    <div class="col-lg-10">
+                                                    <div class="col-lg-10" ng-class="{'has-error':myForm1.content1.$error.required,'has-success':myForm1.content1.$valid}">
                                                 <textarea type="text" class="form-control input-sm"
                                                           data-parsley-minlength="6"
-                                                          ng-model="resultSureList.content" name="content"
+                                                          ng-model="resultSureList.content" name="content1"
                                                           required></textarea>
                                                     </div>
                                                 </div>
@@ -198,7 +169,7 @@
                                                 <div class=" form-group modal-footer">
                                                     <button type="submit" class="btn btn-info col-sm-12" about=""
                                                             ng-click="del()" data-dismiss="modal"
-                                                            ng-disabled="myForm.$invalid">确定
+                                                            ng-disabled="myForm1.$invalid">确定
                                                     </button>
                                                 </div>
                                             </form>
