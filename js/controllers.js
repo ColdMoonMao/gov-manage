@@ -2217,7 +2217,7 @@ angular.module('app.controllers', [])
 
 	$scope.refuse = function(index) {
 			$scope.resultSureList.content = " ";
-			$scope.resultSureList.status = '1';
+			// $scope.resultSureList.status = '1';
 
 
 			console.log(index)
@@ -2233,6 +2233,24 @@ angular.module('app.controllers', [])
 			publicityServe.resultList($scope.resultList)
 				.then(function(data) {
 					console.log(data);
+					if(data.data.result==null){
+						$scope.resultSureList.content = " ";
+						$scope.resultSureList.status = '1';
+					}
+					else{
+					if(data.data.result.content==null){
+						$scope.resultSureList.content = " ";
+					}
+					else{
+						$scope.resultSureList.content =data.data.result.content;
+					}
+					if(data.data.result.status==1){
+
+					}
+					else{
+						$scope.resultSureList.status ='2';
+					}
+					}
 
 				}, function(error) {
 					console.log(error);
