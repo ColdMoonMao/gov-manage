@@ -1,196 +1,192 @@
 <div>
-    <h3 class=" m-left-xs header-text">用户管理</h3>
-    <div class="col-sm-4 col-md-4 ">
-        <!-- <div class="input-group">
-            <input type="text" class="form-control" ng-model="listObj.staff">
-            <div class="input-group-btn">
-                <button ng-click="search()" type="button" class="btn btn-info no-shadow">查询</button>
-            </div> -->
-            <!-- /input-group-btn -->
-        <!-- </div> -->
-        <!-- /input-group -->
-    </div>
-    <div class="col-sm-8 col-md-8 ">
-        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addModal" ng-click="addFun()">添加</button>
-    </div>
-    <table class="table table-striped table-responsive table-hover" id="dataTable">
-        <thead>
-            <tr ng-init="isrotateusername=true;isrotatename=true;isrotateorgName=true">
-                <th ng-click="orderFun()" class="col-md-4">用户名<span class="caret" style="transform:rotate({{isrotateusername?0:180}}deg)"></span></th>
-                <th ng-click="orderFun()" class="col-md-3">姓名<span class="caret" style="transform:rotate({{isrotatename?0:180}}deg)"></span></th>
-                <th ng-click="orderFun()" class="col-md-3">部门<span class="caret" style="transform:rotate({{isrotateorgName?0:180}}deg)"></span></th>
-                <th class="col-md-2 ">操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-init="reverse=true" ng-repeat="(key, value) in array.result |orderBy:exp:reverse">
-                <td>{{value.username}}</td>
-                <td>{{value.name}}</td>
-                <td>{{value.orgName}}</td>
-                <td>
-                    <button ng-click="edit()" type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal">修改</button>
-                    <button ng-click="del()" type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModal">删除</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <!-- /table -->
-    <!-- pagination -->
-    <div class="col-md-12">
-        <ul class="pagination col-md-9 col-sm-9">
-            <li ng-click="listObj.page=1"><a href="">«</a></li>
-            <li ng-click="prePage()">
-                <a href="">
-                    <</a>
-            </li>
-            <li>
-                <input style="display: inline-block;width: 65px;height: 32px;float: left;" min="1" max="{{array.total/listObj.limit+1}}" type="number" class="form-control" ng-model="listObj.page" value="listObj.page">
-            </li>
-            <li ng-click="nextPage()"><a href="">></a></li>
-            <li ng-click="lastPage()"><a href="">»</a></li>
-            <li>
-                <button type="button" ng-click="refresh()" class="btn btn-sm btn-success"><i class="fa fa-refresh" aria-hidden="true"></i></button>
-            </li>
-        </ul>
-        <ul class="pagination col-md-3 col-sm-3">
-            <li><a>显示{{listObj.page < 2 ? 1:(listObj.limit*(listObj.page-1))}}-{{(listObj.limit*(listObj.page-1)+listObj.limit)}}条,共{{array.total}}条</a></li>
-        </ul>
-    </div>
-    <!-- /pagination -->
-    <!-- 新增 modal -->
-    <div class="modal fade" id="addModal" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">添加</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" role="form" name="myForm" novalidate="novalidate">
-                        <div class="form-group" >
-                            <label for="inputTitle" class="col-lg-2 control-label">用户名:</label>
-                            <div class="col-lg-10 " ng-class="{'has-error':myForm.username.$error.required,'has-success':myForm.username.$valid}">
-                                <input type="text" required class="form-control" id="inputTitle" placeholder="用户名不能为空" ng-model="addObj.username" name="username" ng-model-option="{updataOn:'blur',debounce :'500'}">
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <div class="form-group">
-                            <label  class="col-lg-2 control-label">姓名:</label>
-                            <div class="col-lg-10" ng-class="{'has-error':myForm.name.$error.required,'has-success':myForm.name.$valid}">
-                                <input type="text" required class="form-control"  placeholder="姓名不能为空" ng-model="addObj.name" name="name" ng-model-option="{updataOn:'blur',debounce :'500'}">
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">部门:</label>
-                            <div class="col-lg-10" ng-class="{'has-error':myForm.depart.$error.required,'has-success':myForm.depart.$valid}">
-                                <select class="form-control" required ng-model="departArr.name" name="depart">
-                                <option>{{departArr.name}}</option>}
-                                option
-                                </select>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword" class="col-lg-2 control-label">密码:</label>
-                            <div class="col-lg-10" ng-class="{'has-error':myForm.password.$error.required,'has-success':myForm.password.$valid}">
-                                <input type="password" required class="form-control" id="inputPassword" placeholder="密码" ng-model="addObj.password" name="password" >
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <div class="form-group">
-                            <label  class="col-lg-2 control-label">确认密码:</label>
-                            <div class="col-lg-10" ng-class="{'has-error':myForm.passwordConfirm.$error.required,'has-success':myForm.passwordConfirm.$valid}">
-                                <input type="password" required class="form-control" ng-model="addPasswordConfirm"  placeholder="确认密码" name="passwordConfirm">
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">角色:</label>
-                            <div class="col-lg-10" ng-class="{'has-error':myForm.role.$error.required,'has-success':myForm.role.$valid}">
-                                <select name="role" required class="form-control" ng-options="value as value.name for value in roleArr" ng-model="value" ng-change="roleChange(value)">
-                                </select>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        
-                        <!-- /form-group -->
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
-                    <button class="btn btn-primary col-md-12" ng-click="add()" data-dismiss="modal" ng-disabled="myForm.$invalid">确定</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /modal -->
-    <!-- 修改 modal -->
-    <div class="modal fade" id="editModal" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">修改</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" name="editForm">
-                        <div class="form-group">
-                            <label for="inputTitle" class="col-lg-2 control-label">用户名:</label>
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" id="inputTitle" placeholder="用户名" ng-model="editUsername" readonly="">
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <div class="form-group" >
-                            <label for="inputTitle" class="col-lg-2 control-label">姓名:</label>
-                            <div class="col-lg-10" ng-class="{'has-error':editForm.name.$error.required,'has-success':editForm.name.$valid}">
-                                <input type="text" required class="form-control" id="inputTitle" placeholder="姓名" ng-model="editObj.name" name="name">
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">部门:</label>
-                            <div class="col-lg-10" ng-class="{'has-error':editForm.depart.$error.required,'has-success':editForm.depart.$valid}">
-                                <select class="form-control" ng-model="departArr.name" name="depart" required>
-                                <option>{{departArr.name}}</option>}
-                                option
-                                </select>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword" class="col-lg-2 control-label">密码:</label>
-                            <div class="col-lg-10" ng-class="{'has-error':editForm.password.$error.required,'has-success':editForm.password.$valid}">
-                                <input type="password"  class="form-control" id="inputPassword" placeholder="留空则不修改密码" ng-model="editObj.password" name="password">
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPasswordConfirm" class="col-lg-2 control-label">确认密码:</label>
-                            <div class="col-lg-10" ng-class="{'has-error':editForm.passwordConfirm.$error.required,'has-success':editForm.passwordConfirm.$valid}">
-                                <input type="password"  class="form-control" id="inputPasswordConfirm" placeholder="留空则不修改密码" name="passwordConfirm" ng-model="editPasswordConfirm">
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">角色:</label>
-                            <div class="col-lg-10" ng-class="{'has-error':editForm.role.$error.required,'has-success':editForm.role.$valid}">
-                                <select  class="form-control" ng-options="value as value.name for value in roleArr" ng-model="value" ng-change="roleChange(value)" name="role">
-                                </select>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        
-                        <!-- /form-group -->
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
-                    <button class="btn btn-primary col-md-12" ng-click="editConfirm()" data-dismiss="modal" ng-disabled="editForm.$invalid">确定</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /modal -->
+	<h3 class=" m-left-xs header-text">用户管理</h3>
+	<div class="col-sm-4 col-md-4 ">
+		<!-- <div class="input-group">
+			<input type="text" class="form-control" ng-model="listObj.staff">
+			<div class="input-group-btn">
+				<button ng-click="search()" type="button" class="btn btn-info no-shadow">查询</button>
+			</div> -->
+		<!-- /input-group-btn -->
+		<!-- </div> -->
+		<!-- /input-group -->
+	</div>
+	<div class="col-sm-8 col-md-8 ">
+		<button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addModal" ng-click="addFun()">添加</button>
+	</div>
+	<table class="table table-striped table-responsive table-hover" id="dataTable">
+		<thead>
+			<tr ng-init="isrotateusername=true;isrotatename=true;isrotateorgName=true">
+				<th ng-click="orderFun()" class="col-md-4">用户名<span class="caret" style="transform:rotate({{isrotateusername?0:180}}deg)"></span></th>
+				<th ng-click="orderFun()" class="col-md-3">姓名<span class="caret" style="transform:rotate({{isrotatename?0:180}}deg)"></span></th>
+				<th ng-click="orderFun()" class="col-md-3">部门<span class="caret" style="transform:rotate({{isrotateorgName?0:180}}deg)"></span></th>
+				<th class="col-md-2 ">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-init="reverse=true" ng-repeat="(key, value) in array.result |orderBy:exp:reverse">
+				<td>{{value.username}}</td>
+				<td>{{value.name}}</td>
+				<td>{{value.orgName}}</td>
+				<td>
+					<button ng-click="edit()" type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal">修改</button>
+					<button ng-click="del()" type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModal">删除</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<!-- /table -->
+	<!-- pagination -->
+	<div class="col-md-12">
+		<ul class="pagination col-md-9 col-sm-9">
+			<li ng-click="listObj.page=1"><a href="">«</a></li>
+			<li ng-click="prePage()">
+				<a href="">
+					<</a>
+			</li>
+			<li>
+				<input style="display: inline-block;width: 65px;height: 32px;float: left;" min="1" max="{{array.total/listObj.limit+1}}" type="number" class="form-control" ng-model="listObj.page" value="listObj.page">
+			</li>
+			<li ng-click="nextPage()"><a href="">></a></li>
+			<li ng-click="lastPage()"><a href="">»</a></li>
+			<li>
+				<button type="button" ng-click="refresh()" class="btn btn-sm btn-success"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+			</li>
+		</ul>
+		<ul class="pagination col-md-3 col-sm-3">
+			<li><a>显示{{listObj.page < 2 ? 1:(listObj.limit*(listObj.page-1))}}-{{(listObj.limit*(listObj.page-1)+listObj.limit)}}条,共{{array.total}}条</a></li>
+		</ul>
+	</div>
+	<!-- /pagination -->
+	<!-- 新增 modal -->
+	<div class="modal fade" id="addModal" aria-hidden="true" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title">添加</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" role="form" name="myForm" novalidate="novalidate">
+						<div class="form-group">
+							<label for="inputTitle" class="col-lg-2 control-label">用户名:</label>
+							<div class="col-lg-10 " ng-class="{'has-error':myForm.username.$error.required&&myForm.$submitted,'has-success':myForm.username.$valid&&myForm.$submitted}">
+								<input type="text" required class="form-control" id="inputTitle" placeholder="用户名不能为空" ng-model="addObj.username" name="username" ng-model-option="{updataOn:'blur',debounce :'500'}">
+							</div>
+							<!-- /.col -->
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">姓名:</label>
+							<div class="col-lg-10" ng-class="{'has-error':myForm.name.$error.required&&myForm.$submitted,'has-success':myForm.name.$valid&&myForm.$submitted}">
+								<input type="text" required class="form-control" placeholder="姓名不能为空" ng-model="addObj.name" name="name" ng-model-option="{updataOn:'blur',debounce :'500'}">
+							</div>
+							<!-- /.col -->
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">部门:</label>
+							<div class="col-lg-10" ng-class="{'has-error':myForm.depart.$error.required&&myForm.$submitted,'has-success':myForm.depart.$valid&&myForm.$submitted}">
+								<select class="form-control" required ng-model="departArr.name" name="depart">
+									<option>{{departArr.name}}</option>} option
+								</select>
+							</div>
+							<!-- /.col -->
+						</div>
+						<div class="form-group">
+							<label for="inputPassword" class="col-lg-2 control-label">密码:</label>
+							<div class="col-lg-10" ng-class="{'has-error':myForm.password.$error.required&&myForm.$submitted,'has-success':myForm.password.$valid&&myForm.$submitted}">
+								<input type="password" required class="form-control" id="inputPassword" placeholder="密码" ng-model="addObj.password" name="password">
+							</div>
+							<!-- /.col -->
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">确认密码:</label>
+							<div class="col-lg-10" ng-class="{'has-error':myForm.passwordConfirm.$error.required&&myForm.$submitted,'has-success':myForm.passwordConfirm.$valid&&myForm.$submitted}">
+								<input type="password" required class="form-control" ng-model="addPasswordConfirm" placeholder="确认密码" name="passwordConfirm">
+							</div>
+							<!-- /.col -->
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">角色:</label>
+							<div class="col-lg-10" ng-class="{'has-error':myForm.role.$error.required&&myForm.$submitted,'has-success':myForm.role.$valid&&myForm.$submitted}">
+								<select ng-init="value=roleArr[10]" name="role" required class="form-control" ng-options="value as value.name for value in roleArr" ng-model="value" ng-change="roleChange(value)">
+								</select>
+							</div>
+							<!-- /.col -->
+						</div>
+						<button class="btn btn-primary col-md-12" ng-click="add()">确定</button>
+						<!-- /form-group -->
+					</form>
+				</div>
+				<div class="modal-footer">
+					<!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /modal -->
+	<!-- 修改 modal -->
+	<div class="modal fade" id="editModal" aria-hidden="true" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title">修改</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" name="editForm" novalidate="novalidate">
+						<div class="form-group">
+							<label for="inputTitle" class="col-lg-2 control-label">用户名:</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" id="inputTitle" placeholder="用户名" ng-model="editUsername" readonly="">
+							</div>
+							<!-- /.col -->
+						</div>
+						<div class="form-group">
+							<label for="inputTitle" class="col-lg-2 control-label">姓名:</label>
+							<div class="col-lg-10" ng-class="{'has-error':editForm.name.$error.required&&editForm.$submitted,'has-success':editForm.name.$valid&&editForm.$submitted}">
+								<input type="text" required class="form-control" id="inputTitle" placeholder="姓名" ng-model="editObj.name" name="name">
+							</div>
+							<!-- /.col -->
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">部门:</label>
+							<div class="col-lg-10" ng-class="{'has-error':editForm.depart.$error.required&&editForm.$submitted,'has-success':editForm.depart.$valid&&editForm.$submitted}">
+								<select class="form-control" ng-model="departArr.name" name="depart" required>
+									<option>{{departArr.name}}</option>} option
+								</select>
+							</div>
+							<!-- /.col -->
+						</div>
+						<div class="form-group">
+							<label for="inputPassword" class="col-lg-2 control-label">密码:</label>
+							<div class="col-lg-10" ng-class="{'has-error':editForm.password.$error.required&&editForm.$submitted,'has-success':editForm.password.$valid&&editForm.$submitted}">
+								<input type="password" class="form-control" id="inputPassword" placeholder="留空则不修改密码" ng-model="editObj.password" name="password">
+							</div>
+							<!-- /.col -->
+						</div>
+						<div class="form-group">
+							<label for="inputPasswordConfirm" class="col-lg-2 control-label">确认密码:</label>
+							<div class="col-lg-10" ng-class="{'has-error':editForm.passwordConfirm.$error.required&&editForm.$submitted,'has-success':editForm.passwordConfirm.$valid&&editForm.$submitted}">
+								<input type="password" class="form-control" id="inputPasswordConfirm" placeholder="留空则不修改密码" name="passwordConfirm" ng-model="editPasswordConfirm">
+							</div>
+							<!-- /.col -->
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">角色:</label>
+							<div class="col-lg-10" ng-class="{'has-error':editForm.role.$error.required&&editForm.$submitted,'has-success':editForm.role.$valid&&editForm.$submitted}">
+								<select class="form-control" ng-options="value as value.name for value in roleArr" ng-model="value" ng-change="roleChange(value)" name="role">
+								</select>
+							</div>
+							<!-- /.col -->
+						</div>
+						<!-- /form-group -->
+						<button class="btn btn-primary col-md-12" ng-click="editConfirm()">确定</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /modal -->
 </div>

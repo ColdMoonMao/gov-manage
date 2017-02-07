@@ -194,52 +194,61 @@ angular.module('app.controllers', [])
 		};
 		//确认申报按钮
 		$scope.confirm = function() {
-			//loading 效果
-			$.LoadingOverlay("show", {
-				image: "img/oval.svg",
-				bgcolor: 'rgba(28,43,54,0.7)'
-			});
-			//上传文件
-			DeclareServe.upload($scope.declare.attachmentFileCode)
-				.then(function(data) {
-					console.log(data, '文件');
-				}, function(er) {
-					console.log(er, '文件 er');
-				})
-			DeclareServe.submit($scope.declare)
-				.then(function(data) {
-					//loading 效果
-					$.LoadingOverlay("hide");
-					console.log(data);
-					if (data.data.success) {
-						swal({
-							title: "成功",
-							text: "",
-							timer: 1000,
-							type: "success",
-							showConfirmButton: false
-						});
-					} else if (data.data.error) {
-						swal({
-								title: data.data.error.message,
-								type: "warning",
-								showCancelButton: true,
-								confirmButtonColor: "#DD6B55",
-								confirmButtonText: "确认",
-								closeOnConfirm: false,
-								showLoaderOnConfirm: true,
-							},
-							function() {
-								swal("跳转……", "", "success");
-								setTimeout(function() {
-									swal.close();
-									$state.go('login');
-								}, 1000)
+			//表单验证,必填项不能为空
+			if ($scope.declare.staff != '' && $scope.declare.staffPhone != '' && $scope.declare.location != '' && $scope.declare.carSource != '') {
+				//loading 效果
+				$.LoadingOverlay("show", {
+					image: "img/oval.svg",
+					bgcolor: 'rgba(28,43,54,0.7)'
+				});
+				//上传文件
+				DeclareServe.upload($scope.declare.attachmentFileCode)
+					.then(function(data) {
+						console.log(data, '文件');
+					}, function(er) {
+						console.log(er, '文件 er');
+					})
+				DeclareServe.submit($scope.declare)
+					.then(function(data) {
+						//loading 效果
+						$.LoadingOverlay("hide");
+						console.log(data);
+						if (data.data.success) {
+							swal({
+								title: "成功",
+								text: "",
+								timer: 1000,
+								type: "success",
+								showConfirmButton: false
 							});
-					}
-				}, function(error) {
-					console.log(error);
-				})
+							//清除填写状态
+							$scope.declare.staff = '';
+							$scope.declare.staffPhone = '';
+							$scope.declare.location = '';
+							$scope.declare.carSource = '';
+							$scope.myForm.$submitted = false;
+						} else if (data.data.error) {
+							swal({
+									title: data.data.error.message,
+									type: "warning",
+									showCancelButton: true,
+									confirmButtonColor: "#DD6B55",
+									confirmButtonText: "确认",
+									closeOnConfirm: false,
+									showLoaderOnConfirm: true,
+								},
+								function() {
+									swal("跳转……", "", "success");
+									setTimeout(function() {
+										swal.close();
+										$state.go('login');
+									}, 1000)
+								});
+						}
+					}, function(error) {
+						console.log(error);
+					})
+			}
 		};
 		//----日期选择插件设置
 		jQuery.datetimepicker.setLocale('zh');
@@ -319,47 +328,61 @@ angular.module('app.controllers', [])
 		};
 		//新增通报 添加函数
 		$scope.add = function() {
-			//loading 效果
-			$.LoadingOverlay("show", {
-				image: "img/oval.svg",
-				bgcolor: 'rgba(28,43,54,0.7)'
-			});
-			NotifServe.add($scope.addObj)
-				.then(function(data) {
-					//loading 效果
-					$.LoadingOverlay("hide");
-					console.log(data);
-					if (data.data.success) {
-						$('#normalModal').modal('hide');
-						$scope.refresh();
-						swal({
-							title: "添加完成",
-							text: "",
-							timer: 1000,
-							type: "success",
-							showConfirmButton: false
-						});
-					} else if (data.data.error) {
-						swal({
-								title: data.data.error.message,
-								type: "warning",
-								showCancelButton: true,
-								confirmButtonColor: "#DD6B55",
-								confirmButtonText: "确认",
-								closeOnConfirm: false,
-								showLoaderOnConfirm: true,
-							},
-							function() {
-								swal("跳转……", "", "success");
-								setTimeout(function() {
-									swal.close();
-									$state.go('login');
-								}, 1000)
+			if ($scope.addObj.title != '' && $scope.addObj.content != '' && $scope.addObj.staff != '') {
+				//loading 效果
+				$.LoadingOverlay("show", {
+					image: "img/oval.svg",
+					bgcolor: 'rgba(28,43,54,0.7)'
+				});
+				NotifServe.add($scope.addObj)
+					.then(function(data) {
+						//loading 效果
+						$.LoadingOverlay("hide");
+						console.log(data);
+						if (data.data.success) {
+							$('#normalModal').modal('hide');
+							$scope.refresh();
+							swal({
+								title: "添加完成",
+								text: "",
+								timer: 1000,
+								type: "success",
+								showConfirmButton: false
 							});
-					};
-				}, function(error) {
-					console.log(error);
-				})
+							//添加成功后清除添加模态框中内容
+							$scope.addObj = {
+								token: sessionStorage.getItem('token'), //  令牌
+								title: '', //   标题
+								content: '', // 内容
+								staff: '', //   人员
+								staffOrgId: 1 //    人员所属部门
+							};
+							//提交状态重置
+							$scope.addForm.$submitted = false;
+							//关闭模态框
+							$('#addModal').modal('hide');
+						} else if (data.data.error) {
+							swal({
+									title: data.data.error.message,
+									type: "warning",
+									showCancelButton: true,
+									confirmButtonColor: "#DD6B55",
+									confirmButtonText: "确认",
+									closeOnConfirm: false,
+									showLoaderOnConfirm: true,
+								},
+								function() {
+									swal("跳转……", "", "success");
+									setTimeout(function() {
+										swal.close();
+										$state.go('login');
+									}, 1000)
+								});
+						};
+					}, function(error) {
+						console.log(error);
+					})
+			}
 		};
 		//删除通报 params
 		$scope.delObj = {
@@ -414,71 +437,6 @@ angular.module('app.controllers', [])
 				});
 			$scope.delObj.id = this.value.id;
 		};
-		//修改通报 params
-		$scope.editObj = {
-			token: sessionStorage.getItem('token'), //  令牌
-			id: '', //  通报id
-			title: '', //   标题
-			content: '', // 内容
-			staff: '', //   人员
-			staffOrgId: 1 //    人员所属部门
-		};
-		//修改通报按钮函数
-		$scope.edit = function() {
-			console.log(this.value);
-			if (this.value.id) {
-				$scope.editObj.id = this.value.id;
-			}
-			if (this.value.title) {
-				$scope.editObj.title = this.value.title;
-			}
-			if (this.value.content) {
-				$scope.editObj.content = this.value.content;
-			}
-			if (this.value.staff) {
-				$scope.editObj.staff = this.value.staff;
-			}
-			if (this.value.staffOrgId) {
-				$scope.editObj.staffOrgId = this.value.staffOrgId;
-			}
-		};
-		//修改通报确认按钮函数
-		$scope.editConfirm = function() {
-			NotifServe.edit($scope.editObj)
-				.then(function(data) {
-					console.log(data);
-					if (data.data.success) {
-						$('#editModal').modal('hide');
-						$scope.refresh();
-						swal({
-							title: "修改完成",
-							text: "",
-							timer: 1000,
-							type: "success",
-							showConfirmButton: false
-						});
-					} else if (data.data.error) {
-						swal({
-								title: data.data.error.message,
-								type: "warning",
-								showCancelButton: true,
-								confirmButtonColor: "#DD6B55",
-								confirmButtonText: "确认",
-								closeOnConfirm: false,
-								showLoaderOnConfirm: true,
-							},
-							function() {
-								swal("跳转……", "", "success");
-								setTimeout(function() {
-									swal.close();
-									$state.go('login');
-								}, 1000)
-							});
-					};
-				}, function(error) {
-					console.log(error);
-				})
-		};
 		//获取详情 params
 		$scope.getObj = {
 			token: sessionStorage.getItem('token'), //  令牌
@@ -517,6 +475,94 @@ angular.module('app.controllers', [])
 				}, function(error) {
 					console.log(error);
 				})
+		};
+		//修改通报 params
+		$scope.editObj = {
+			token: sessionStorage.getItem('token'), //  令牌
+			id: '', //  通报id
+			title: '', //   标题
+			content: '', // 内容
+			staff: '', //   人员
+			staffOrgId: 1 //    人员所属部门
+		};
+		//修改通报按钮函数
+		$scope.edit = function() {
+			console.log(this.value);
+			if (this.value.id) {
+				$scope.getObj.id = this.value.id;
+				$scope.editObj.id = this.value.id;
+			}
+			NotifServe.getById($scope.getObj)
+				.then(function(data) {
+					if (data.data.success) {
+						//获取修改内容详情
+						$scope.editObj.content = data.data.result.content;
+						$scope.editObj.title = data.data.result.title;
+						$scope.editObj.staff = data.data.result.staff;
+						console.log(data);
+					} else if (data.data.error) {
+						swal({
+								title: data.data.error.message,
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "确认",
+								closeOnConfirm: false,
+								showLoaderOnConfirm: true,
+							},
+							function() {
+								swal("跳转……", "", "success");
+								setTimeout(function() {
+									swal.close();
+									$state.go('login');
+								}, 1000)
+							});
+					};
+				}, function(error) {
+					console.log(error);
+				})
+		};
+		//修改通报确认按钮函数
+		$scope.editConfirm = function() {
+			if (Boolean($scope.editObj.title) && Boolean($scope.editObj.content) && Boolean($scope.editObj.staff)) {
+				NotifServe.edit($scope.editObj)
+					.then(function(data) {
+						console.log(data);
+						if (data.data.success) {
+							$scope.refresh();
+							swal({
+								title: "修改完成",
+								text: "",
+								timer: 1000,
+								type: "success",
+								showConfirmButton: false
+							});
+							//提交状态重置
+							$scope.myForm.$submitted = false;
+							//关闭模态框
+							$('#editModal').modal('hide');
+						} else if (data.data.error) {
+							swal({
+									title: data.data.error.message,
+									type: "warning",
+									showCancelButton: true,
+									confirmButtonColor: "#DD6B55",
+									confirmButtonText: "确认",
+									closeOnConfirm: false,
+									showLoaderOnConfirm: true,
+								},
+								function() {
+									swal("跳转……", "", "success");
+									setTimeout(function() {
+										swal.close();
+										$state.go('login');
+									}, 1000)
+								});
+						};
+					}, function(error) {
+						console.log(error);
+					})
+			}
 		};
 		//下一页
 		$scope.nextPage = function() {
@@ -627,40 +673,55 @@ angular.module('app.controllers', [])
 		};
 		//新增通报 添加函数
 		$scope.add = function() {
-			PunishServe.add($scope.addObj)
-				.then(function(data) {
-					console.log(data);
-					if (data.data.success) {
-						$('#normalModal').modal('hide');
-						$scope.refresh();
-						swal({
-							title: "添加完成",
-							text: "",
-							timer: 1000,
-							type: "success",
-							showConfirmButton: false
-						});
-					} else if (data.data.error) {
-						swal({
-								title: data.data.error.message,
-								type: "warning",
-								showCancelButton: true,
-								confirmButtonColor: "#DD6B55",
-								confirmButtonText: "确认",
-								closeOnConfirm: false,
-								showLoaderOnConfirm: true,
-							},
-							function() {
-								swal("跳转……", "", "success");
-								setTimeout(function() {
-									swal.close();
-									$state.go('login');
-								}, 1000)
+			if ($scope.addObj.title != '' && $scope.addObj.content != '' && $scope.addObj.staff != '') {
+				PunishServe.add($scope.addObj)
+					.then(function(data) {
+						console.log(data);
+						if (data.data.success) {
+							$('#normalModal').modal('hide');
+							$scope.refresh();
+							swal({
+								title: "添加完成",
+								text: "",
+								timer: 1000,
+								type: "success",
+								showConfirmButton: false
 							});
-					};
-				}, function(error) {
-					console.log(error);
-				})
+							//清除上次填写内容
+							$scope.addObj = {
+								token: sessionStorage.getItem('token'), //  令牌
+								title: '', //   标题
+								content: '', // 内容
+								staff: '', //   人员
+								staffOrgId: 1 //    人员所属部门
+							};
+							//提交状态重置
+							$scope.myForm.$submitted = false;
+							//关闭模态框
+							$('#addModal').modal('hide');
+						} else if (data.data.error) {
+							swal({
+									title: data.data.error.message,
+									type: "warning",
+									showCancelButton: true,
+									confirmButtonColor: "#DD6B55",
+									confirmButtonText: "确认",
+									closeOnConfirm: false,
+									showLoaderOnConfirm: true,
+								},
+								function() {
+									swal("跳转……", "", "success");
+									setTimeout(function() {
+										swal.close();
+										$state.go('login');
+									}, 1000)
+								});
+						};
+					}, function(error) {
+						console.log(error);
+					})
+			}
+
 		};
 		//删除通报 params
 		$scope.delObj = {
@@ -715,71 +776,6 @@ angular.module('app.controllers', [])
 				});
 			$scope.delObj.id = this.value.id;
 		};
-		//修改通报 params
-		$scope.editObj = {
-			token: sessionStorage.getItem('token'), //  令牌
-			id: '', //  通报id
-			title: '', //   标题
-			content: '', // 内容
-			staff: '', //   人员
-			staffOrgId: 1 //    人员所属部门
-		};
-		//修改通报按钮函数
-		$scope.edit = function() {
-			console.log(this.value);
-			if (this.value.id) {
-				$scope.editObj.id = this.value.id;
-			}
-			if (this.value.title) {
-				$scope.editObj.title = this.value.title;
-			}
-			if (this.value.content) {
-				$scope.editObj.content = this.value.content;
-			}
-			if (this.value.staff) {
-				$scope.editObj.staff = this.value.staff;
-			}
-			if (this.value.staffOrgId) {
-				$scope.editObj.staffOrgId = this.value.staffOrgId;
-			}
-		};
-		//修改通报确认按钮函数
-		$scope.editConfirm = function() {
-			PunishServe.edit($scope.editObj)
-				.then(function(data) {
-					console.log(data);
-					if (data.data.success) {
-						$('#editModal').modal('hide');
-						$scope.refresh();
-						swal({
-							title: "修改完成",
-							text: "",
-							timer: 1000,
-							type: "success",
-							showConfirmButton: false
-						});
-					} else if (data.data.error) {
-						swal({
-								title: data.data.error.message,
-								type: "warning",
-								showCancelButton: true,
-								confirmButtonColor: "#DD6B55",
-								confirmButtonText: "确认",
-								closeOnConfirm: false,
-								showLoaderOnConfirm: true,
-							},
-							function() {
-								swal("跳转……", "", "success");
-								setTimeout(function() {
-									swal.close();
-									$state.go('login');
-								}, 1000)
-							});
-					};
-				}, function(error) {
-					console.log(error);
-				})
-		};
 		//获取详情 params
 		$scope.getObj = {
 			token: sessionStorage.getItem('token'), //  令牌
@@ -819,6 +815,96 @@ angular.module('app.controllers', [])
 					console.log(error);
 				})
 		};
+		//修改通报 params
+		$scope.editObj = {
+			token: sessionStorage.getItem('token'), //  令牌
+			id: '', //  通报id
+			title: '', //   标题
+			content: '', // 内容
+			staff: '', //   人员
+			staffOrgId: 1 //    人员所属部门
+		};
+		//修改通报按钮函数
+		$scope.edit = function() {
+			console.log(this.value);
+			if (this.value.id) {
+				$scope.getObj.id = this.value.id;
+				$scope.editObj.id = this.value.id;
+			}
+			PunishServe.getById($scope.getObj)
+				.then(function(data) {
+					console.log(data);
+					if (data.data.success) {
+						//获取修改内容详情
+						$scope.editObj.content = data.data.result.content;
+						$scope.editObj.title = data.data.result.title;
+						$scope.editObj.staff = data.data.result.staff;
+					} else if (data.data.error) {
+						swal({
+								title: data.data.error.message,
+								type: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "确认",
+								closeOnConfirm: false,
+								showLoaderOnConfirm: true,
+							},
+							function() {
+								swal("跳转……", "", "success");
+								setTimeout(function() {
+									swal.close();
+									$state.go('login');
+								}, 1000)
+							});
+					};
+				}, function(error) {
+					console.log(error);
+				})
+		};
+		//修改通报确认按钮函数
+		$scope.editConfirm = function() {
+			if (Boolean($scope.editObj.title) && Boolean($scope.editObj.content) && Boolean($scope.editObj.staff)) {
+				PunishServe.edit($scope.editObj)
+					.then(function(data) {
+						console.log(data);
+						if (data.data.success) {
+							$('#editModal').modal('hide');
+							$scope.refresh();
+							swal({
+								title: "修改完成",
+								text: "",
+								timer: 1000,
+								type: "success",
+								showConfirmButton: false
+							});
+							//提交状态重置
+							$scope.editForm.$submitted = false;
+							//关闭模态框
+							$('#editModal').modal('hide');
+						} else if (data.data.error) {
+							swal({
+									title: data.data.error.message,
+									type: "warning",
+									showCancelButton: true,
+									confirmButtonColor: "#DD6B55",
+									confirmButtonText: "确认",
+									closeOnConfirm: false,
+									showLoaderOnConfirm: true,
+								},
+								function() {
+									swal("跳转……", "", "success");
+									setTimeout(function() {
+										swal.close();
+										$state.go('login');
+									}, 1000)
+								});
+						};
+					}, function(error) {
+						console.log(error);
+					})
+			}
+		};
+
 		//下一页
 		$scope.nextPage = function() {
 			if ($scope.listObj.page < $scope.array.total / $scope.listObj.limit) {
@@ -976,47 +1062,59 @@ angular.module('app.controllers', [])
 		// };
 		//新增 添加确认函数
 		$scope.add = function() {
-			if ($scope.addPasswordConfirm == $scope.addObj.password) {
-				UsermanageServe.add($scope.addObj)
-					.then(function(data) {
-						console.log(data);
-						if (data.data.success) {
-							swal("添加成功!", "", "success");
-							setTimeout(function() {
-								swal.close();
-							}, 1000)
-							$scope.refresh();
-						} else if (data.data.error) {
-							swal({
-									title: data.data.error.message,
-									type: "warning",
-									showCancelButton: true,
-									confirmButtonColor: "#DD6B55",
-									confirmButtonText: "确认",
-									closeOnConfirm: false,
-									showLoaderOnConfirm: true,
-								},
-								function() {
-									swal("跳转……", "", "success");
-									setTimeout(function() {
-										swal.close();
-										$state.go('login');
-									}, 1000)
-								});
-						}
-					}, function(error) {
-						console.log(error);
-					})
-			} else {
-				swal({
-					title: '两次密码不一致',
-					type: "warning",
-					showCancelButton: true,
-					confirmButtonColor: "#DD6B55",
-					confirmButtonText: "确认",
-					closeOnConfirm: true
-				});
+			if ($scope.addObj.password != '' && $scope.addObj.username != '' && $scope.addObj.name != '') {
+				if ($scope.addPasswordConfirm == $scope.addObj.password) {
+					UsermanageServe.add($scope.addObj)
+						.then(function(data) {
+							console.log(data);
+							if (data.data.success) {
+								swal("添加成功!", "", "success");
+								setTimeout(function() {
+									swal.close();
+								}, 1000)
+								$scope.refresh();
+								//提交状态重置
+								$scope.myForm.$submitted = false;
+								//关闭模态框
+								$('#addModal').modal('hide');
+								//清空上次添加内容
+								$scope.addObj.username = '';
+								$scope.addObj.name = '';
+								$scope.addObj.password = '';
+								$scope.addPasswordConfirm = '';
+							} else if (data.data.error) {
+								swal({
+										title: data.data.error.message,
+										type: "warning",
+										showCancelButton: true,
+										confirmButtonColor: "#DD6B55",
+										confirmButtonText: "确认",
+										closeOnConfirm: false,
+										showLoaderOnConfirm: true,
+									},
+									function() {
+										swal("跳转……", "", "success");
+										setTimeout(function() {
+											swal.close();
+											$state.go('login');
+										}, 1000)
+									});
+							}
+						}, function(error) {
+							console.log(error);
+						})
+				} else {
+					swal({
+						title: '两次密码不一致',
+						type: "warning",
+						showCancelButton: true,
+						confirmButtonColor: "#DD6B55",
+						confirmButtonText: "确认",
+						closeOnConfirm: true
+					});
+				}
 			}
+
 
 		};
 		//删除 params
@@ -1111,58 +1209,67 @@ angular.module('app.controllers', [])
 			}
 			//修改确认按钮函数
 		$scope.editConfirm = function() {
-			if ($scope.editPasswordConfirm == $scope.editObj.password) {
-				UsermanageServe.edit($scope.editObj)
-					.then(function(data) {
-						console.log(data);
-						if (data.data.success) {
-							$('#editModal').modal('hide');
-							$scope.refresh();
+			if (Boolean($scope.editObj.name)) {
+				if ($scope.editPasswordConfirm == $scope.editObj.password) {
+					UsermanageServe.edit($scope.editObj)
+						.then(function(data) {
+							console.log(data);
+							if (data.data.success) {
+								$('#editModal').modal('hide');
+								$scope.refresh();
+								swal({
+									title: "修改完成",
+									text: "",
+									timer: 1000,
+									type: "success",
+									showConfirmButton: false
+								});
+								//提交状态重置
+								$scope.editForm.$submitted = false;
+								//关闭模态框
+								$('#editModal').modal('hide');
+								//清空上次内容
+								$scope.editPasswordConfirm = '';
+							} else if (data.data.error) {
+								swal({
+										title: data.data.error.message,
+										type: "warning",
+										showCancelButton: true,
+										confirmButtonColor: "#DD6B55",
+										confirmButtonText: "确认",
+										closeOnConfirm: false,
+										showLoaderOnConfirm: true,
+									},
+									function() {
+										swal("跳转……", "", "success");
+										setTimeout(function() {
+											swal.close();
+											$state.go('login');
+										}, 1000)
+									});
+							};
+						}, function(error) {
+							console.log(error);
 							swal({
-								title: "修改完成",
+								title: "修改失败",
 								text: "",
 								timer: 1000,
-								type: "success",
+								type: "warning",
 								showConfirmButton: false
 							});
-						} else if (data.data.error) {
-							swal({
-									title: data.data.error.message,
-									type: "warning",
-									showCancelButton: true,
-									confirmButtonColor: "#DD6B55",
-									confirmButtonText: "确认",
-									closeOnConfirm: false,
-									showLoaderOnConfirm: true,
-								},
-								function() {
-									swal("跳转……", "", "success");
-									setTimeout(function() {
-										swal.close();
-										$state.go('login');
-									}, 1000)
-								});
-						};
-					}, function(error) {
-						console.log(error);
-						swal({
-							title: "修改失败",
-							text: "",
-							timer: 1000,
-							type: "warning",
-							showConfirmButton: false
-						});
-					})
-			}else {
-				swal({
-					title: '两次密码不一致',
-					type: "warning",
-					showCancelButton: true,
-					confirmButtonColor: "#DD6B55",
-					confirmButtonText: "确认",
-					closeOnConfirm: true
-				});
+						})
+				} else {
+					swal({
+						title: '两次密码不一致',
+						type: "warning",
+						showCancelButton: true,
+						confirmButtonColor: "#DD6B55",
+						confirmButtonText: "确认",
+						closeOnConfirm: true
+					});
+				}
 			}
+
 		};
 
 		//下一页
@@ -1249,57 +1356,64 @@ angular.module('app.controllers', [])
 		};
 		//新增 添加确认函数
 		$scope.add = function() {
-			//拼接参数
-			var functionCodesArr = []; //选中的CheckBox项code数组
-			$('#addModal [type="checkbox"]').each(function(index, el) {
-				if (el.checked) {
-					functionCodesArr.push(el.title)
-				}
-			});
-			$scope.addObj.functionCodes = functionCodesArr.join('&functionCodes=');
-			RolemanageServe.add($scope.addObj.token, $scope.addObj.roleName, $scope.addObj.functionCodes)
-				.then(function(data) {
-					console.log(data);
-					if (data.data.success) {
-						swal("添加成功!", "", "success");
-						setTimeout(function() {
-								swal.close();
-							}, 1000)
-							//清除选中状态
-						$('#addModal [type="checkbox"]').each(function(index, el) {
-							el.checked = false;
-						})
-						functionCodesArr = []; //成功后清除参数的对象
-						$scope.addObj.roleName = ''; //成功后清除参数的对象
-						$scope.refresh();
-					} else if (data.data.error) {
-						swal({
-								title: data.data.error.message,
-								type: "warning",
-								showCancelButton: true,
-								confirmButtonColor: "#DD6B55",
-								confirmButtonText: "确认",
-								closeOnConfirm: false,
-								showLoaderOnConfirm: true,
-							},
-							function() {
-								swal("跳转……", "", "success");
-								setTimeout(function() {
-									swal.close();
-									$state.go('login');
-								}, 1000)
-							});
+			if ($scope.addObj.roleName != '') {
+				//拼接参数
+				var functionCodesArr = []; //选中的CheckBox项code数组
+				$('#addModal [type="checkbox"]').each(function(index, el) {
+					if (el.checked) {
+						functionCodesArr.push(el.title)
 					}
-				}, function(error) {
-					console.log(error);
-					swal({
-						title: "添加失败",
-						text: "",
-						timer: 1000,
-						type: "warning",
-						showConfirmButton: false
-					});
-				})
+				});
+				$scope.addObj.functionCodes = functionCodesArr.join('&functionCodes=');
+				RolemanageServe.add($scope.addObj.token, $scope.addObj.roleName, $scope.addObj.functionCodes)
+					.then(function(data) {
+						console.log(data);
+						if (data.data.success) {
+							swal("添加成功!", "", "success");
+							setTimeout(function() {
+									swal.close();
+								}, 1000)
+								//清除选中状态
+							$('#addModal [type="checkbox"]').each(function(index, el) {
+								el.checked = false;
+							});
+							//提交状态重置
+							$scope.addFormSub.$submitted = false;
+							//关闭模态框
+							$('#addModal').modal('hide');
+							functionCodesArr = []; //成功后清除参数的对象
+							$scope.addObj.roleName = ''; //成功后清除参数的对象
+							$scope.refresh();
+						} else if (data.data.error) {
+							swal({
+									title: data.data.error.message,
+									type: "warning",
+									showCancelButton: true,
+									confirmButtonColor: "#DD6B55",
+									confirmButtonText: "确认",
+									closeOnConfirm: false,
+									showLoaderOnConfirm: true,
+								},
+								function() {
+									swal("跳转……", "", "success");
+									setTimeout(function() {
+										swal.close();
+										$state.go('login');
+									}, 1000)
+								});
+						}
+					}, function(error) {
+						console.log(error);
+						swal({
+							title: "添加失败",
+							text: "",
+							timer: 1000,
+							type: "warning",
+							showConfirmButton: false
+						});
+					})
+			}
+
 		};
 		//删除 params
 		$scope.delObj = {
@@ -1409,54 +1523,57 @@ angular.module('app.controllers', [])
 		};
 		//修改确认按钮函数 
 		$scope.editConfirm = function() {
-			var functionCodesArr = []; //选中的CheckBox项code数组
-			$('#editModal [type="checkbox"]').each(function(index, el) {
-				if (el.checked) {
-					functionCodesArr.push(el.title)
-				}
-			});
-			$scope.editObj.functionCodes = functionCodesArr.join('&functionCodes=');
-			RolemanageServe.edit($scope.editObj.token, $scope.editObj.roleName, $scope.editObj.roleId, $scope.editObj.functionCodes)
-				.then(function(data) {
-					console.log(data);
-					if (data.data.success) {
-						$('#editModal').modal('hide');
-						$scope.refresh();
+			if (Boolean($scope.editObj.roleName)) {
+				var functionCodesArr = []; //选中的CheckBox项code数组
+				$('#editModal [type="checkbox"]').each(function(index, el) {
+					if (el.checked) {
+						functionCodesArr.push(el.title)
+					}
+				});
+				$scope.editObj.functionCodes = functionCodesArr.join('&functionCodes=');
+				RolemanageServe.edit($scope.editObj.token, $scope.editObj.roleName, $scope.editObj.roleId, $scope.editObj.functionCodes)
+					.then(function(data) {
+						console.log(data);
+						if (data.data.success) {
+							$('#editModal').modal('hide');
+							$scope.refresh();
+							swal({
+								title: "修改完成",
+								text: "",
+								timer: 1000,
+								type: "success",
+								showConfirmButton: false
+							});
+						} else if (data.data.error) {
+							swal({
+									title: data.data.error.message,
+									type: "warning",
+									showCancelButton: true,
+									confirmButtonColor: "#DD6B55",
+									confirmButtonText: "确认",
+									closeOnConfirm: false,
+									showLoaderOnConfirm: true,
+								},
+								function() {
+									swal("跳转……", "", "success");
+									setTimeout(function() {
+										swal.close();
+										$state.go('login');
+									}, 1000)
+								});
+						};
+					}, function(error) {
+						console.log(error);
 						swal({
-							title: "修改完成",
+							title: "修改失败",
 							text: "",
 							timer: 1000,
-							type: "success",
+							type: "warning",
 							showConfirmButton: false
 						});
-					} else if (data.data.error) {
-						swal({
-								title: data.data.error.message,
-								type: "warning",
-								showCancelButton: true,
-								confirmButtonColor: "#DD6B55",
-								confirmButtonText: "确认",
-								closeOnConfirm: false,
-								showLoaderOnConfirm: true,
-							},
-							function() {
-								swal("跳转……", "", "success");
-								setTimeout(function() {
-									swal.close();
-									$state.go('login');
-								}, 1000)
-							});
-					};
-				}, function(error) {
-					console.log(error);
-					swal({
-						title: "修改失败",
-						text: "",
-						timer: 1000,
-						type: "warning",
-						showConfirmButton: false
-					});
-				})
+					})
+			}
+
 		};
 		//下一页
 		$scope.nextPage = function() {
@@ -1663,69 +1780,69 @@ angular.module('app.controllers', [])
 			key: '2'
 		}]
 		$scope.peopleCountArr = [{
-			countRange: "全部",
-			countMin: "0",
-			countMax: "0"
-		}, {
-			countRange: "0-50人",
-			countMin: "0",
-			countMax: "50"
-		}, {
-			countRange: "50-100人",
-			countMin: "50",
-			countMax: "100"
-		}, {
-			countRange: "100-150人",
-			countMin: "100",
-			countMax: "150"
-		}, {
-			countRange: "150-200人",
-			countMin: "150",
-			countMax: "200"
-		}]
-        //----日期选择插件设置
-        jQuery.datetimepicker.setLocale('zh');
-        jQuery('#createFromDatetimepicker').datetimepicker({
-            timepicker: false,
-            format: 'Y-m-d',
-            closeOnDateSelect: true
-            // onSelectDate: function(ct, $i) {
-            //     $scope.CreateTimeFrom = ct.getFullYear()+"-"+(ct.getMonth()+1)+"-"+ct.getDate();
-            //     console.log($scope.CreateTimeFrom);//split(""),双引号里需是本身自带的,表示以什么把字符串分开,空表示单个字符分开,
-            // }
-        });
-        jQuery('#createToDatetimepicker').datetimepicker({
-            timepicker: false,
-            format: 'Y-m-d',
-            closeOnDateSelect: true
-            // onSelectDate: function(ct, $i) {
-            //     $scope.CreateTimeTo = $('#createToDatetimepicker').val();
-            //     console.log($('#createToDatetimepicker').val());
-            // }
-        });
-        jQuery('#eventFormDatetimepicker').datetimepicker({
-            timepicker: false,
-            format: 'Y-m-d',
-            closeOnDateSelect: true
-            // onSelectDate: function(ct, $i) {
-            //     $scope.TimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-');
-            // }
-        });
-        jQuery('#eventToDatetimepicker').datetimepicker({
-            timepicker: false,
-            format: 'Y-m-d',
-            closeOnDateSelect: true
-            // onSelectDate: function(ct, $i) {
-            //     $scope.TimeTo = ct.toLocaleString().slice(0,9).split("/").join('-');
-            // }
-        });
-        //日期选择插件设置end-----
+				countRange: "全部",
+				countMin: "0",
+				countMax: "0"
+			}, {
+				countRange: "0-50人",
+				countMin: "0",
+				countMax: "50"
+			}, {
+				countRange: "50-100人",
+				countMin: "50",
+				countMax: "100"
+			}, {
+				countRange: "100-150人",
+				countMin: "100",
+				countMax: "150"
+			}, {
+				countRange: "150-200人",
+				countMin: "150",
+				countMax: "200"
+			}]
+			//----日期选择插件设置
+		jQuery.datetimepicker.setLocale('zh');
+		jQuery('#createFromDatetimepicker').datetimepicker({
+			timepicker: false,
+			format: 'Y-m-d',
+			closeOnDateSelect: true
+				// onSelectDate: function(ct, $i) {
+				//     $scope.CreateTimeFrom = ct.getFullYear()+"-"+(ct.getMonth()+1)+"-"+ct.getDate();
+				//     console.log($scope.CreateTimeFrom);//split(""),双引号里需是本身自带的,表示以什么把字符串分开,空表示单个字符分开,
+				// }
+		});
+		jQuery('#createToDatetimepicker').datetimepicker({
+			timepicker: false,
+			format: 'Y-m-d',
+			closeOnDateSelect: true
+				// onSelectDate: function(ct, $i) {
+				//     $scope.CreateTimeTo = $('#createToDatetimepicker').val();
+				//     console.log($('#createToDatetimepicker').val());
+				// }
+		});
+		jQuery('#eventFormDatetimepicker').datetimepicker({
+			timepicker: false,
+			format: 'Y-m-d',
+			closeOnDateSelect: true
+				// onSelectDate: function(ct, $i) {
+				//     $scope.TimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-');
+				// }
+		});
+		jQuery('#eventToDatetimepicker').datetimepicker({
+			timepicker: false,
+			format: 'Y-m-d',
+			closeOnDateSelect: true
+				// onSelectDate: function(ct, $i) {
+				//     $scope.TimeTo = ct.toLocaleString().slice(0,9).split("/").join('-');
+				// }
+		});
+		//日期选择插件设置end-----
 		$scope.combineSearch = function() {
-            $scope.CreateTimeFrom = $('#createFromDatetimepicker').val();
-            $scope.CreateTimeTo = $('#createToDatetimepicker').val();
-            $scope.TimeFrom = $('#eventFormDatetimepicker').val();
-            $scope.TimeTo = $('#eventToDatetimepicker').val();
-            $scope.combinequeryobj = {
+				$scope.CreateTimeFrom = $('#createFromDatetimepicker').val();
+				$scope.CreateTimeTo = $('#createToDatetimepicker').val();
+				$scope.TimeFrom = $('#eventFormDatetimepicker').val();
+				$scope.TimeTo = $('#eventToDatetimepicker').val();
+				$scope.combinequeryobj = {
 						token: $scope.token, //令牌
 						page: 1, //当前页
 						start: 0, //从哪个开始
@@ -1833,49 +1950,49 @@ angular.module('app.controllers', [])
 	})
 	//数量统计
 	.controller('statisticCtrl', function($scope, $state, StatisticServe) {
-        //----日期选择插件设置
-        jQuery.datetimepicker.setLocale('zh');
-        jQuery('#createFromDatetimepicker').datetimepicker({
-            timepicker: false,
-            format: 'Y-m-d',
-            closeOnDateSelect: true
-            // onSelectDate: function(ct, $i) {
-            //     $scope.CreateTimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-');
-            // }
-        });
-        jQuery('#createToDatetimepicker').datetimepicker({
-            timepicker: false,
-            format: 'Y-m-d',
-            closeOnDateSelect: true
-            // onSelectDate: function(ct, $i) {
-             //    $scope.CreateTimeTo = ct.toLocaleString().slice(0,9).split("/").join('-');
-			// }
-        });
-        jQuery('#eventFormDatetimepicker').datetimepicker({
-            timepicker: false,
-            format: 'Y-m-d',
-            closeOnDateSelect: true
-            // onSelectDate: function(ct, $i) {
-            //     $scope.TimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-');
-            // }
-        });
-        jQuery('#eventToDatetimepicker').datetimepicker({
-            timepicker: false,
-            format: 'Y-m-d',
-            closeOnDateSelect: true
-            // onSelectDate: function(ct, $i) {
-             //    $scope.TimeTo = ct.toLocaleString().slice(0,9).split("/").join('-');
-			// }
-        });
-        //日期选择插件设置end-----
+		//----日期选择插件设置
+		jQuery.datetimepicker.setLocale('zh');
+		jQuery('#createFromDatetimepicker').datetimepicker({
+			timepicker: false,
+			format: 'Y-m-d',
+			closeOnDateSelect: true
+				// onSelectDate: function(ct, $i) {
+				//     $scope.CreateTimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-');
+				// }
+		});
+		jQuery('#createToDatetimepicker').datetimepicker({
+			timepicker: false,
+			format: 'Y-m-d',
+			closeOnDateSelect: true
+				// onSelectDate: function(ct, $i) {
+				//    $scope.CreateTimeTo = ct.toLocaleString().slice(0,9).split("/").join('-');
+				// }
+		});
+		jQuery('#eventFormDatetimepicker').datetimepicker({
+			timepicker: false,
+			format: 'Y-m-d',
+			closeOnDateSelect: true
+				// onSelectDate: function(ct, $i) {
+				//     $scope.TimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-');
+				// }
+		});
+		jQuery('#eventToDatetimepicker').datetimepicker({
+			timepicker: false,
+			format: 'Y-m-d',
+			closeOnDateSelect: true
+				// onSelectDate: function(ct, $i) {
+				//    $scope.TimeTo = ct.toLocaleString().slice(0,9).split("/").join('-');
+				// }
+		});
+		//日期选择插件设置end-----
 		$scope.token = sessionStorage.getItem("token");
 		console.log($scope.token);
 		$scope.statisticSearch = function() {
-            $scope.CreateTimeFrom = $('#createFromDatetimepicker').val();
-            $scope.CreateTimeTo = $('#createToDatetimepicker').val();
-            $scope.TimeFrom = $('#eventFormDatetimepicker').val();
-            $scope.TimeTo = $('#eventToDatetimepicker').val();
-            $scope.statisticobj = {
+			$scope.CreateTimeFrom = $('#createFromDatetimepicker').val();
+			$scope.CreateTimeTo = $('#createToDatetimepicker').val();
+			$scope.TimeFrom = $('#eventFormDatetimepicker').val();
+			$scope.TimeTo = $('#eventToDatetimepicker').val();
+			$scope.statisticobj = {
 					token: $scope.token, //令牌
 					eventCreateTimeFrom: $scope.CreateTimeFrom, //申报开始时间
 					eventCreateTimeTo: $scope.CreateTimeTo, //申报结束时间
@@ -2011,14 +2128,14 @@ angular.module('app.controllers', [])
 
 	//通过按钮函数
 	$scope.pass = function(index) {
-		$scope.sureList.content='';
+			$scope.sureList.content = '';
 			console.log(index)
 			$scope.index = index;
 			$scope.id = $scope.list[index].id;
 			// console.log($scope.id);
 			$scope.modList.eventId = $scope.id;
 
-		$scope.sureList.status = '1';
+			$scope.sureList.status = '1';
 			ApproveServe.modList($scope.modList)
 				.then(function(data) {
 					console.log(data);
@@ -2064,15 +2181,15 @@ angular.module('app.controllers', [])
 		}
 		//拒绝按钮函数
 	$scope.refuse = function(index) {
-		$scope.sureList.content='';
+			$scope.sureList.content = '';
 			console.log(index)
 			$scope.index = index;
 			$scope.id = $scope.list[index].id;
 			// console.log($scope.id);
 			$scope.modList.eventId = $scope.id;
 			$scope.modList.status = 2;
-			$scope.sureList.status=2;
-		console.log($scope.sureList.status)
+			$scope.sureList.status = 2;
+			console.log($scope.sureList.status)
 
 			ApproveServe.modList($scope.modList)
 				.then(function(data) {
@@ -2083,13 +2200,13 @@ angular.module('app.controllers', [])
 				})
 		}
 		//拒绝模态框确定函数
-	$scope.refuseSure= function() {
+	$scope.refuseSure = function() {
 		$scope.id = $scope.list[$scope.index].id;;
 		$scope.sureList.eventId = $scope.id;
 		$scope.modList.status = 2;
-		$scope.sureList.status =2;
+		$scope.sureList.status = 2;
 		console.log($scope.sureList.eventId)
-		//请求接口
+			//请求接口
 		console.log(123)
 		console.log($scope.sureList.status)
 		ApproveServe.sureList($scope.sureList)
@@ -2143,7 +2260,7 @@ angular.module('app.controllers', [])
 		isrotate: true
 	}]
 	$scope.attrArr = ['staff', 'staffOrgName', 'eventType', 'peopleCount', 'createTime', 'eventDate', 'auditStatus', 'auditContent']
-//排序
+		//排序
 	$scope.orderToggle = function(index) {
 		$scope.x = ($scope.x == "+" ? "-" : "+");
 		$scope.attr = $scope.attrArr[index];
@@ -2347,23 +2464,20 @@ angular.module('app.controllers', [])
 			publicityServe.resultList($scope.resultList)
 				.then(function(data) {
 					console.log(data);
-					if(data.data.result==null){
+					if (data.data.result == null) {
 						$scope.resultSureList.content = "";
 						$scope.resultSureList.status = '1';
-					}
-					else{
-					if(data.data.result.content==null){
-						$scope.resultSureList.content = " ";
-					}
-					else{
-						$scope.resultSureList.content =data.data.result.content;
-					}
-					if(data.data.result.status==1){
+					} else {
+						if (data.data.result.content == null) {
+							$scope.resultSureList.content = " ";
+						} else {
+							$scope.resultSureList.content = data.data.result.content;
+						}
+						if (data.data.result.status == 1) {
 
-					}
-					else{
-						$scope.resultSureList.status ='2';
-					}
+						} else {
+							$scope.resultSureList.status = '2';
+						}
 					}
 
 				}, function(error) {
@@ -2434,7 +2548,7 @@ angular.module('app.controllers', [])
 		isrotate: true
 	}]
 	$scope.attrArr = ['staff', 'staffOrgName', 'eventType', 'peopleCount', 'createTime', 'eventDate', 'auditStatus', 'auditContent']
-//排序
+		//排序
 	$scope.orderToggle = function(index) {
 		$scope.x = ($scope.x == "+" ? "-" : "+");
 		$scope.attr = $scope.attrArr[index];
@@ -2643,44 +2757,39 @@ angular.module('app.controllers', [])
 			supervisionServe.registerList($scope.registerList)
 				.then(function(data) {
 					console.log(data);
-					if(data.data.result!=null){
+					if (data.data.result != null) {
 						$scope.registerSureList.content = data.data.result.content;
-						$scope.registerSureList.otherQuestion=data.data.result.otherQuestion;
-						$scope.registerSureList.isCashGiftOutOfLimits=data.data.result.isCashGiftOutOfLimits;
+						$scope.registerSureList.otherQuestion = data.data.result.otherQuestion;
+						$scope.registerSureList.isCashGiftOutOfLimits = data.data.result.isCashGiftOutOfLimits;
 
-						if($scope.registerSureList.isCashGiftOutOfLimits=true){
-							$scope.registerSureList.isCashGiftOutOfLimits='1'
-						}
-						else{
-							$scope.registerSureList.isCashGiftOutOfLimits='0'
-						}
-
-						if($scope.registerSureList.isUsePublicAssets=true){
-							$scope.registerSureList.isUsePublicAssets='1'
-						}
-						else{
-							$scope.registerSureList.isUsePublicAssets='0'
+						if ($scope.registerSureList.isCashGiftOutOfLimits = true) {
+							$scope.registerSureList.isCashGiftOutOfLimits = '1'
+						} else {
+							$scope.registerSureList.isCashGiftOutOfLimits = '0'
 						}
 
-						if($scope.registerSureList.isUsePublicCar=true){
-							$scope.registerSureList.isUsePublicCar='1'
-						}
-						else{
-							$scope.registerSureList.isUsePublicCar='0'
-						}
-
-						if($scope.registerSureList.isUsePublicGoods=true){
-							$scope.registerSureList.isUsePublicGoods='1'
-						}
-						else{
-							$scope.registerSureList.isUsePublicGoods='0'
+						if ($scope.registerSureList.isUsePublicAssets = true) {
+							$scope.registerSureList.isUsePublicAssets = '1'
+						} else {
+							$scope.registerSureList.isUsePublicAssets = '0'
 						}
 
-						if($scope.registerSureList.isUsePublicMoney=true){
-							$scope.registerSureList.isUsePublicMoney='1'
+						if ($scope.registerSureList.isUsePublicCar = true) {
+							$scope.registerSureList.isUsePublicCar = '1'
+						} else {
+							$scope.registerSureList.isUsePublicCar = '0'
 						}
-						else{
-							$scope.registerSureList.isUsePublicMoney='0'
+
+						if ($scope.registerSureList.isUsePublicGoods = true) {
+							$scope.registerSureList.isUsePublicGoods = '1'
+						} else {
+							$scope.registerSureList.isUsePublicGoods = '0'
+						}
+
+						if ($scope.registerSureList.isUsePublicMoney = true) {
+							$scope.registerSureList.isUsePublicMoney = '1'
+						} else {
+							$scope.registerSureList.isUsePublicMoney = '0'
 						}
 
 					}
@@ -2749,7 +2858,7 @@ angular.module('app.controllers', [])
 		isrotate: true
 	}]
 	$scope.attrArr = ['staff', 'staffOrgName', 'eventType', 'peopleCount', 'createTime', 'eventDate', 'auditStatus', 'auditContent']
-//排序
+		//排序
 	$scope.orderToggle = function(index) {
 		$scope.x = ($scope.x == "+" ? "-" : "+");
 		$scope.attr = $scope.attrArr[index];
