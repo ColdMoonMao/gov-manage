@@ -407,11 +407,12 @@ angular.module('app.controllers', [])
 						.then(function(data) {
 							console.log(data);
 							if (data.data.success) {
-								// $('#normalModal').modal('hide');
-								swal("Deleted!", "", "success");
+								$('#normalModal').modal('hide');
+								swal("删除成功", "", "success");
 								setTimeout(function() {
 									swal.close();
 								}, 1000)
+
 								$scope.refresh();
 							} else if (data.data.error) {
 								swal({
@@ -2136,10 +2137,18 @@ angular.module('app.controllers', [])
 			// console.log($scope.id);
 			$scope.modList.eventId = $scope.id;
 
-			$scope.sureList.status = '1';
+
+			$scope.sureList.status =1;
 			ApproveServe.modList($scope.modList)
 				.then(function(data) {
 					console.log(data);
+					if(data.data.result==null){
+						$scope.sureList.content='';
+					}
+					else{
+						$scope.sureList.content=data.data.result.content;
+					}
+
 
 				}, function(error) {
 					console.log(error);
@@ -2195,6 +2204,13 @@ angular.module('app.controllers', [])
 			ApproveServe.modList($scope.modList)
 				.then(function(data) {
 					console.log(data);
+					if(data.data.result==null){
+						$scope.sureList.content='';
+					}
+					else{
+						$scope.sureList.content=data.data.result.content;
+					}
+
 
 				}, function(error) {
 					console.log(error);
@@ -2413,6 +2429,7 @@ angular.module('app.controllers', [])
 		}
 		//公示内容模态框的确定函数
 	$scope.sure = function() {
+		if($scope.sureList.content!=''){
 			// $('#myModal').modal('toggle');
 			// console.log($scope.index)
 			// $scope.list[$scope.index].auditStatus=1;
@@ -2434,6 +2451,12 @@ angular.module('app.controllers', [])
 						showConfirmButton: false
 					});
 					$scope.refresh();
+
+					//提交状态重置
+					// $scope.myForm.$submitted = false;
+					//关闭模态框
+					$('#myModal').modal('hide');
+
 				}, function(error) {
 					swal({
 						title: "登录授权过期",
@@ -2444,6 +2467,8 @@ angular.module('app.controllers', [])
 					});
 					console.log(error);
 				});
+		}
+
 		}
 		//公示结果按钮函数
 
@@ -2488,38 +2513,45 @@ angular.module('app.controllers', [])
 		//公示结果模态框确定函数
 
 	$scope.del = function() {
+		if($scope.resultSureList.content!=''){
+			//获取eventId
 
-		//获取eventId
+			$scope.id = $scope.list[$scope.index].id;
 
-		$scope.id = $scope.list[$scope.index].id;
+			$scope.resultSureList.eventId = $scope.id;
+			console.log($scope.resultSureList.eventId)
 
-		$scope.resultSureList.eventId = $scope.id;
-		console.log($scope.resultSureList.eventId)
+			//请求接口
+			publicityServe.resultSureList($scope.resultSureList)
 
-		//请求接口
-		publicityServe.resultSureList($scope.resultSureList)
+				.then(function(data) {
+					console.log(data);
+					swal({
+						title: "公示结果成功",
+						text: "",
+						timer: 1000,
+						type: "success",
+						showConfirmButton: false
+					});
+					$scope.refresh();
 
-		.then(function(data) {
-			console.log(data);
-			swal({
-				title: "公示结果成功",
-				text: "",
-				timer: 1000,
-				type: "success",
-				showConfirmButton: false
-			});
-			$scope.refresh();
+					//提交状态重置
+					// $scope.myForm.$submitted = false;
+					//关闭模态框
+					$('#myModal1').modal('hide');
 
-		}, function(error) {
-			swal({
-				title: "登录授权过期",
-				text: "",
-				timer: 1000,
-				type: "error",
-				showConfirmButton: false
-			});
-			console.log(error);
-		});
+				}, function(error) {
+					swal({
+						title: "登录授权过期",
+						text: "",
+						timer: 1000,
+						type: "error",
+						showConfirmButton: false
+					});
+					console.log(error);
+				});
+		}
+
 
 	}
 

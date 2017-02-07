@@ -19,7 +19,7 @@
                     <form class="form-inline no-margin">
                         <div class="form-group">
                             <label class="">申报人:</label>
-                            <input type="text" class="form-control" ng-model="userList.staff">
+                            <input type="text" class="form-control" ng-model="pubList.staff">
                             <select class="form-control" ng-model="sel" ng-init="sel='未公示'" ng-change="selChange()">
                                 <option>未公示</option>
                                 <option>已公示</option>
@@ -84,10 +84,10 @@
 
                                                 <div class="form-group" >
                                                     <label class="control-label col-lg-2">内容：</label>
-                                                    <div class="col-lg-10" ng-class="{'has-error':myForm.content.$error.required,'has-success':myForm.content.$valid}">
+                                                    <div class="col-lg-10" ng-class="{'has-error':myForm.content.$error.required&&myForm.$submitted,'has-success':myForm.content.$valid&&myForm.$submitted}">
                                                     <textarea type="text" class="form-control input-sm"
                                                               data-parsley-minlength="6" required name="content"
-                                                              ng-model="sureList.content"></textarea>
+                                                              ng-model="sureList.content" placeholder="内容不能为空"></textarea>
                                                     </div><!-- /.col -->
                                                 </div><!-- /form-group -->
                                                 <div class="form-group" >
@@ -101,8 +101,7 @@
                                                 <div class="modal-footer">
                                                     <div class="text-right m-top-md">
                                                         <button type="submit" class="btn btn-info col-sm-12" about=""
-                                                                ng-click="sure()" data-dismiss="modal"
-                                                                ng-disabled="myForm.$invalid">确定
+                                                                ng-click="sure()" >确定
                                                         </button>
                                                     </div>
                                                 </div>
@@ -150,9 +149,9 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label col-lg-2">内容：</label>
-                                                    <div class="col-lg-10" ng-class="{'has-error':myForm1.content1.$error.required,'has-success':myForm1.content1.$valid}">
+                                                    <div class="col-lg-10" ng-class="{'has-error':myForm1.content1.$error.required&&myForm1.$submitted,'has-success':myForm1.content1.$valid&&myForm1.$submitted}">
                                                 <textarea type="text" class="form-control input-sm"
-                                                          data-parsley-minlength="6"
+                                                          data-parsley-minlength="6" placeholder="内容不能为空"
                                                           ng-model="resultSureList.content" name="content1"
                                                           required></textarea>
                                                     </div>
@@ -168,8 +167,7 @@
 
                                                 <div class=" form-group modal-footer">
                                                     <button type="submit" class="btn btn-info col-sm-12" about=""
-                                                            ng-click="del()" data-dismiss="modal"
-                                                            ng-disabled="myForm1.$invalid">确定
+                                                            ng-click="del()">确定
                                                     </button>
                                                 </div>
                                             </form>
