@@ -1690,7 +1690,7 @@ angular.module('app.controllers', [])
             format: 'Y-m-d',
             closeOnDateSelect: true,
             onSelectDate: function(ct, $i) {
-                $scope.CreateTimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-0');
+                $scope.CreateTimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-');
                 console.log(ct.toLocaleString().slice(0,9).split("/").join("-"));//split(""),双引号里需是本身自带的,表示以什么把字符串分开,空表示单个字符分开,
             }
         });
@@ -1699,7 +1699,7 @@ angular.module('app.controllers', [])
             format: 'Y-m-d',
             closeOnDateSelect: true,
             onSelectDate: function(ct, $i) {
-                $scope.CreateTimeTo = ct.toLocaleString().slice(0,9).split("/").join('-0');
+                $scope.CreateTimeTo = ct.toLocaleString().slice(0,9).split("/").join('-');
             }
         });
         jQuery('#eventFormDatetimepicker').datetimepicker({
@@ -1707,7 +1707,7 @@ angular.module('app.controllers', [])
             format: 'Y-m-d',
             closeOnDateSelect: true,
             onSelectDate: function(ct, $i) {
-                $scope.TimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-0');
+                $scope.TimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-');
             }
         });
         jQuery('#eventToDatetimepicker').datetimepicker({
@@ -1715,7 +1715,7 @@ angular.module('app.controllers', [])
             format: 'Y-m-d',
             closeOnDateSelect: true,
             onSelectDate: function(ct, $i) {
-                $scope.TimeTo = ct.toLocaleString().slice(0,9).split("/").join('-0');
+                $scope.TimeTo = ct.toLocaleString().slice(0,9).split("/").join('-');
             }
         });
         //日期选择插件设置end-----
@@ -1835,7 +1835,7 @@ angular.module('app.controllers', [])
             format: 'Y-m-d',
             closeOnDateSelect: true,
             onSelectDate: function(ct, $i) {
-                $scope.CreateTimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-0');
+                $scope.CreateTimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-');
             }
         });
         jQuery('#createToDatetimepicker').datetimepicker({
@@ -1843,7 +1843,7 @@ angular.module('app.controllers', [])
             format: 'Y-m-d',
             closeOnDateSelect: true,
             onSelectDate: function(ct, $i) {
-                $scope.CreateTimeTo = ct.toLocaleString().slice(0,9).split("/").join('-0');
+                $scope.CreateTimeTo = ct.toLocaleString().slice(0,9).split("/").join('-');
 			}
         });
         jQuery('#eventFormDatetimepicker').datetimepicker({
@@ -1851,7 +1851,7 @@ angular.module('app.controllers', [])
             format: 'Y-m-d',
             closeOnDateSelect: true,
             onSelectDate: function(ct, $i) {
-                $scope.TimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-0');
+                $scope.TimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-');
             }
         });
         jQuery('#eventToDatetimepicker').datetimepicker({
@@ -1859,7 +1859,7 @@ angular.module('app.controllers', [])
             format: 'Y-m-d',
             closeOnDateSelect: true,
             onSelectDate: function(ct, $i) {
-                $scope.TimeTo = ct.toLocaleString().slice(0,9).split("/").join('-0');
+                $scope.TimeTo = ct.toLocaleString().slice(0,9).split("/").join('-');
 			}
         });
         //日期选择插件设置end-----
