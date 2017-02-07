@@ -1200,6 +1200,7 @@ angular.module('app.controllers', [])
 					$scope.editObj.name = this.value.name;
 				}
 				$scope.editObj.password = '';
+				$scope.editPasswordConfirm='';
 				if (this.value.roleId) {
 					$scope.editObj.roleId = this.value.roleId;
 				}
