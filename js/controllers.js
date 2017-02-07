@@ -1688,38 +1688,43 @@ angular.module('app.controllers', [])
         jQuery('#createFromDatetimepicker').datetimepicker({
             timepicker: false,
             format: 'Y-m-d',
-            closeOnDateSelect: true,
-            onSelectDate: function(ct, $i) {
-                $scope.CreateTimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-');
-                console.log(ct.toLocaleString().slice(0,9).split("/").join("-"));//split(""),双引号里需是本身自带的,表示以什么把字符串分开,空表示单个字符分开,
-            }
+            closeOnDateSelect: true
+            // onSelectDate: function(ct, $i) {
+            //     $scope.CreateTimeFrom = ct.getFullYear()+"-"+(ct.getMonth()+1)+"-"+ct.getDate();
+            //     console.log($scope.CreateTimeFrom);//split(""),双引号里需是本身自带的,表示以什么把字符串分开,空表示单个字符分开,
+            // }
         });
         jQuery('#createToDatetimepicker').datetimepicker({
             timepicker: false,
             format: 'Y-m-d',
-            closeOnDateSelect: true,
-            onSelectDate: function(ct, $i) {
-                $scope.CreateTimeTo = ct.toLocaleString().slice(0,9).split("/").join('-');
-            }
+            closeOnDateSelect: true
+            // onSelectDate: function(ct, $i) {
+            //     $scope.CreateTimeTo = $('#createToDatetimepicker').val();
+            //     console.log($('#createToDatetimepicker').val());
+            // }
         });
         jQuery('#eventFormDatetimepicker').datetimepicker({
             timepicker: false,
             format: 'Y-m-d',
-            closeOnDateSelect: true,
-            onSelectDate: function(ct, $i) {
-                $scope.TimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-');
-            }
+            closeOnDateSelect: true
+            // onSelectDate: function(ct, $i) {
+            //     $scope.TimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-');
+            // }
         });
         jQuery('#eventToDatetimepicker').datetimepicker({
             timepicker: false,
             format: 'Y-m-d',
-            closeOnDateSelect: true,
-            onSelectDate: function(ct, $i) {
-                $scope.TimeTo = ct.toLocaleString().slice(0,9).split("/").join('-');
-            }
+            closeOnDateSelect: true
+            // onSelectDate: function(ct, $i) {
+            //     $scope.TimeTo = ct.toLocaleString().slice(0,9).split("/").join('-');
+            // }
         });
         //日期选择插件设置end-----
 		$scope.combineSearch = function() {
+            $scope.CreateTimeFrom = $('#createFromDatetimepicker').val();
+            $scope.CreateTimeTo = $('#createToDatetimepicker').val();
+            $scope.TimeFrom = $('#eventFormDatetimepicker').val();
+            $scope.TimeTo = $('#eventToDatetimepicker').val();
             $scope.combinequeryobj = {
 						token: $scope.token, //令牌
 						page: 1, //当前页
@@ -1833,39 +1838,43 @@ angular.module('app.controllers', [])
         jQuery('#createFromDatetimepicker').datetimepicker({
             timepicker: false,
             format: 'Y-m-d',
-            closeOnDateSelect: true,
-            onSelectDate: function(ct, $i) {
-                $scope.CreateTimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-');
-            }
+            closeOnDateSelect: true
+            // onSelectDate: function(ct, $i) {
+            //     $scope.CreateTimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-');
+            // }
         });
         jQuery('#createToDatetimepicker').datetimepicker({
             timepicker: false,
             format: 'Y-m-d',
-            closeOnDateSelect: true,
-            onSelectDate: function(ct, $i) {
-                $scope.CreateTimeTo = ct.toLocaleString().slice(0,9).split("/").join('-');
-			}
+            closeOnDateSelect: true
+            // onSelectDate: function(ct, $i) {
+             //    $scope.CreateTimeTo = ct.toLocaleString().slice(0,9).split("/").join('-');
+			// }
         });
         jQuery('#eventFormDatetimepicker').datetimepicker({
             timepicker: false,
             format: 'Y-m-d',
-            closeOnDateSelect: true,
-            onSelectDate: function(ct, $i) {
-                $scope.TimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-');
-            }
+            closeOnDateSelect: true
+            // onSelectDate: function(ct, $i) {
+            //     $scope.TimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-');
+            // }
         });
         jQuery('#eventToDatetimepicker').datetimepicker({
             timepicker: false,
             format: 'Y-m-d',
-            closeOnDateSelect: true,
-            onSelectDate: function(ct, $i) {
-                $scope.TimeTo = ct.toLocaleString().slice(0,9).split("/").join('-');
-			}
+            closeOnDateSelect: true
+            // onSelectDate: function(ct, $i) {
+             //    $scope.TimeTo = ct.toLocaleString().slice(0,9).split("/").join('-');
+			// }
         });
         //日期选择插件设置end-----
 		$scope.token = sessionStorage.getItem("token");
 		console.log($scope.token);
 		$scope.statisticSearch = function() {
+            $scope.CreateTimeFrom = $('#createFromDatetimepicker').val();
+            $scope.CreateTimeTo = $('#createToDatetimepicker').val();
+            $scope.TimeFrom = $('#eventFormDatetimepicker').val();
+            $scope.TimeTo = $('#eventToDatetimepicker').val();
             $scope.statisticobj = {
 					token: $scope.token, //令牌
 					eventCreateTimeFrom: $scope.CreateTimeFrom, //申报开始时间
