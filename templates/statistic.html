@@ -15,15 +15,15 @@
                 <form class="form-inline no-margin">
                     <div class="form-group">
                         <label >申报时间:</label>
-                        <input type="date" class="form-control" ng-model="CreateTimeFrom">
+                        <input type="text" id="createFromDatetimepicker" ng-model="CreateTimeFrom" class="form-control">
                         <label >至:</label>
-                        <input type="date" class="form-control" ng-model="CreateTimeTo">
+                        <input type="text" id="createToDatetimepicker" ng-model="CreateTimeTo" class="form-control">
                     </div><!-- /form-group -->
                     <div class="form-group" style="margin-left: 20px">
                         <label>宴请时间:</label>
-                        <input type="date" class="form-control" ng-model="TimeFrom">
+                        <input type="text" id="eventFormDatetimepicker" ng-model="TimeFrom" class="form-control">
                         <label >至:</label>
-                        <input type="date" class="form-control" ng-model="TimeTo">
+                        <input type="text" id="eventToDatetimepicker" ng-model="TimeTo" class="form-control">
                     </div><!-- /form-group -->
                     <button type="submit" class="btn btn-sm btn-success" ng-click="statisticSearch()">查询</button>
                 </form>

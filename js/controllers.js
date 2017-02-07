@@ -1624,6 +1624,7 @@ angular.module('app.controllers', [])
 	})
 	//组合查询combinequery
 	.controller('combinequeryCtrl', function($scope, $state, PrecisequeryServe) {
+
 		$scope.token = sessionStorage.getItem("token");
 		$scope.attrArr = ['staff', 'staffOrgName', 'eventType', 'peopleCount', 'createTime', 'eventDate', 'auditStatus', 'auditContent']
 		$scope.menuArr = [{
@@ -1682,8 +1683,44 @@ angular.module('app.controllers', [])
 			countMin: "150",
 			countMax: "200"
 		}]
+        //----日期选择插件设置
+        jQuery.datetimepicker.setLocale('zh');
+        jQuery('#createFromDatetimepicker').datetimepicker({
+            timepicker: false,
+            format: 'Y-m-d',
+            closeOnDateSelect: true,
+            onSelectDate: function(ct, $i) {
+                $scope.CreateTimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-0');
+                console.log(ct.toLocaleString().slice(0,9).split("/").join("-"));//split(""),双引号里需是本身自带的,表示以什么把字符串分开,空表示单个字符分开,
+            }
+        });
+        jQuery('#createToDatetimepicker').datetimepicker({
+            timepicker: false,
+            format: 'Y-m-d',
+            closeOnDateSelect: true,
+            onSelectDate: function(ct, $i) {
+                $scope.CreateTimeTo = ct.toLocaleString().slice(0,9).split("/").join('-0');
+            }
+        });
+        jQuery('#eventFormDatetimepicker').datetimepicker({
+            timepicker: false,
+            format: 'Y-m-d',
+            closeOnDateSelect: true,
+            onSelectDate: function(ct, $i) {
+                $scope.TimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-0');
+            }
+        });
+        jQuery('#eventToDatetimepicker').datetimepicker({
+            timepicker: false,
+            format: 'Y-m-d',
+            closeOnDateSelect: true,
+            onSelectDate: function(ct, $i) {
+                $scope.TimeTo = ct.toLocaleString().slice(0,9).split("/").join('-0');
+            }
+        });
+        //日期选择插件设置end-----
 		$scope.combineSearch = function() {
-				$scope.combinequeryobj = {
+            $scope.combinequeryobj = {
 						token: $scope.token, //令牌
 						page: 1, //当前页
 						start: 0, //从哪个开始
@@ -1787,13 +1824,49 @@ angular.module('app.controllers', [])
 			$scope.combineSearch();
 		}, 500);
 
+
 	})
 	//数量统计
 	.controller('statisticCtrl', function($scope, $state, StatisticServe) {
+        //----日期选择插件设置
+        jQuery.datetimepicker.setLocale('zh');
+        jQuery('#createFromDatetimepicker').datetimepicker({
+            timepicker: false,
+            format: 'Y-m-d',
+            closeOnDateSelect: true,
+            onSelectDate: function(ct, $i) {
+                $scope.CreateTimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-0');
+            }
+        });
+        jQuery('#createToDatetimepicker').datetimepicker({
+            timepicker: false,
+            format: 'Y-m-d',
+            closeOnDateSelect: true,
+            onSelectDate: function(ct, $i) {
+                $scope.CreateTimeTo = ct.toLocaleString().slice(0,9).split("/").join('-0');
+			}
+        });
+        jQuery('#eventFormDatetimepicker').datetimepicker({
+            timepicker: false,
+            format: 'Y-m-d',
+            closeOnDateSelect: true,
+            onSelectDate: function(ct, $i) {
+                $scope.TimeFrom = ct.toLocaleString().slice(0,9).split("/").join('-0');
+            }
+        });
+        jQuery('#eventToDatetimepicker').datetimepicker({
+            timepicker: false,
+            format: 'Y-m-d',
+            closeOnDateSelect: true,
+            onSelectDate: function(ct, $i) {
+                $scope.TimeTo = ct.toLocaleString().slice(0,9).split("/").join('-0');
+			}
+        });
+        //日期选择插件设置end-----
 		$scope.token = sessionStorage.getItem("token");
 		console.log($scope.token);
 		$scope.statisticSearch = function() {
-			var statisticobj = {
+            $scope.statisticobj = {
 					token: $scope.token, //令牌
 					eventCreateTimeFrom: $scope.CreateTimeFrom, //申报开始时间
 					eventCreateTimeTo: $scope.CreateTimeTo, //申报结束时间
@@ -1805,7 +1878,7 @@ angular.module('app.controllers', [])
 				image: "img/oval.svg",
 				bgcolor: 'rgba(28,43,54,0.7)'
 			});
-			StatisticServe.statisticlist(statisticobj)
+			StatisticServe.statisticlist($scope.statisticobj)
 				.then(function(data) {
 					//loading 效果
 					$.LoadingOverlay("hide");
