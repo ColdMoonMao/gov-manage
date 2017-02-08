@@ -1,6 +1,6 @@
 // rolemanage角色管理页面服务
 angular.module('app.services')
-    .factory('RolemanageServe', function($http, $q, $state) {
+    .factory('RoleManageServe', function($http, $q, $state) {
         return {
             //获取列表list
             list: function(params) {

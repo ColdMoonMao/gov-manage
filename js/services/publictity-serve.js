@@ -1,6 +1,6 @@
 // 公示页面服务
 angular.module('app.services')
-    .factory('publicityServe', function($http, $q) {
+    .factory('PublicityServe', function($http, $q) {
         return {
             //页面接口
             pubList: function(params) {

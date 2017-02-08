@@ -1,6 +1,6 @@
 //精确查询precisequery和组合查询公用
 angular.module('app.services')
-    .factory('PrecisequeryServe', function($http, $q) {
+    .factory('PreciseQueryServe', function($http, $q) {
         return {
             //获取列表申报list
             Preciselist: function(params) {

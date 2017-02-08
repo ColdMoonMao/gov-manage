@@ -742,7 +742,7 @@ angular.module('app.controllers')
 
 // notifaction公开通报页面控制
 angular.module('app.controllers')
-    .controller('NotifCtrl', function($scope, $state, $timeout, NotifServe) {
+    .controller('notifCtrl', function($scope, $state, $timeout, NotifServe) {
         //获取列表params 对象
         $scope.listObj = {
             token: sessionStorage.getItem('token'), //  令牌

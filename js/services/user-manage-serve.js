@@ -1,6 +1,6 @@
 // usermanage用户管理页面服务
 angular.module('app.services')
-    .factory('UsermanageServe', function($http, $q, $state) {
+    .factory('UserManageServe', function($http, $q, $state) {
         return {
             //获取列表list
             list: function(params) {

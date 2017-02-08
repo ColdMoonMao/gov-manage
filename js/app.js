@@ -89,7 +89,7 @@ angular.module('app', ['app.controllers', 'app.services','ui.router'])
 				views: {
 					'content': {
 						templateUrl: 'templates/notification.html',
-						controller: 'NotifCtrl'
+						controller: 'notifCtrl'
 					}
 				}
 			})
@@ -122,8 +122,8 @@ angular.module('app', ['app.controllers', 'app.services','ui.router'])
 						controller: 'roleManageCtrl'
 					}
 				}
-			})
+			});
 
 		$urlRouterProvider.otherwise('/login');
 
-	})
+	});

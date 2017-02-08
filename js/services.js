@@ -223,7 +223,7 @@ angular.module('app.services')
 
 //精确查询precisequery和组合查询公用
 angular.module('app.services')
-    .factory('PrecisequeryServe', function($http, $q) {
+    .factory('PreciseQueryServe', function($http, $q) {
         return {
             //获取列表申报list
             Preciselist: function(params) {
@@ -246,7 +246,7 @@ angular.module('app.services')
 
 // 公示页面服务
 angular.module('app.services')
-    .factory('publicityServe', function($http, $q) {
+    .factory('PublicityServe', function($http, $q) {
         return {
             //页面接口
             pubList: function(params) {
@@ -426,7 +426,7 @@ angular.module('app.services')
 
 // rolemanage角色管理页面服务
 angular.module('app.services')
-    .factory('RolemanageServe', function($http, $q, $state) {
+    .factory('RoleManageServe', function($http, $q, $state) {
         return {
             //获取列表list
             list: function(params) {
@@ -536,7 +536,7 @@ angular.module('app.services')
 
 // supervision监督页面服务
 angular.module('app.services')
-    .factory('supervisionServe', function($http, $q) {
+    .factory('SupervisionServe', function($http, $q) {
         return {
             //页面接口
             pubList: function(params) {
@@ -629,7 +629,7 @@ angular.module('app.services')
 
 // usermanage用户管理页面服务
 angular.module('app.services')
-    .factory('UsermanageServe', function($http, $q, $state) {
+    .factory('UserManageServe', function($http, $q, $state) {
         return {
             //获取列表list
             list: function(params) {

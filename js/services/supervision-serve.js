@@ -1,6 +1,6 @@
 // supervision监督页面服务
 angular.module('app.services')
-    .factory('supervisionServe', function($http, $q) {
+    .factory('SupervisionServe', function($http, $q) {
         return {
             //页面接口
             pubList: function(params) {
