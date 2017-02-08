@@ -1,65 +1,112 @@
 /* Empty. Add your own CSS if you like */
-	html,body{
-		margin: 0;
-		padding: 0;
-	}
-	/* login */
-	.login{
-		background-position: center;
-		background-size: cover;
-		background-position: center;
-		/* background-image: url('../img/default-BG.jpg'); */
-		background-color: rgba(43, 170, 177, 0.8);
-		height: 768px;
-	}
-	.login>div{
-		background-color: rgba(0, 0, 0, 0.6);
 
-	}
-	.sign-in-wrapper .login-brand{
-		color: #ddd;
-		font-weight: bold;
-	}
-	.login button{
-		width: 100%;
-	}
-	/* /login */
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+
+/* login */
+
+.login {
+	background-position: center;
+	background-size: cover;
+	background-position: center;
+	/* background-image: url('../img/default-BG.jpg'); */
+	background-color: rgba(43, 170, 177, 0.8);
+	height: 768px;
+}
+
+.login>div {
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.sign-in-wrapper .login-brand {
+	color: #ddd;
+	font-weight: bold;
+}
+
+.login button {
+	width: 100%;
+}
+
+
+/* /login */
+
+
 /* @media (min-width: 768px) { */
-	.declare .form-group {
-		margin: 3px 0;
-	}
-	.declare .form-control{
-		width: 130px ;
-	}
-	.declare .textarea{
-		width: 373px;
-	}
-	.declare .input-group{
-		width: 130px;
-	}
-	.declare .form-group:nth-child(1) label{
-		margin-right: 14px;
-	}
-	.declare .form-group:nth-child(5) label{
-		margin-right: 27px;
-	}
-	.declare .form-group:nth-child(4n+6) label{
-		margin-right: 27px;
-	}
-	.declare .form-group:nth-child(18) label{
-		margin-right: 27px;
-	}
-	.declare .form-group:nth-child(19) label{
-		margin-right: 14px;
-	}
+
+.declare .form-group {
+	margin: 3px 0;
+}
+
+.declare .form-control {
+	width: 130px;
+}
+
+.declare .textarea {
+	width: 373px;
+}
+
+.declare .input-group {
+	width: 130px;
+}
+
+.declare .form-group:nth-child(1) label {
+	margin-right: 14px;
+}
+
+.declare .form-group:nth-child(5) label {
+	margin-right: 27px;
+}
+
+.declare .form-group:nth-child(4n+6) label {
+	margin-right: 27px;
+}
+
+.declare .form-group:nth-child(18) label {
+	margin-right: 27px;
+}
+
+.declare .form-group:nth-child(19) label {
+	margin-right: 14px;
+}
+
+
 /* } */
+
+
 /*/main*/
-.main-con{
+
+.main-con {
 	/*height: 500px;*/
 	width: 100%;
 }
-#main-title{
+
+#main-title {
 	position: relative;
-	top:50%;
+	top: 50%;
 	transform: translateY(-50%);
+}
+
+
+/* pagination */
+
+.pagination input {
+	display: inline-block;
+	width: 65px;
+	height: 32px;
+	float: left;
+	position: relative;
+	border-radius: 0;
+	border-color: #ddd;
+	box-shadow: none;
+	background-color: #fff;
+	margin: 0px 0.5px 0px 0px;
+}
+.pagination button{
+	position: relative;
+	margin: 0.3px 1px 0;
+	height: 31.4px;
+	box-sizing: border-box;
 }
