@@ -174,36 +174,39 @@ angular.module('app.controllers')
                         $scope.registerSureList.content = data.data.result.content;
                         $scope.registerSureList.otherQuestion = data.data.result.otherQuestion;
                         $scope.registerSureList.isCashGiftOutOfLimits = data.data.result.isCashGiftOutOfLimits;
+                        $scope.registerSureList.isUsePublicCar = data.data.result.isUsePublicCar;
+                        $scope.registerSureList.isUsePublicGoods = data.data.result.isUsePublicGoods;
+                        $scope.registerSureList.isUsePublicMoney = data.data.result.isUsePublicMoney;
+                        $scope.registerSureList.isUsePublicAsserts = data.data.result.isUsePublicAsserts;
 
                         if ($scope.registerSureList.isCashGiftOutOfLimits == true) {
                             $scope.registerSureList.isCashGiftOutOfLimits = '1';
                         } else {
                             $scope.registerSureList.isCashGiftOutOfLimits = '0';
-                        }
-
-                        if ($scope.registerSureList.isUsePublicAssets == true) {
-                            $scope.registerSureList.isUsePublicAssets = '1';
-                        } else {
-                            $scope.registerSureList.isUsePublicAssets = '0';
-                        }
+                        };
 
                         if ($scope.registerSureList.isUsePublicCar == true) {
-                            $scope.registerSureList.isUsePublicCar = '1';
+                            $scope.registerSureList.isUsePublicCar ='1';
                         } else {
                             $scope.registerSureList.isUsePublicCar = '0';
-                        }
+                        };
 
                         if ($scope.registerSureList.isUsePublicGoods == true) {
                             $scope.registerSureList.isUsePublicGoods = '1';
                         } else {
                             $scope.registerSureList.isUsePublicGoods = '0';
-                        }
+                        };
 
                         if ($scope.registerSureList.isUsePublicMoney == true) {
                             $scope.registerSureList.isUsePublicMoney = '1';
                         } else {
                             $scope.registerSureList.isUsePublicMoney = '0';
-                        }
+                        };
+                        if ($scope.registerSureList.isUsePublicAsserts == true) {
+                            $scope.registerSureList.isUsePublicAsserts = '1';
+                        } else {
+                            $scope.registerSureList.isUsePublicAsserts = '0';
+                        };
 
                     }
 
