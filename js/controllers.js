@@ -495,7 +495,7 @@ angular.module('app.controllers')
             staffPhone: '', //  联系电话
             eventType: 1, //    操办事项 1：婚嫁 2：丧葬
             eventCount: 2, //   操办次数
-            eventDate: '', //   操办时间 格式示例 2016-08-27 00:00:00
+            eventDate: new Date(), //   操办时间 格式示例 2016-08-27 00:00:00
             location: '', //    操办地点
             tableCount: '', //  操办桌数
             peopleCount: '', // 参加人数
