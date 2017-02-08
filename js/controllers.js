@@ -29,7 +29,8 @@ angular.module('app.controllers', [])
 								type: "warning",
 								confirmButtonColor: "#DD6B55",
 								confirmButtonText: "确定",
-								closeOnConfirm: true
+								closeOnConfirm: true,
+								cancelButtonText: "取消"
 							})
 
 						}
@@ -86,6 +87,7 @@ angular.module('app.controllers', [])
 						confirmButtonColor: "#DD6B55",
 						confirmButtonText: "退出",
 						closeOnConfirm: false,
+						cancelButtonText: "取消",
 						showLoaderOnConfirm: true,
 					},
 					function() {
@@ -235,6 +237,7 @@ angular.module('app.controllers', [])
 									confirmButtonColor: "#DD6B55",
 									confirmButtonText: "确认",
 									closeOnConfirm: false,
+									cancelButtonText: "取消",
 									showLoaderOnConfirm: true,
 								},
 								function() {
@@ -303,6 +306,7 @@ angular.module('app.controllers', [])
 								confirmButtonColor: "#DD6B55",
 								confirmButtonText: "确认",
 								closeOnConfirm: false,
+								cancelButtonText: "取消",
 								showLoaderOnConfirm: true,
 							},
 							function() {
@@ -369,6 +373,7 @@ angular.module('app.controllers', [])
 									confirmButtonColor: "#DD6B55",
 									confirmButtonText: "确认",
 									closeOnConfirm: false,
+									cancelButtonText: "取消",
 									showLoaderOnConfirm: true,
 								},
 								function() {
@@ -400,6 +405,7 @@ angular.module('app.controllers', [])
 					confirmButtonColor: "#DD6B55",
 					confirmButtonText: "删除",
 					closeOnConfirm: false,
+					cancelButtonText: "取消",
 					showLoaderOnConfirm: true,
 				},
 				function() {
@@ -407,12 +413,15 @@ angular.module('app.controllers', [])
 						.then(function(data) {
 							console.log(data);
 							if (data.data.success) {
-								$('#normalModal').modal('hide');
-								swal("删除成功", "", "success");
+								// $('#normalModal').modal('hide');
+								swal({
+									title: "已删除",
+									type: "success",
+									showConfirmButton: false
+								});
 								setTimeout(function() {
 									swal.close();
 								}, 1000)
-
 								$scope.refresh();
 							} else if (data.data.error) {
 								swal({
@@ -422,6 +431,7 @@ angular.module('app.controllers', [])
 										confirmButtonColor: "#DD6B55",
 										confirmButtonText: "确认",
 										closeOnConfirm: false,
+										cancelButtonText: "取消",
 										showLoaderOnConfirm: true,
 									},
 									function() {
@@ -431,6 +441,8 @@ angular.module('app.controllers', [])
 											$state.go('login');
 										}, 1000)
 									});
+							} else {
+								swal("网络错误!", "", "warning")
 							};
 						}, function(error) {
 							console.log(error);
@@ -463,6 +475,7 @@ angular.module('app.controllers', [])
 								confirmButtonColor: "#DD6B55",
 								confirmButtonText: "确认",
 								closeOnConfirm: false,
+								cancelButtonText: "取消",
 								showLoaderOnConfirm: true,
 							},
 							function() {
@@ -509,6 +522,7 @@ angular.module('app.controllers', [])
 								confirmButtonColor: "#DD6B55",
 								confirmButtonText: "确认",
 								closeOnConfirm: false,
+								cancelButtonText: "取消",
 								showLoaderOnConfirm: true,
 							},
 							function() {
@@ -550,6 +564,7 @@ angular.module('app.controllers', [])
 									confirmButtonColor: "#DD6B55",
 									confirmButtonText: "确认",
 									closeOnConfirm: false,
+									cancelButtonText: "取消",
 									showLoaderOnConfirm: true,
 								},
 								function() {
@@ -649,6 +664,7 @@ angular.module('app.controllers', [])
 								confirmButtonColor: "#DD6B55",
 								confirmButtonText: "确认",
 								closeOnConfirm: false,
+								cancelButtonText: "取消",
 								showLoaderOnConfirm: true,
 							},
 							function() {
@@ -708,6 +724,7 @@ angular.module('app.controllers', [])
 									confirmButtonColor: "#DD6B55",
 									confirmButtonText: "确认",
 									closeOnConfirm: false,
+									cancelButtonText: "取消",
 									showLoaderOnConfirm: true,
 								},
 								function() {
@@ -740,6 +757,7 @@ angular.module('app.controllers', [])
 					confirmButtonColor: "#DD6B55",
 					confirmButtonText: "删除",
 					closeOnConfirm: false,
+					cancelButtonText: "取消",
 					showLoaderOnConfirm: true,
 				},
 				function() {
@@ -748,7 +766,11 @@ angular.module('app.controllers', [])
 							console.log(data);
 							if (data.data.success) {
 								// $('#normalModal').modal('hide');
-								swal("Deleted!", "", "success");
+								swal({
+									title: "已删除",
+									type: "success",
+									showConfirmButton: false
+								});
 								setTimeout(function() {
 									swal.close();
 								}, 1000)
@@ -761,6 +783,7 @@ angular.module('app.controllers', [])
 										confirmButtonColor: "#DD6B55",
 										confirmButtonText: "确认",
 										closeOnConfirm: false,
+										cancelButtonText: "取消",
 										showLoaderOnConfirm: true,
 									},
 									function() {
@@ -770,6 +793,8 @@ angular.module('app.controllers', [])
 											$state.go('login');
 										}, 1000)
 									});
+							} else {
+								swal("网络错误!", "", "warning")
 							};
 						}, function(error) {
 							console.log(error);
@@ -802,6 +827,7 @@ angular.module('app.controllers', [])
 								confirmButtonColor: "#DD6B55",
 								confirmButtonText: "确认",
 								closeOnConfirm: false,
+								cancelButtonText: "取消",
 								showLoaderOnConfirm: true,
 							},
 							function() {
@@ -848,6 +874,7 @@ angular.module('app.controllers', [])
 								confirmButtonColor: "#DD6B55",
 								confirmButtonText: "确认",
 								closeOnConfirm: false,
+								cancelButtonText: "取消",
 								showLoaderOnConfirm: true,
 							},
 							function() {
@@ -890,6 +917,7 @@ angular.module('app.controllers', [])
 									confirmButtonColor: "#DD6B55",
 									confirmButtonText: "确认",
 									closeOnConfirm: false,
+									cancelButtonText: "取消",
 									showLoaderOnConfirm: true,
 								},
 								function() {
@@ -957,7 +985,7 @@ angular.module('app.controllers', [])
 	})
 	//punish纪律处分页面控制结束
 	// usermanage用户管理页面控制
-	.controller('usermanageCtrl', function($scope, $state, $timeout, UsermanageServe) {
+	.controller('userManageCtrl', function($scope, $state, $timeout, UserManageServe) {
 		//获取列表params 对象
 		$scope.listObj = {
 			token: sessionStorage.getItem('token'), //  令牌
@@ -976,7 +1004,7 @@ angular.module('app.controllers', [])
 				image: "img/oval.svg",
 				bgcolor: 'rgba(28,43,54,0.7)'
 			});
-			UsermanageServe.list($scope.listObj)
+			UserManageServe.list($scope.listObj)
 				.then(function(data) {
 					//loading 效果
 					$.LoadingOverlay("hide");
@@ -990,6 +1018,7 @@ angular.module('app.controllers', [])
 								confirmButtonColor: "#DD6B55",
 								confirmButtonText: "确认",
 								closeOnConfirm: false,
+								cancelButtonText: "取消",
 								showLoaderOnConfirm: true,
 							},
 							function() {
@@ -1020,7 +1049,7 @@ angular.module('app.controllers', [])
 			}
 			//获取部门列表
 		function getDepartList() {
-			UsermanageServe.depart(departObj)
+			UserManageServe.depart(departObj)
 				.then(function(data) {
 					console.log(data);
 					$scope.departArr = data.data.result;
@@ -1039,7 +1068,7 @@ angular.module('app.controllers', [])
 			}
 			//获取角色列表
 		function getRoleList() {
-			UsermanageServe.role(roleObj)
+			UserManageServe.role(roleObj)
 				.then(function(data) {
 					console.log(data);
 					$scope.roleArr = data.data.result;
@@ -1065,7 +1094,7 @@ angular.module('app.controllers', [])
 		$scope.add = function() {
 			if ($scope.addObj.password != '' && $scope.addObj.username != '' && $scope.addObj.name != '') {
 				if ($scope.addPasswordConfirm == $scope.addObj.password) {
-					UsermanageServe.add($scope.addObj)
+					UserManageServe.add($scope.addObj)
 						.then(function(data) {
 							console.log(data);
 							if (data.data.success) {
@@ -1091,6 +1120,7 @@ angular.module('app.controllers', [])
 										confirmButtonColor: "#DD6B55",
 										confirmButtonText: "确认",
 										closeOnConfirm: false,
+										cancelButtonText: "取消",
 										showLoaderOnConfirm: true,
 									},
 									function() {
@@ -1100,6 +1130,8 @@ angular.module('app.controllers', [])
 											$state.go('login');
 										}, 1000)
 									});
+							} else {
+								swal("网络错误!", "", "warning")
 							}
 						}, function(error) {
 							console.log(error);
@@ -1111,7 +1143,8 @@ angular.module('app.controllers', [])
 						showCancelButton: true,
 						confirmButtonColor: "#DD6B55",
 						confirmButtonText: "确认",
-						closeOnConfirm: true
+						closeOnConfirm: true,
+						cancelButtonText: "取消"
 					});
 				}
 			}
@@ -1135,15 +1168,20 @@ angular.module('app.controllers', [])
 					confirmButtonColor: "#DD6B55",
 					confirmButtonText: "删除",
 					closeOnConfirm: false,
+					cancelButtonText: "取消",
 					showLoaderOnConfirm: true,
 				},
 				function() {
-					UsermanageServe.del($scope.delObj)
+					UserManageServe.del($scope.delObj)
 						.then(function(data) {
 							console.log(data);
 							if (data.data.success) {
 								// $('#normalModal').modal('hide');
-								swal("Deleted!", "", "success");
+								swal({
+									title: "已删除",
+									type: "success",
+									showConfirmButton: false
+								});
 								setTimeout(function() {
 									swal.close();
 								}, 1000)
@@ -1156,6 +1194,7 @@ angular.module('app.controllers', [])
 										confirmButtonColor: "#DD6B55",
 										confirmButtonText: "确认",
 										closeOnConfirm: false,
+										cancelButtonText: "取消",
 										showLoaderOnConfirm: true,
 									},
 									function() {
@@ -1165,9 +1204,20 @@ angular.module('app.controllers', [])
 											$state.go('login');
 										}, 1000)
 									});
+							} else {
+								swal({
+									title: "网络错误!",
+									type: "warning",
+									confirmButtonText: "确认"
+								});
 							};
 						}, function(error) {
-							console.log(error);
+							console.log(error, '错误');
+							swal({
+								title: "网络错误!",
+								type: "warning",
+								confirmButtonText: "确认"
+							});
 						})
 				});
 		};
@@ -1183,7 +1233,7 @@ angular.module('app.controllers', [])
 		//修改按钮函数
 		$scope.edit = function() {
 				console.log(this.value);
-				UsermanageServe.get({ token: sessionStorage.getItem('token'), userId: this.value.id })
+				UserManageServe.get({ token: sessionStorage.getItem('token'), userId: this.value.id })
 					.then(function(data) {
 						console.log(data);
 						$scope.getRole = data.data.result.role;
@@ -1201,7 +1251,7 @@ angular.module('app.controllers', [])
 					$scope.editObj.name = this.value.name;
 				}
 				$scope.editObj.password = '';
-				$scope.editPasswordConfirm='';
+				$scope.editPasswordConfirm = '';
 				if (this.value.roleId) {
 					$scope.editObj.roleId = this.value.roleId;
 				}
@@ -1213,7 +1263,7 @@ angular.module('app.controllers', [])
 		$scope.editConfirm = function() {
 			if (Boolean($scope.editObj.name)) {
 				if ($scope.editPasswordConfirm == $scope.editObj.password) {
-					UsermanageServe.edit($scope.editObj)
+					UserManageServe.edit($scope.editObj)
 						.then(function(data) {
 							console.log(data);
 							if (data.data.success) {
@@ -1240,6 +1290,7 @@ angular.module('app.controllers', [])
 										confirmButtonColor: "#DD6B55",
 										confirmButtonText: "确认",
 										closeOnConfirm: false,
+										cancelButtonText: "取消",
 										showLoaderOnConfirm: true,
 									},
 									function() {
@@ -1249,6 +1300,8 @@ angular.module('app.controllers', [])
 											$state.go('login');
 										}, 1000)
 									});
+							} else {
+								swal("网络错误!", "", "warning")
 							};
 						}, function(error) {
 							console.log(error);
@@ -1267,7 +1320,8 @@ angular.module('app.controllers', [])
 						showCancelButton: true,
 						confirmButtonColor: "#DD6B55",
 						confirmButtonText: "确认",
-						closeOnConfirm: true
+						closeOnConfirm: true,
+						cancelButtonText: "取消"
 					});
 				}
 			}
@@ -1320,7 +1374,7 @@ angular.module('app.controllers', [])
 	})
 	//usermanage用户管理页面控制结束
 	// rolemanage角色管理页面控制
-	.controller('rolemanageCtrl', function($scope, $state, $timeout, RolemanageServe) {
+	.controller('roleManageCtrl', function($scope, $state, $timeout, RoleManageServe) {
 		//获取列表params 对象
 		$scope.listObj = {
 			token: sessionStorage.getItem('token'), //  令牌
@@ -1339,7 +1393,7 @@ angular.module('app.controllers', [])
 				image: "img/oval.svg",
 				bgcolor: 'rgba(28,43,54,0.7)'
 			});
-			RolemanageServe.list($scope.listObj)
+			RoleManageServe.list($scope.listObj)
 				.then(function(data) {
 					//loading 效果
 					$.LoadingOverlay("hide");
@@ -1367,7 +1421,7 @@ angular.module('app.controllers', [])
 					}
 				});
 				$scope.addObj.functionCodes = functionCodesArr.join('&functionCodes=');
-				RolemanageServe.add($scope.addObj.token, $scope.addObj.roleName, $scope.addObj.functionCodes)
+				RoleManageServe.add($scope.addObj.token, $scope.addObj.roleName, $scope.addObj.functionCodes)
 					.then(function(data) {
 						console.log(data);
 						if (data.data.success) {
@@ -1394,7 +1448,8 @@ angular.module('app.controllers', [])
 									confirmButtonColor: "#DD6B55",
 									confirmButtonText: "确认",
 									closeOnConfirm: false,
-									showLoaderOnConfirm: true,
+									cancelButtonText: "取消",
+									showLoaderOnConfirm: true
 								},
 								function() {
 									swal("跳转……", "", "success");
@@ -1434,15 +1489,20 @@ angular.module('app.controllers', [])
 					confirmButtonColor: "#DD6B55",
 					confirmButtonText: "删除",
 					closeOnConfirm: false,
-					showLoaderOnConfirm: true,
+					cancelButtonText: "取消",
+					showLoaderOnConfirm: true
 				},
 				function() {
-					RolemanageServe.del($scope.delObj)
+					RoleManageServe.del($scope.delObj)
 						.then(function(data) {
 							console.log(data);
 							if (data.data.success) {
 								// $('#normalModal').modal('hide');
-								swal("Deleted!", "", "success");
+								swal({
+									title: "已删除",
+									type: "success",
+									showConfirmButton: false
+								});
 								setTimeout(function() {
 									swal.close();
 								}, 1000)
@@ -1455,7 +1515,8 @@ angular.module('app.controllers', [])
 										confirmButtonColor: "#DD6B55",
 										confirmButtonText: "确认",
 										closeOnConfirm: false,
-										showLoaderOnConfirm: true,
+										cancelButtonText: "取消",
+										showLoaderOnConfirm: true
 									},
 									function() {
 										swal("跳转……", "", "success");
@@ -1480,7 +1541,7 @@ angular.module('app.controllers', [])
 			$scope.editObj.roleId = this.value.id; //下方editObj内roleId赋值
 			$scope.editObj.roleName = this.value.name; //下方editObj内roleName赋值
 			console.log(this.value);
-			RolemanageServe.getById(getObj)
+			RoleManageServe.getById(getObj)
 				.then(function(data) {
 					if (data.data.success) {
 						console.log(data.data.result.functions);
@@ -1502,6 +1563,7 @@ angular.module('app.controllers', [])
 								confirmButtonColor: "#DD6B55",
 								confirmButtonText: "确认",
 								closeOnConfirm: false,
+								cancelButtonText: "取消",
 								showLoaderOnConfirm: true,
 							},
 							function() {
@@ -1533,7 +1595,7 @@ angular.module('app.controllers', [])
 					}
 				});
 				$scope.editObj.functionCodes = functionCodesArr.join('&functionCodes=');
-				RolemanageServe.edit($scope.editObj.token, $scope.editObj.roleName, $scope.editObj.roleId, $scope.editObj.functionCodes)
+				RoleManageServe.edit($scope.editObj.token, $scope.editObj.roleName, $scope.editObj.roleId, $scope.editObj.functionCodes)
 					.then(function(data) {
 						console.log(data);
 						if (data.data.success) {
@@ -1554,6 +1616,7 @@ angular.module('app.controllers', [])
 									confirmButtonColor: "#DD6B55",
 									confirmButtonText: "确认",
 									closeOnConfirm: false,
+									cancelButtonText: "取消",
 									showLoaderOnConfirm: true,
 								},
 								function() {
@@ -1613,7 +1676,7 @@ angular.module('app.controllers', [])
 	})
 	//rolemanage角色管理页面控制结束
 	//精确查询precisequery
-	.controller('precisequeryCtrl', function($scope, $state, PrecisequeryServe) {
+	.controller('preciseQueryCtrl', function($scope, $state, PreciseQueryServe) {
 		$scope.organizArr = [{ organiz: '根组织', key: '1' }];
 		$scope.token = sessionStorage.getItem("token");
 		$scope.menuArr = [{
@@ -1657,7 +1720,7 @@ angular.module('app.controllers', [])
 				image: "img/oval.svg",
 				bgcolor: 'rgba(28,43,54,0.7)'
 			});
-			PrecisequeryServe.Preciselist($scope.precisequeryobj)
+			PreciseQueryServe.Preciselist($scope.precisequeryobj)
 				.then(function(data) {
 					//loading 效果
 					$.LoadingOverlay("hide");
@@ -1680,6 +1743,7 @@ angular.module('app.controllers', [])
 								confirmButtonColor: "#DD6B55",
 								confirmButtonText: "确认",
 								closeOnConfirm: false,
+								cancelButtonText: "取消",
 								showLoaderOnConfirm: true,
 							},
 							function() {
@@ -1742,7 +1806,7 @@ angular.module('app.controllers', [])
 
 	})
 	//组合查询combinequery
-	.controller('combinequeryCtrl', function($scope, $state, PrecisequeryServe) {
+	.controller('combineQueryCtrl', function($scope, $state, PreciseQueryServe) {
 
 		$scope.token = sessionStorage.getItem("token");
 		$scope.attrArr = ['staff', 'staffOrgName', 'eventType', 'peopleCount', 'createTime', 'eventDate', 'auditStatus', 'auditContent']
@@ -1862,7 +1926,7 @@ angular.module('app.controllers', [])
 					image: "img/oval.svg",
 					bgcolor: 'rgba(28,43,54,0.7)'
 				});
-				PrecisequeryServe.Preciselist($scope.combinequeryobj)
+				PreciseQueryServe.Preciselist($scope.combinequeryobj)
 					.then(function(data) {
 						//loading 效果
 						$.LoadingOverlay("hide");
@@ -1885,6 +1949,7 @@ angular.module('app.controllers', [])
 									confirmButtonColor: "#DD6B55",
 									confirmButtonText: "确认",
 									closeOnConfirm: false,
+									cancelButtonText: "取消",
 									showLoaderOnConfirm: true,
 								},
 								function() {
@@ -2022,6 +2087,7 @@ angular.module('app.controllers', [])
 								confirmButtonColor: "#DD6B55",
 								confirmButtonText: "确认",
 								closeOnConfirm: false,
+								cancelButtonText: "取消",
 								showLoaderOnConfirm: true,
 							},
 							function() {
@@ -2064,108 +2130,152 @@ angular.module('app.controllers', [])
 			myChart.setOption(option);
 		}
 	})
-
-// approve审批页面控制
-.controller('approveCtrl', function($scope, $state, $timeout, ApproveServe, GlobalServe) {
-	$scope.userList = {
-		token: sessionStorage.getItem('token'), //	令牌
-		staff: '', //	申报人
-		auditStatus: -1, //	审核状态 -1：待审核 1：通过 2：拒绝
-		page: 1, //  当前页数
-		start: 0, //	从第几个开始
-		limit: 10, //	每页显示多少个
-
-
-	};
-	$scope.modList = {
-		token: sessionStorage.getItem('token'), //	令牌
-		eventId: '', //	申报人
-		status: '1', //	审核状态 1：通过 2：拒绝
-		// content: '' ,			//  审批意见内容
-	};
-
-	$scope.sureList = {
+	// approve审批页面控制
+	.controller('approveCtrl', function($scope, $state, $timeout, ApproveServe) {
+		$scope.userList = {
 			token: sessionStorage.getItem('token'), //	令牌
-			eventId: '', //	申报人id
+			staff: '', //	申报人
+			auditStatus: -1, //	审核状态 -1：待审核 1：通过 2：拒绝
+			page: 1, //  当前页数
+			start: 0, //	从第几个开始
+			limit: 10, //	每页显示多少个
+
+
+		};
+		$scope.modList = {
+			token: sessionStorage.getItem('token'), //	令牌
+			eventId: '', //	申报人
 			status: '1', //	审核状态 1：通过 2：拒绝
-			content: '', //  审批意见内容
-		}
-		//改变审核状态
-	$scope.selChange = function() {
-		// console.log(event);
-		console.log(event.target.selectedIndex);
-		if (event.target.selectedIndex == 0) {
-			$scope.userList.auditStatus = -1
-		} else {
-			$scope.userList.auditStatus = event.target.selectedIndex;
-		}
+			// content: '' ,			//  审批意见内容
+		};
 
-	};
+		$scope.sureList = {
+				token: sessionStorage.getItem('token'), //	令牌
+				eventId: '', //	申报人id
+				status: '1', //	审核状态 1：通过 2：拒绝
+				content: '', //  审批意见内容
+			}
+			//改变审核状态
+		$scope.selChange = function() {
+			// console.log(event);
+			console.log(event.target.selectedIndex);
+			if (event.target.selectedIndex == 0) {
+				$scope.userList.auditStatus = -1
+			} else {
+				$scope.userList.auditStatus = event.target.selectedIndex;
+			}
 
-	$scope.search = function() {
-		$scope.refresh();
-	};
-	//刷新
-	$scope.refresh = function() {
-		//loading 效果
-		$.LoadingOverlay("show", {
-			image: "img/oval.svg",
-			bgcolor: 'rgba(28,43,54,0.7)'
-		});
-		ApproveServe.userList($scope.userList)
-			.then(function(data) {
-				//loading 效果
-				$.LoadingOverlay("hide");
-				console.log(data);
+		};
 
-				$scope.list = data.data.result;
-				$scope.array = data.data;
-
-			}, function(error) {
-				// console.log(error);
-			})
-			// console.log(GlobalServe.token);
-	};
-	// $scope.refresh();
-
-	//通过按钮函数
-	$scope.pass = function(index) {
-			$scope.sureList.content = '';
-			console.log(index)
-			$scope.index = index;
-			$scope.id = $scope.list[index].id;
-			// console.log($scope.id);
-			$scope.modList.eventId = $scope.id;
-
-
-			$scope.sureList.status =1;
-			ApproveServe.modList($scope.modList)
+		$scope.search = function() {
+			$scope.refresh();
+		};
+		//刷新
+		$scope.refresh = function() {
+			//loading 效果
+			$.LoadingOverlay("show", {
+				image: "img/oval.svg",
+				bgcolor: 'rgba(28,43,54,0.7)'
+			});
+			ApproveServe.userList($scope.userList)
 				.then(function(data) {
+					//loading 效果
+					$.LoadingOverlay("hide");
 					console.log(data);
-					if(data.data.result==null){
-						$scope.sureList.content='';
-					}
-					else{
-						$scope.sureList.content=data.data.result.content;
-					}
 
+					$scope.list = data.data.result;
+					$scope.array = data.data;
 
 				}, function(error) {
-					console.log(error);
+					// console.log(error);
 				})
 				// console.log(GlobalServe.token);
-		}
-		//通过模态框的确定函数
-	$scope.sure = function() {
-			// $('#myModal').modal('toggle');
-			// console.log($scope.index)
-			// $scope.list[$scope.index].auditStatus=1;
-			//获取eventId
+		};
+		// $scope.refresh();
+
+		//通过按钮函数
+		$scope.pass = function(index) {
+				$scope.sureList.content = '';
+				console.log(index)
+				$scope.index = index;
+				$scope.id = $scope.list[index].id;
+				// console.log($scope.id);
+				$scope.modList.eventId = $scope.id;
+
+				$scope.sureList.status = '1';
+				ApproveServe.modList($scope.modList)
+					.then(function(data) {
+						console.log(data);
+
+					}, function(error) {
+						console.log(error);
+					})
+					// console.log(GlobalServe.token);
+			}
+			//通过模态框的确定函数
+		$scope.sure = function() {
+				// $('#myModal').modal('toggle');
+				// console.log($scope.index)
+				// $scope.list[$scope.index].auditStatus=1;
+				//获取eventId
+				$scope.id = $scope.list[$scope.index].id;;
+				$scope.sureList.eventId = $scope.id;
+				$scope.sureList.status = '1';
+				console.log($scope.sureList.eventId)
+					//请求接口
+				ApproveServe.sureList($scope.sureList)
+					.then(function(data) {
+						console.log(data);
+						swal({
+							title: "审批成功",
+							text: "",
+							timer: 1000,
+							type: "success",
+							showConfirmButton: false
+						});
+
+						$scope.refresh();
+					}, function(error) {
+						swal({
+							title: "登录授权过期",
+							text: "",
+							timer: 1000,
+							type: "error",
+							showConfirmButton: false
+						});
+						console.log(error);
+					});
+			}
+			//拒绝按钮函数
+		$scope.refuse = function(index) {
+				$scope.sureList.content = '';
+				console.log(index)
+				$scope.index = index;
+				$scope.id = $scope.list[index].id;
+				// console.log($scope.id);
+				$scope.modList.eventId = $scope.id;
+				$scope.modList.status = 2;
+				$scope.sureList.status = 2;
+				console.log($scope.sureList.status)
+
+				ApproveServe.modList($scope.modList)
+					.then(function(data) {
+						console.log(data);
+
+					}, function(error) {
+						console.log(error);
+					})
+			}
+			//拒绝模态框确定函数
+		$scope.refuseSure = function() {
 			$scope.id = $scope.list[$scope.index].id;;
 			$scope.sureList.eventId = $scope.id;
-			$scope.sureList.status = '1';
+			$scope.modList.status = 2;
+			$scope.sureList.status = 2;
 			console.log($scope.sureList.eventId)
 				//请求接口
+			console.log(123)
+			console.log($scope.sureList.status)
 			ApproveServe.sureList($scope.sureList)
 				.then(function(data) {
 					console.log(data);
@@ -2188,330 +2298,262 @@ angular.module('app.controllers', [])
 					});
 					console.log(error);
 				});
-		}
-		//拒绝按钮函数
-	$scope.refuse = function(index) {
-			$scope.sureList.content = '';
-			console.log(index)
-			$scope.index = index;
-			$scope.id = $scope.list[index].id;
-			// console.log($scope.id);
-			$scope.modList.eventId = $scope.id;
-			$scope.modList.status = 2;
-			$scope.sureList.status = 2;
-			console.log($scope.sureList.status)
 
-			ApproveServe.modList($scope.modList)
-				.then(function(data) {
-					console.log(data);
-					if(data.data.result==null){
-						$scope.sureList.content='';
-					}
-					else{
-						$scope.sureList.content=data.data.result.content;
-					}
-
-
-				}, function(error) {
-					console.log(error);
-				})
-		}
-		//拒绝模态框确定函数
-	$scope.refuseSure = function() {
-		$scope.id = $scope.list[$scope.index].id;;
-		$scope.sureList.eventId = $scope.id;
-		$scope.modList.status = 2;
-		$scope.sureList.status = 2;
-		console.log($scope.sureList.eventId)
-			//请求接口
-		console.log(123)
-		console.log($scope.sureList.status)
-		ApproveServe.sureList($scope.sureList)
-			.then(function(data) {
-				console.log(data);
-				swal({
-					title: "审批成功",
-					text: "",
-					timer: 1000,
-					type: "success",
-					showConfirmButton: false
-				});
-
-				$scope.refresh();
-			}, function(error) {
-				swal({
-					title: "登录授权过期",
-					text: "",
-					timer: 1000,
-					type: "error",
-					showConfirmButton: false
-				});
-				console.log(error);
-			});
-
-	}
-
-	$scope.menuArr = [{
-		name: '申报人',
-		isrotate: true
-	}, {
-		name: '部门',
-		isrotate: true
-	}, {
-		name: '类型',
-		isrotate: true
-	}, {
-		name: '人数',
-		isrotate: true
-	}, {
-		name: '申报时间',
-		isrotate: true
-	}, {
-		name: '宴请时间',
-		isrotate: true
-	}, {
-		name: '状态',
-		isrotate: true
-	}, {
-		name: '操作',
-		isrotate: true
-	}]
-	$scope.attrArr = ['staff', 'staffOrgName', 'eventType', 'peopleCount', 'createTime', 'eventDate', 'auditStatus', 'auditContent']
-		//排序
-	$scope.orderToggle = function(index) {
-		$scope.x = ($scope.x == "+" ? "-" : "+");
-		$scope.attr = $scope.attrArr[index];
-		$scope.menuArr.forEach(function(value, i, arr) {
-			value.isrotate = i == index ? $scope.menuArr[index].isrotate : true;
-		})
-		$scope.menuArr[index].isrotate = !$scope.menuArr[index].isrotate;
-	}
-
-	//下一页
-	$scope.nextPage = function() {
-		if ($scope.userList.page < $scope.array.total / $scope.userList.limit) {
-			$scope.userList.page++;
-		}
-	};
-	//上一页
-	$scope.prePage = function() {
-		if ($scope.userList.page > 1) {
-			$scope.userList.page--;
-		}
-	};
-	//最后一页
-	$scope.lastPage = function() {
-		console.log(Math.floor($scope.array.total / $scope.userList.limit));
-		$scope.userList.page = Math.floor($scope.array.total / $scope.userList.limit) + 1;
-	};
-	//监控页码变化.300ms后更新列表
-	$scope.$watch('userList.page', function(newValue) {
-		$scope.userList.start = $scope.userList.limit * ($scope.userList.page - 1);
-		$timeout(function() {
-			$scope.search();
-			$scope.$apply()
-		}, 300);
-	});
-
-})
-
-//公示页面控制
-.controller('publicityCtrl', function($scope, $state, $timeout, publicityServe, GlobalServe) {
-	$scope.pubList = {
-		token: sessionStorage.getItem('token'), //	令牌
-		staff: '', //	申报人
-		bulletinStatus: -1, //	公示状态 -1：未公示 1：已公示
-		page: 1, //  当前页数
-		start: 0, //	从第几个开始
-		limit: 10, //	每页显示多少个
-
-
-	};
-	$scope.modList = {
-		token: sessionStorage.getItem('token'), //	令牌
-		eventId: '', //	申报人
-		status: -1, //	公示状态 1：已公示 -1：未公示
-		// content: '' ,			//  公示意见内容
-	};
-
-	$scope.sureList = {
-		token: sessionStorage.getItem('token'), //	令牌
-		eventId: '', //	申报人id
-		status: 1, //	公示状态 1：公示内容 2：公示结果
-		content: '', //  公示意见内容
-
-	};
-
-	//公示结果参数
-	$scope.resultList = {
-		token: sessionStorage.getItem('token'), //	令牌
-		eventId: '', //	申报人
-		// status: -1,		//	公示状态 1：已公示 -1：未公示
-		// content: '' ,			//  公示意见内容
-	};
-	//公示结果确认参数
-	$scope.resultSureList = {
-		token: sessionStorage.getItem('token'), //	令牌
-		eventId: '', //	申报人id
-		status: 1, //1: 通过 2：有异议
-		content: '', //  公示意见内容
-		attachmentFileCode: '', //文件
-	}
-
-	//改变公示状态
-	$scope.selChange = function() {
-		// console.log(event);
-		console.log(event.target.selectedIndex);
-		if (event.target.selectedIndex == 0) {
-			$scope.pubList.bulletinStatus = -1
-		} else {
-			$scope.pubList.bulletinStatus = event.target.selectedIndex;
 		}
 
-	};
-
-	$scope.search = function() {
-		$scope.refresh();
-	};
-	//刷新
-	$scope.refresh = function() {
-		//loading 效果
-		$.LoadingOverlay("show", {
-			image: "img/oval.svg",
-			bgcolor: 'rgba(28,43,54,0.7)'
-		});
-		publicityServe.pubList($scope.pubList)
-			.then(function(data) {
-				//loading 效果
-				$.LoadingOverlay("hide");
-				console.log(data);
-				$scope.bulle = data.config.params.bulletinStatus
-				$scope.bulletinStatus = data.config.params.bulletinStatus;
-				// console.log($scope.bulle)
-				$scope.list = data.data.result;
-				$scope.arr = data.data;
-
-			}, function(error) {
-				// console.log(error);
+		$scope.menuArr = [{
+			name: '申报人',
+			isrotate: true
+		}, {
+			name: '部门',
+			isrotate: true
+		}, {
+			name: '类型',
+			isrotate: true
+		}, {
+			name: '人数',
+			isrotate: true
+		}, {
+			name: '申报时间',
+			isrotate: true
+		}, {
+			name: '宴请时间',
+			isrotate: true
+		}, {
+			name: '状态',
+			isrotate: true
+		}, {
+			name: '操作',
+			isrotate: true
+		}]
+		$scope.attrArr = ['staff', 'staffOrgName', 'eventType', 'peopleCount', 'createTime', 'eventDate', 'auditStatus', 'auditContent']
+			//排序
+		$scope.orderToggle = function(index) {
+			$scope.x = ($scope.x == "+" ? "-" : "+");
+			$scope.attr = $scope.attrArr[index];
+			$scope.menuArr.forEach(function(value, i, arr) {
+				value.isrotate = i == index ? $scope.menuArr[index].isrotate : true;
 			})
-			// console.log(GlobalServe.token);
-	};
-	// $scope.refresh();
+			$scope.menuArr[index].isrotate = !$scope.menuArr[index].isrotate;
+		}
 
-	//公示内容按钮函数
-	$scope.pass = function(index) {
-			$scope.sureList.content = "";
-            $scope.attachmentPath = "";
-			console.log(index)
-			$scope.index = index;
-			$scope.id = $scope.list[index].id;
-			// console.log($scope.id);
-			$scope.modList.eventId = $scope.id;
+		//下一页
+		$scope.nextPage = function() {
+			if ($scope.userList.page < $scope.array.total / $scope.userList.limit) {
+				$scope.userList.page++;
+			}
+		};
+		//上一页
+		$scope.prePage = function() {
+			if ($scope.userList.page > 1) {
+				$scope.userList.page--;
+			}
+		};
+		//最后一页
+		$scope.lastPage = function() {
+			console.log(Math.floor($scope.array.total / $scope.userList.limit));
+			$scope.userList.page = Math.floor($scope.array.total / $scope.userList.limit) + 1;
+		};
+		//监控页码变化.300ms后更新列表
+		$scope.$watch('userList.page', function(newValue) {
+			$scope.userList.start = $scope.userList.limit * ($scope.userList.page - 1);
+			$timeout(function() {
+				$scope.search();
+				$scope.$apply()
+			}, 300);
+		});
+
+	})
+	//公示页面控制
+	.controller('publicityCtrl', function($scope, $state, $timeout, PublicityServe) {
+		$scope.pubList = {
+			token: sessionStorage.getItem('token'), //	令牌
+			staff: '', //	申报人
+			bulletinStatus: -1, //	公示状态 -1：未公示 1：已公示
+			page: 1, //  当前页数
+			start: 0, //	从第几个开始
+			limit: 10, //	每页显示多少个
 
 
-			publicityServe.modList($scope.modList)
+		};
+		$scope.modList = {
+			token: sessionStorage.getItem('token'), //	令牌
+			eventId: '', //	申报人
+			status: -1, //	公示状态 1：已公示 -1：未公示
+			// content: '' ,			//  公示意见内容
+		};
+
+		$scope.sureList = {
+			token: sessionStorage.getItem('token'), //	令牌
+			eventId: '', //	申报人id
+			status: 1, //	公示状态 1：公示内容 2：公示结果
+			content: '', //  公示意见内容
+
+		};
+
+		//公示结果参数
+		$scope.resultList = {
+			token: sessionStorage.getItem('token'), //	令牌
+			eventId: '', //	申报人
+			// status: -1,		//	公示状态 1：已公示 -1：未公示
+			// content: '' ,			//  公示意见内容
+		};
+		//公示结果确认参数
+		$scope.resultSureList = {
+			token: sessionStorage.getItem('token'), //	令牌
+			eventId: '', //	申报人id
+			status: 1, //1: 通过 2：有异议
+			content: '', //  公示意见内容
+			attachmentFileCode: '', //文件
+		}
+
+		//改变公示状态
+		$scope.selChange = function() {
+			// console.log(event);
+			console.log(event.target.selectedIndex);
+			if (event.target.selectedIndex == 0) {
+				$scope.pubList.bulletinStatus = -1
+			} else {
+				$scope.pubList.bulletinStatus = event.target.selectedIndex;
+			}
+
+		};
+
+		$scope.search = function() {
+			$scope.refresh();
+		};
+		//刷新
+		$scope.refresh = function() {
+			//loading 效果
+			$.LoadingOverlay("show", {
+				image: "img/oval.svg",
+				bgcolor: 'rgba(28,43,54,0.7)'
+			});
+			PublicityServe.pubList($scope.pubList)
 				.then(function(data) {
+					//loading 效果
+					$.LoadingOverlay("hide");
 					console.log(data);
-					$scope.bulletinStatus = $scope.bulletinStatus;
-					console.log($scope.bulletinStatus)
-					if ($scope.bulletinStatus == 1) {
-						$scope.sureList.content = data.data.result.content;
-						console.log($scope.sureList.content)
-						$scope.attachmentPath = data.data.result.attachmentPath;
-						if ($scope.attachmentPath == null) {
-							$scope.attachmentPath = "无";
-						}
-					}
+					$scope.bulle = data.config.params.bulletinStatus
+					$scope.bulletinStatus = data.config.params.bulletinStatus;
+					// console.log($scope.bulle)
+					$scope.list = data.data.result;
+					$scope.arr = data.data;
 
 				}, function(error) {
-					console.log(error);
+					// console.log(error);
 				})
 				// console.log(GlobalServe.token);
-		}
-		//公示内容模态框的确定函数
-	$scope.sure = function() {
-		if($scope.sureList.content!=''){
-			// $('#myModal').modal('toggle');
-			// console.log($scope.index)
-			// $scope.list[$scope.index].auditStatus=1;
-			//获取eventId
-			$scope.id = $scope.list[$scope.index].id;;
-			$scope.sureList.eventId = $scope.id;
-			console.log($scope.sureList.eventId);
-			$scope.sureList.content = $scope.sureList.content;
+		};
+		// $scope.refresh();
 
-			//请求接口
-			publicityServe.sureList($scope.sureList)
-				.then(function(data) {
-					console.log(data);
-					swal({
-						title: "公示成功",
-						text: "",
-						timer: 1000,
-						type: "success",
-						showConfirmButton: false
-					});
-					$scope.refresh();
+		//公示内容按钮函数
+		$scope.pass = function(index) {
+				$scope.sureList.content = "";
+				console.log(index)
+				$scope.index = index;
+				$scope.id = $scope.list[index].id;
+				// console.log($scope.id);
+				$scope.modList.eventId = $scope.id;
 
-					//提交状态重置
-					// $scope.myForm.$submitted = false;
-					//关闭模态框
-					$('#myModal').modal('hide');
 
-				}, function(error) {
-					swal({
-						title: "登录授权过期",
-						text: "",
-						timer: 1000,
-						type: "error",
-						showConfirmButton: false
-					});
-					console.log(error);
-				});
-		}
-
-		}
-		//公示结果按钮函数
-
-	$scope.refuse = function(index) {
-			$scope.resultSureList.content = "";
-			// $scope.resultSureList.status = '1';
-
-			console.log(index)
-			$scope.index = index;
-			$scope.id = $scope.list[index].id;
-			// console.log($scope.id);
-			$scope.resultList.eventId = $scope.id;
-
-			$scope.resultSureList.content = $scope.resultSureList.content
-			$scope.resultSureList.status = $scope.resultSureList.status
-			publicityServe.resultList($scope.resultList)
-				.then(function(data) {
-					console.log(data);
-					if (data.data.result == null) {
-						$scope.resultSureList.content = "";
-						$scope.resultSureList.status = '1';
-					} else {
-						if (data.data.result.content == null) {
-							$scope.resultSureList.content = " ";
-						} else {
-							$scope.resultSureList.content = data.data.result.content;
+				PublicityServe.modList($scope.modList)
+					.then(function(data) {
+						console.log(data);
+						$scope.bulletinStatus = $scope.bulletinStatus;
+						console.log($scope.bulletinStatus)
+						if ($scope.bulletinStatus == 1) {
+							$scope.sureList.content = data.data.result.content;
+							console.log($scope.sureList.content)
+							$scope.attachmentPath = data.data.result.attachmentPath;
+							if ($scope.attachmentPath == null) {
+								$scope.attachmentPath = "无";
+							}
 						}
-						if (data.data.result.status == 1) {
 
+					}, function(error) {
+						console.log(error);
+					})
+					// console.log(GlobalServe.token);
+			}
+			//公示内容模态框的确定函数
+		$scope.sure = function() {
+				// $('#myModal').modal('toggle');
+				// console.log($scope.index)
+				// $scope.list[$scope.index].auditStatus=1;
+				//获取eventId
+				$scope.id = $scope.list[$scope.index].id;;
+				$scope.sureList.eventId = $scope.id;
+				console.log($scope.sureList.eventId);
+				$scope.sureList.content = $scope.sureList.content;
+
+				//请求接口
+				PublicityServe.sureList($scope.sureList)
+					.then(function(data) {
+						console.log(data);
+						swal({
+							title: "公示成功",
+							text: "",
+							timer: 1000,
+							type: "success",
+							showConfirmButton: false
+						});
+						$scope.refresh();
+					}, function(error) {
+						swal({
+							title: "登录授权过期",
+							text: "",
+							timer: 1000,
+							type: "error",
+							showConfirmButton: false
+						});
+						console.log(error);
+					});
+			}
+			//公示结果按钮函数
+
+		$scope.refuse = function(index) {
+				$scope.resultSureList.content = "";
+				// $scope.resultSureList.status = '1';
+
+
+				console.log(index)
+				$scope.index = index;
+				$scope.id = $scope.list[index].id;
+				// console.log($scope.id);
+
+				$scope.resultList.eventId = $scope.id;
+
+
+				$scope.resultSureList.content = $scope.resultSureList.content
+				$scope.resultSureList.status = $scope.resultSureList.status
+				PublicityServe.resultList($scope.resultList)
+					.then(function(data) {
+						console.log(data);
+						if (data.data.result == null) {
+							$scope.resultSureList.content = "";
+							$scope.resultSureList.status = '1';
 						} else {
-							$scope.resultSureList.status = '2';
+							if (data.data.result.content == null) {
+								$scope.resultSureList.content = " ";
+							} else {
+								$scope.resultSureList.content = data.data.result.content;
+							}
+							if (data.data.result.status == 1) {
+
+							} else {
+								$scope.resultSureList.status = '2';
+							}
 						}
-					}
 
-				}, function(error) {
-					console.log(error);
-				})
-		}
-		//公示结果模态框确定函数
+					}, function(error) {
+						console.log(error);
+					})
+			}
+			//公示结果模态框确定函数
 
-	$scope.del = function() {
-		if($scope.resultSureList.content!=''){
+		$scope.del = function() {
+
 			//获取eventId
 
 			$scope.id = $scope.list[$scope.index].id;
@@ -2520,336 +2562,19 @@ angular.module('app.controllers', [])
 			console.log($scope.resultSureList.eventId)
 
 			//请求接口
-			publicityServe.resultSureList($scope.resultSureList)
+			PublicityServe.resultSureList($scope.resultSureList)
 
-				.then(function(data) {
-					console.log(data);
-					swal({
-						title: "公示结果成功",
-						text: "",
-						timer: 1000,
-						type: "success",
-						showConfirmButton: false
-					});
-					$scope.refresh();
-
-					//提交状态重置
-					// $scope.myForm.$submitted = false;
-					//关闭模态框
-					$('#myModal1').modal('hide');
-
-				}, function(error) {
-					swal({
-						title: "登录授权过期",
-						text: "",
-						timer: 1000,
-						type: "error",
-						showConfirmButton: false
-					});
-					console.log(error);
-				});
-		}
-
-
-	}
-
-	$scope.menuArr = [{
-		name: '申报人',
-		isrotate: true
-	}, {
-		name: '部门',
-		isrotate: true
-	}, {
-		name: '类型',
-		isrotate: true
-	}, {
-		name: '人数',
-		isrotate: true
-	}, {
-		name: '申报时间',
-		isrotate: true
-	}, {
-		name: '宴请时间',
-		isrotate: true
-	}, {
-		name: '状态',
-		isrotate: true
-	}, {
-		name: '操作',
-		isrotate: true
-	}]
-	$scope.attrArr = ['staff', 'staffOrgName', 'eventType', 'peopleCount', 'createTime', 'eventDate', 'auditStatus', 'auditContent']
-		//排序
-	$scope.orderToggle = function(index) {
-		$scope.x = ($scope.x == "+" ? "-" : "+");
-		$scope.attr = $scope.attrArr[index];
-		$scope.menuArr.forEach(function(value, i, arr) {
-			value.isrotate = i == index ? $scope.menuArr[index].isrotate : true;
-		})
-		$scope.menuArr[index].isrotate = !$scope.menuArr[index].isrotate;
-	}
-
-	//下一页
-	$scope.nextPage = function() {
-		if ($scope.pubList.page < $scope.arr.total / $scope.pubList.limit) {
-			$scope.pubList.page++;
-		}
-	};
-	//上一页
-	$scope.prePage = function() {
-		if ($scope.pubList.page > 1) {
-			$scope.pubList.page--;
-		}
-	};
-	//最后一页
-	$scope.lastPage = function() {
-		console.log(Math.floor($scope.arr.total / $scope.pubList.limit));
-		$scope.pubList.page = Math.floor($scope.arr.total / $scope.pubList.limit) + 1;
-	};
-	//监控页码变化.300ms后更新列表
-	$scope.$watch('pubList.page', function(newValue) {
-		$scope.pubList.start = $scope.pubList.limit * ($scope.pubList.page - 1);
-		$timeout(function() {
-			$scope.search();
-			$scope.$apply()
-		}, 300);
-	});
-
-})
-
-//supervision监督页面控制
-.controller('supervisionCtrl', function($scope, $state, $timeout, supervisionServe, GlobalServe) {
-	$scope.pubList = {
-		token: sessionStorage.getItem('token'), //	令牌
-		staff: '', //	申报人
-		superviseStatus: -1, //	监督状态 -1：未监督 1：已监督
-		page: 1, //  当前页数
-		start: 0, //	从第几个开始
-		limit: 10, //	每页显示多少个
-
-
-	};
-	$scope.modList = {
-		token: sessionStorage.getItem('token'), //	令牌
-		eventId: '', //	申报人
-		status: -1, //	监督状态 -1：未监督 1：已监督
-		// content: '' ,			//  监督报告
-	};
-
-	$scope.sureList = {
-			token: sessionStorage.getItem('token'), //	令牌
-			eventId: '', //	申报人id
-			status: 1, //	监督状态 1：监督报告 2：违纪登记
-			title: '', //标题
-			content: '', //  监督报告
-		}
-		//违纪登记框接口参数
-	$scope.registerList = {
-		token: sessionStorage.getItem('token'), //	令牌
-		eventId: '', //	申报人
-		// status: -1,		//	监督状态 -1：未监督 1：已监督
-
-	};
-	//违纪登记确认参数
-	$scope.registerSureList = {
-			token: sessionStorage.getItem('token'), //	令牌
-			eventId: '', //	申报人id
-			// status: 1,					 //	监督状态 1：监督报告 2：违纪登记
-			isCashGiftOutOfLimits: 0, // 礼金是否超标 0： 否 1：是
-			isUsePublicCar: 0, // 使用公车 0： 否 1：是
-			isUsePublicGoods: 0, // 使用公产0： 否 1：是
-			isUsePublicAsserts: 0, // 使用公物 0： 否 1：是
-			isUsePublicMoney: 0, // 使用公款 0： 否 1：是
-			attachmentFileCode: '', // 附加文件
-			otherQuestion: '', // 其他问题
-			content: '', // 内容
-		}
-		//改变监督状态
-	$scope.selChange = function() {
-		// console.log(event);
-		console.log(event.target.selectedIndex);
-		if (event.target.selectedIndex == 0) {
-			$scope.pubList.superviseStatus = -1
-		} else {
-			$scope.pubList.superviseStatus = event.target.selectedIndex;
-		}
-
-	};
-
-	$scope.search = function() {
-		$scope.refresh();
-	};
-	//刷新
-	$scope.refresh = function() {
-		//loading 效果
-		$.LoadingOverlay("show", {
-			image: "img/oval.svg",
-			bgcolor: 'rgba(28,43,54,0.7)'
-		});
-		supervisionServe.pubList($scope.pubList)
-			.then(function(data) {
-				//loading 效果
-				$.LoadingOverlay("hide");
-				console.log(data);
-				$scope.bulle = data.config.params.superviseStatus
-					// console.log($scope.bulle)
-				$scope.list = data.data.result;
-				$scope.arr = data.data;
-				$scope.superviseStatus = data.config.params.superviseStatus;
-			}, function(error) {
-				// console.log(error);
-			})
-			// console.log(GlobalServe.token);
-	};
-	// $scope.refresh();
-
-	//监督报告按钮函数
-	$scope.pass = function(index) {
-			$scope.sureList.title = " ";
-			$scope.sureList.content = " ";
-			console.log(index)
-			$scope.index = index;
-			$scope.id = $scope.list[index].id;
-			// console.log($scope.id);
-			$scope.modList.eventId = $scope.id;
-
-			$scope.superviseStatus = $scope.superviseStatus;
-			supervisionServe.modList($scope.modList)
-				.then(function(data) {
-					console.log(data);
-
-					console.log($scope.superviseStatus);
-					if ($scope.superviseStatus == 1) {
-						$scope.sureList.title = data.data.result.title;
-						$scope.sureList.content = data.data.result.content;
-
-					} else {
-						$scope.sureList.title = " ";
-						$scope.sureList.content = " ";
-					}
-				}, function(error) {
-					console.log(error);
-				})
-				// console.log(GlobalServe.token);
-		}
-		//监督报告模态框的确定函数
-	$scope.sure = function() {
-			// $('#myModal').modal('toggle');
-			// console.log($scope.index)
-			// $scope.list[$scope.index].auditStatus=1;
-			//获取eventId
-			$scope.id = $scope.list[$scope.index].id;;
-			$scope.sureList.eventId = $scope.id;
-			console.log($scope.sureList.eventId)
-
-
-			//请求接口
-			supervisionServe.sureList($scope.sureList)
-				.then(function(data) {
-					console.log(data);
-					swal({
-						title: "监督报告成功",
-						text: "",
-						timer: 1000,
-						type: "success",
-						showConfirmButton: false
-					});
-					$scope.refresh();
-				}, function(error) {
-					swal({
-						title: "登录授权过期",
-						text: "",
-						timer: 1000,
-						type: "error",
-						showConfirmButton: false
-					});
-					console.log(error);
-				});
-		}
-		//违纪登记按钮函数
-	$scope.refuse = function(index) {
-			$scope.registerSureList.content = " ";
-			$scope.registerSureList.otherQuestion = " ";
-			$scope.registerSureList.isCashGiftOutOfLimits = "0";
-			$scope.registerSureList.isUsePublicCar = "0";
-			$scope.registerSureList.isUsePublicGoods = "0";
-			$scope.registerSureList.isUsePublicAsserts = "0";
-			$scope.registerSureList.isUsePublicMoney = "0";
-
-
-			console.log(index)
-			$scope.index = index;
-			$scope.id = $scope.list[index].id;
-			// console.log($scope.id);
-			$scope.registerList.eventId = $scope.id;
-			// $scope.sureList.status=2;
-			$scope.registerSureList.otherQuestion = $scope.registerSureList.otherQuestion;
-			$scope.registerSureList.content = $scope.registerSureList.content;
-			supervisionServe.registerList($scope.registerList)
-				.then(function(data) {
-					console.log(data);
-					if (data.data.result != null) {
-						$scope.registerSureList.content = data.data.result.content;
-						$scope.registerSureList.otherQuestion = data.data.result.otherQuestion;
-						$scope.registerSureList.isCashGiftOutOfLimits = data.data.result.isCashGiftOutOfLimits;
-
-						if ($scope.registerSureList.isCashGiftOutOfLimits = true) {
-							$scope.registerSureList.isCashGiftOutOfLimits = '1'
-						} else {
-							$scope.registerSureList.isCashGiftOutOfLimits = '0'
-						}
-
-						if ($scope.registerSureList.isUsePublicAssets = true) {
-							$scope.registerSureList.isUsePublicAssets = '1'
-						} else {
-							$scope.registerSureList.isUsePublicAssets = '0'
-						}
-
-						if ($scope.registerSureList.isUsePublicCar = true) {
-							$scope.registerSureList.isUsePublicCar = '1'
-						} else {
-							$scope.registerSureList.isUsePublicCar = '0'
-						}
-
-						if ($scope.registerSureList.isUsePublicGoods = true) {
-							$scope.registerSureList.isUsePublicGoods = '1'
-						} else {
-							$scope.registerSureList.isUsePublicGoods = '0'
-						}
-
-						if ($scope.registerSureList.isUsePublicMoney = true) {
-							$scope.registerSureList.isUsePublicMoney = '1'
-						} else {
-							$scope.registerSureList.isUsePublicMoney = '0'
-						}
-
-					}
-
-				}, function(error) {
-					console.log(error);
-				})
-		}
-		//违纪登记模态框确定函数
-	$scope.del = function() {
-		$scope.id = $scope.list[$scope.index].id;;
-		$scope.registerSureList.eventId = $scope.id;
-		console.log($scope.registerSureList.eventId)
-		$scope.registerSureList.otherQuestion = $scope.registerSureList.otherQuestion;
-		$scope.registerSureList.content = $scope.registerSureList.content;
-
-		//请求接口
-		supervisionServe.registerSureList($scope.registerSureList)
 			.then(function(data) {
 				console.log(data);
 				swal({
-					title: "违纪登记成功",
+					title: "公示结果成功",
 					text: "",
 					timer: 1000,
 					type: "success",
 					showConfirmButton: false
 				});
-
 				$scope.refresh();
+
 			}, function(error) {
 				swal({
 					title: "登录授权过期",
@@ -2861,69 +2586,378 @@ angular.module('app.controllers', [])
 				console.log(error);
 			});
 
-	}
-
-	$scope.menuArr = [{
-		name: '申报人',
-		isrotate: true
-	}, {
-		name: '部门',
-		isrotate: true
-	}, {
-		name: '类型',
-		isrotate: true
-	}, {
-		name: '人数',
-		isrotate: true
-	}, {
-		name: '申报时间',
-		isrotate: true
-	}, {
-		name: '宴请时间',
-		isrotate: true
-	}, {
-		name: '状态',
-		isrotate: true
-	}, {
-		name: '操作',
-		isrotate: true
-	}]
-	$scope.attrArr = ['staff', 'staffOrgName', 'eventType', 'peopleCount', 'createTime', 'eventDate', 'auditStatus', 'auditContent']
-		//排序
-	$scope.orderToggle = function(index) {
-		$scope.x = ($scope.x == "+" ? "-" : "+");
-		$scope.attr = $scope.attrArr[index];
-		$scope.menuArr.forEach(function(value, i, arr) {
-			value.isrotate = i == index ? $scope.menuArr[index].isrotate : true;
-		})
-		$scope.menuArr[index].isrotate = !$scope.menuArr[index].isrotate;
-	}
-
-	//下一页
-	$scope.nextPage = function() {
-		if ($scope.pubList.page < $scope.arr.total / $scope.pubList.limit) {
-			$scope.pubList.page++;
 		}
-	};
-	//上一页
-	$scope.prePage = function() {
-		if ($scope.pubList.page > 1) {
-			$scope.pubList.page--;
+
+		$scope.menuArr = [{
+			name: '申报人',
+			isrotate: true
+		}, {
+			name: '部门',
+			isrotate: true
+		}, {
+			name: '类型',
+			isrotate: true
+		}, {
+			name: '人数',
+			isrotate: true
+		}, {
+			name: '申报时间',
+			isrotate: true
+		}, {
+			name: '宴请时间',
+			isrotate: true
+		}, {
+			name: '状态',
+			isrotate: true
+		}, {
+			name: '操作',
+			isrotate: true
+		}]
+		$scope.attrArr = ['staff', 'staffOrgName', 'eventType', 'peopleCount', 'createTime', 'eventDate', 'auditStatus', 'auditContent']
+			//排序
+		$scope.orderToggle = function(index) {
+			$scope.x = ($scope.x == "+" ? "-" : "+");
+			$scope.attr = $scope.attrArr[index];
+			$scope.menuArr.forEach(function(value, i, arr) {
+				value.isrotate = i == index ? $scope.menuArr[index].isrotate : true;
+			})
+			$scope.menuArr[index].isrotate = !$scope.menuArr[index].isrotate;
 		}
-	};
-	//最后一页
-	$scope.lastPage = function() {
-		console.log(Math.floor($scope.arr.total / $scope.pubList.limit));
-		$scope.pubList.page = Math.floor($scope.arr.total / $scope.pubList.limit) + 1;
-	};
-	//监控页码变化.300ms后更新列表
-	$scope.$watch('pubList.page', function(newValue) {
-		$scope.pubList.start = $scope.pubList.limit * ($scope.pubList.page - 1);
-		$timeout(function() {
-			$scope.search();
-			$scope.$apply()
-		}, 300);
-	});
+
+		//下一页
+		$scope.nextPage = function() {
+			if ($scope.pubList.page < $scope.arr.total / $scope.pubList.limit) {
+				$scope.pubList.page++;
+			}
+		};
+		//上一页
+		$scope.prePage = function() {
+			if ($scope.pubList.page > 1) {
+				$scope.pubList.page--;
+			}
+		};
+		//最后一页
+		$scope.lastPage = function() {
+			console.log(Math.floor($scope.arr.total / $scope.pubList.limit));
+			$scope.pubList.page = Math.floor($scope.arr.total / $scope.pubList.limit) + 1;
+		};
+		//监控页码变化.300ms后更新列表
+		$scope.$watch('pubList.page', function(newValue) {
+			$scope.pubList.start = $scope.pubList.limit * ($scope.pubList.page - 1);
+			$timeout(function() {
+				$scope.search();
+				$scope.$apply()
+			}, 300);
+		});
+
+	})
+	//supervision监督页面控制
+	.controller('supervisionCtrl', function($scope, $state, $timeout, SupervisionServe) {
+		$scope.pubList = {
+			token: sessionStorage.getItem('token'), //	令牌
+			staff: '', //	申报人
+			superviseStatus: -1, //	监督状态 -1：未监督 1：已监督
+			page: 1, //  当前页数
+			start: 0, //	从第几个开始
+			limit: 10, //	每页显示多少个
 
 
-})
+		};
+		$scope.modList = {
+			token: sessionStorage.getItem('token'), //	令牌
+			eventId: '', //	申报人
+			status: -1, //	监督状态 -1：未监督 1：已监督
+			// content: '' ,			//  监督报告
+		};
+
+		$scope.sureList = {
+				token: sessionStorage.getItem('token'), //	令牌
+				eventId: '', //	申报人id
+				status: 1, //	监督状态 1：监督报告 2：违纪登记
+				title: '', //标题
+				content: '', //  监督报告
+			}
+			//违纪登记框接口参数
+		$scope.registerList = {
+			token: sessionStorage.getItem('token'), //	令牌
+			eventId: '', //	申报人
+			// status: -1,		//	监督状态 -1：未监督 1：已监督
+
+		};
+		//违纪登记确认参数
+		$scope.registerSureList = {
+				token: sessionStorage.getItem('token'), //	令牌
+				eventId: '', //	申报人id
+				// status: 1,					 //	监督状态 1：监督报告 2：违纪登记
+				isCashGiftOutOfLimits: 0, // 礼金是否超标 0： 否 1：是
+				isUsePublicCar: 0, // 使用公车 0： 否 1：是
+				isUsePublicGoods: 0, // 使用公产0： 否 1：是
+				isUsePublicAsserts: 0, // 使用公物 0： 否 1：是
+				isUsePublicMoney: 0, // 使用公款 0： 否 1：是
+				attachmentFileCode: '', // 附加文件
+				otherQuestion: '', // 其他问题
+				content: '', // 内容
+			}
+			//改变监督状态
+		$scope.selChange = function() {
+			// console.log(event);
+			console.log(event.target.selectedIndex);
+			if (event.target.selectedIndex == 0) {
+				$scope.pubList.superviseStatus = -1
+			} else {
+				$scope.pubList.superviseStatus = event.target.selectedIndex;
+			}
+
+		};
+
+		$scope.search = function() {
+			$scope.refresh();
+		};
+		//刷新
+		$scope.refresh = function() {
+			//loading 效果
+			$.LoadingOverlay("show", {
+				image: "img/oval.svg",
+				bgcolor: 'rgba(28,43,54,0.7)'
+			});
+			SupervisionServe.pubList($scope.pubList)
+				.then(function(data) {
+					//loading 效果
+					$.LoadingOverlay("hide");
+					console.log(data);
+					$scope.bulle = data.config.params.superviseStatus
+						// console.log($scope.bulle)
+					$scope.list = data.data.result;
+					$scope.arr = data.data;
+					$scope.superviseStatus = data.config.params.superviseStatus;
+				}, function(error) {
+					// console.log(error);
+				})
+				// console.log(GlobalServe.token);
+		};
+		// $scope.refresh();
+
+		//监督报告按钮函数
+		$scope.pass = function(index) {
+				$scope.sureList.title = " ";
+				$scope.sureList.content = " ";
+				console.log(index)
+				$scope.index = index;
+				$scope.id = $scope.list[index].id;
+				// console.log($scope.id);
+				$scope.modList.eventId = $scope.id;
+
+				$scope.superviseStatus = $scope.superviseStatus;
+				SupervisionServe.modList($scope.modList)
+					.then(function(data) {
+						console.log(data);
+
+						console.log($scope.superviseStatus);
+						if ($scope.superviseStatus == 1) {
+							$scope.sureList.title = data.data.result.title;
+							$scope.sureList.content = data.data.result.content;
+
+						} else {
+							$scope.sureList.title = " ";
+							$scope.sureList.content = " ";
+						}
+					}, function(error) {
+						console.log(error);
+					})
+					// console.log(GlobalServe.token);
+			}
+			//监督报告模态框的确定函数
+		$scope.sure = function() {
+				// $('#myModal').modal('toggle');
+				// console.log($scope.index)
+				// $scope.list[$scope.index].auditStatus=1;
+				//获取eventId
+				$scope.id = $scope.list[$scope.index].id;;
+				$scope.sureList.eventId = $scope.id;
+				console.log($scope.sureList.eventId)
+
+
+				//请求接口
+				SupervisionServe.sureList($scope.sureList)
+					.then(function(data) {
+						console.log(data);
+						swal({
+							title: "监督报告成功",
+							text: "",
+							timer: 1000,
+							type: "success",
+							showConfirmButton: false
+						});
+						$scope.refresh();
+					}, function(error) {
+						swal({
+							title: "登录授权过期",
+							text: "",
+							timer: 1000,
+							type: "error",
+							showConfirmButton: false
+						});
+						console.log(error);
+					});
+			}
+			//违纪登记按钮函数
+		$scope.refuse = function(index) {
+				$scope.registerSureList.content = " ";
+				$scope.registerSureList.otherQuestion = " ";
+				$scope.registerSureList.isCashGiftOutOfLimits = "0";
+				$scope.registerSureList.isUsePublicCar = "0";
+				$scope.registerSureList.isUsePublicGoods = "0";
+				$scope.registerSureList.isUsePublicAsserts = "0";
+				$scope.registerSureList.isUsePublicMoney = "0";
+
+
+				console.log(index)
+				$scope.index = index;
+				$scope.id = $scope.list[index].id;
+				// console.log($scope.id);
+				$scope.registerList.eventId = $scope.id;
+				// $scope.sureList.status=2;
+				$scope.registerSureList.otherQuestion = $scope.registerSureList.otherQuestion;
+				$scope.registerSureList.content = $scope.registerSureList.content;
+				SupervisionServe.registerList($scope.registerList)
+					.then(function(data) {
+						console.log(data);
+						if (data.data.result != null) {
+							$scope.registerSureList.content = data.data.result.content;
+							$scope.registerSureList.otherQuestion = data.data.result.otherQuestion;
+							$scope.registerSureList.isCashGiftOutOfLimits = data.data.result.isCashGiftOutOfLimits;
+
+							if ($scope.registerSureList.isCashGiftOutOfLimits = true) {
+								$scope.registerSureList.isCashGiftOutOfLimits = '1'
+							} else {
+								$scope.registerSureList.isCashGiftOutOfLimits = '0'
+							}
+
+							if ($scope.registerSureList.isUsePublicAssets = true) {
+								$scope.registerSureList.isUsePublicAssets = '1'
+							} else {
+								$scope.registerSureList.isUsePublicAssets = '0'
+							}
+
+							if ($scope.registerSureList.isUsePublicCar = true) {
+								$scope.registerSureList.isUsePublicCar = '1'
+							} else {
+								$scope.registerSureList.isUsePublicCar = '0'
+							}
+
+							if ($scope.registerSureList.isUsePublicGoods = true) {
+								$scope.registerSureList.isUsePublicGoods = '1'
+							} else {
+								$scope.registerSureList.isUsePublicGoods = '0'
+							}
+
+							if ($scope.registerSureList.isUsePublicMoney = true) {
+								$scope.registerSureList.isUsePublicMoney = '1'
+							} else {
+								$scope.registerSureList.isUsePublicMoney = '0'
+							}
+
+						}
+
+					}, function(error) {
+						console.log(error);
+					})
+			}
+			//违纪登记模态框确定函数
+		$scope.del = function() {
+			$scope.id = $scope.list[$scope.index].id;;
+			$scope.registerSureList.eventId = $scope.id;
+			console.log($scope.registerSureList.eventId)
+			$scope.registerSureList.otherQuestion = $scope.registerSureList.otherQuestion;
+			$scope.registerSureList.content = $scope.registerSureList.content;
+
+			//请求接口
+			SupervisionServe.registerSureList($scope.registerSureList)
+				.then(function(data) {
+					console.log(data);
+					swal({
+						title: "违纪登记成功",
+						text: "",
+						timer: 1000,
+						type: "success",
+						showConfirmButton: false
+					});
+
+					$scope.refresh();
+				}, function(error) {
+					swal({
+						title: "登录授权过期",
+						text: "",
+						timer: 1000,
+						type: "error",
+						showConfirmButton: false
+					});
+					console.log(error);
+				});
+
+		}
+
+		$scope.menuArr = [{
+			name: '申报人',
+			isrotate: true
+		}, {
+			name: '部门',
+			isrotate: true
+		}, {
+			name: '类型',
+			isrotate: true
+		}, {
+			name: '人数',
+			isrotate: true
+		}, {
+			name: '申报时间',
+			isrotate: true
+		}, {
+			name: '宴请时间',
+			isrotate: true
+		}, {
+			name: '状态',
+			isrotate: true
+		}, {
+			name: '操作',
+			isrotate: true
+		}]
+		$scope.attrArr = ['staff', 'staffOrgName', 'eventType', 'peopleCount', 'createTime', 'eventDate', 'auditStatus', 'auditContent']
+			//排序
+		$scope.orderToggle = function(index) {
+			$scope.x = ($scope.x == "+" ? "-" : "+");
+			$scope.attr = $scope.attrArr[index];
+			$scope.menuArr.forEach(function(value, i, arr) {
+				value.isrotate = i == index ? $scope.menuArr[index].isrotate : true;
+			})
+			$scope.menuArr[index].isrotate = !$scope.menuArr[index].isrotate;
+		}
+
+		//下一页
+		$scope.nextPage = function() {
+			if ($scope.pubList.page < $scope.arr.total / $scope.pubList.limit) {
+				$scope.pubList.page++;
+			}
+		};
+		//上一页
+		$scope.prePage = function() {
+			if ($scope.pubList.page > 1) {
+				$scope.pubList.page--;
+			}
+		};
+		//最后一页
+		$scope.lastPage = function() {
+			console.log(Math.floor($scope.arr.total / $scope.pubList.limit));
+			$scope.pubList.page = Math.floor($scope.arr.total / $scope.pubList.limit) + 1;
+		};
+		//监控页码变化.300ms后更新列表
+		$scope.$watch('pubList.page', function(newValue) {
+			$scope.pubList.start = $scope.pubList.limit * ($scope.pubList.page - 1);
+			$timeout(function() {
+				$scope.search();
+				$scope.$apply()
+			}, 300);
+		});
+
+
+	})
