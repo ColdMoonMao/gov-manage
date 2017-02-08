@@ -38,18 +38,7 @@
 
         <div>
             <table class="table table-striped no-margin">
-                <!--<thead>-->
-                <!--<tr>-->
-                    <!--<th class="text-left">申报人</th>-->
-                    <!--<th class="text-left">部门</th>-->
-                    <!--<th class="text-left">类型</th>-->
-                    <!--<th class="text-left">人数</th>-->
-                    <!--<th class="text-left">申报时间</th>-->
-                    <!--<th class="text-left">宴请时间</th>-->
-                    <!--<th class="text-left">状态</th>-->
-                    <!--<th class="text-left">操作</th>-->
-                <!--</tr>-->
-                <!--</thead>-->
+
                 <thead>
                 <tr>
                     <th ng-repeat=" menu in menuArr" ng-click="orderToggle($index)">{{menu.name}}<span class="caret" style="transform:rotate({{menu.isrotate?0:180}}deg)"></span></th>
@@ -67,9 +56,6 @@
                         {{item.auditStatus==1?'通过':'拒绝'&&item.auditStatus==null?'未审批':'通过'&&item.auditStatus==2?'拒绝':'通过'}}
                     </td>
                     <td>
-                        <!--<button class="btn  btn-primary btn-sm">确认</button>-->
-                        <!--<button class="btn btn-danger btn-sm">拒绝</button>-->
-                        <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                                 data-target="#myModal" ng-click="pass($index)">
                             通过
@@ -174,15 +160,15 @@
                 <</a>
         </li>
         <li>
-            <input style="display: inline-block;width: 65px;height: 32px;float: left;" min="1"
+            <input  min="1" style="display: inline-block;width: 65px;height: 32px;float: left;"
                    max="{{array.total/userList.limit+1}}" type="number" class="form-control" ng-model="userList.page"
                    value="userList.page">
         </li>
         <li ng-click="nextPage()"><a href="">></a></li>
         <li ng-click="lastPage()"><a href="">»</a></li>
         <li>
-            <button type="button" ng-click="refresh()" class="btn btn-sm btn-success"><i class="fa fa-refresh"
-                                                                                         aria-hidden="true"></i>
+            <button type="button" ng-click="refresh()" class="btn btn-sm btn-success">
+                <i class="fa fa-refresh" aria-hidden="true"></i>
             </button>
         </li>
     </ul>

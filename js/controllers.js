@@ -2401,6 +2401,7 @@ angular.module('app.controllers', [])
 	//公示内容按钮函数
 	$scope.pass = function(index) {
 			$scope.sureList.content = "";
+            $scope.attachmentPath = "";
 			console.log(index)
 			$scope.index = index;
 			$scope.id = $scope.list[index].id;
@@ -2476,14 +2477,11 @@ angular.module('app.controllers', [])
 			$scope.resultSureList.content = "";
 			// $scope.resultSureList.status = '1';
 
-
 			console.log(index)
 			$scope.index = index;
 			$scope.id = $scope.list[index].id;
 			// console.log($scope.id);
-
 			$scope.resultList.eventId = $scope.id;
-
 
 			$scope.resultSureList.content = $scope.resultSureList.content
 			$scope.resultSureList.status = $scope.resultSureList.status
