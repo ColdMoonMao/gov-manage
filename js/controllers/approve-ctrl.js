@@ -51,29 +51,33 @@ angular.module('app.controllers')
                     //loading 效果
                     $.LoadingOverlay("hide");
                     console.log(data);
+                    if(data.data.success){
+                        $scope.list = data.data.result;
+                        $scope.array = data.data;
+                    }else if(data.data.error){
+                        swal({
+                                title: data.data.error.message,
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "确认",
+                                closeOnConfirm: false,
+                                cancelButtonText: "取消",
+                                showLoaderOnConfirm: true,
+                            },
+                            function() {
+                                swal("跳转……", "", "success");
+                                setTimeout(function() {
+                                    swal.close();
+                                    $state.go('login');
+                                }, 1000);
+                            });
+                    }
 
-                    $scope.list = data.data.result;
-                    $scope.array = data.data;
 
                 }, function(error) {
                     // console.log(error);
-                    swal({
-                            title: data.data.error.message,
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "确认",
-                            closeOnConfirm: false,
-                            cancelButtonText: "取消",
-                            showLoaderOnConfirm: true,
-                        },
-                        function() {
-                            swal("跳转……", "", "success");
-                            setTimeout(function() {
-                                swal.close();
-                                $state.go('login');
-                            }, 1000);
-                        });
+
                 });
         };
         // $scope.refresh();
@@ -126,23 +130,7 @@ angular.module('app.controllers')
 
                     $scope.refresh();
                 }, function(error) {
-                    swal({
-                            title: data.data.error.message,
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "确认",
-                            closeOnConfirm: false,
-                            cancelButtonText: "取消",
-                            showLoaderOnConfirm: true,
-                        },
-                        function() {
-                            swal("跳转……", "", "success");
-                            setTimeout(function() {
-                                swal.close();
-                                $state.go('login');
-                            }, 1000);
-                        });
+
                     console.log(error);
                 });
         };
@@ -194,23 +182,6 @@ angular.module('app.controllers')
 
                     $scope.refresh();
                 }, function(error) {
-                    swal({
-                            title: data.data.error.message,
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "确认",
-                            closeOnConfirm: false,
-                            cancelButtonText: "取消",
-                            showLoaderOnConfirm: true,
-                        },
-                        function() {
-                            swal("跳转……", "", "success");
-                            setTimeout(function() {
-                                swal.close();
-                                $state.go('login');
-                            }, 1000);
-                        });
                     console.log(error);
                 });
 

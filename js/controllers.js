@@ -53,29 +53,33 @@ angular.module('app.controllers')
                     //loading 效果
                     $.LoadingOverlay("hide");
                     console.log(data);
+                    if(data.data.success){
+                        $scope.list = data.data.result;
+                        $scope.array = data.data;
+                    }else if(data.data.error){
+                        swal({
+                                title: data.data.error.message,
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "确认",
+                                closeOnConfirm: false,
+                                cancelButtonText: "取消",
+                                showLoaderOnConfirm: true,
+                            },
+                            function() {
+                                swal("跳转……", "", "success");
+                                setTimeout(function() {
+                                    swal.close();
+                                    $state.go('login');
+                                }, 1000);
+                            });
+                    }
 
-                    $scope.list = data.data.result;
-                    $scope.array = data.data;
 
                 }, function(error) {
                     // console.log(error);
-                    swal({
-                            title: data.data.error.message,
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "确认",
-                            closeOnConfirm: false,
-                            cancelButtonText: "取消",
-                            showLoaderOnConfirm: true,
-                        },
-                        function() {
-                            swal("跳转……", "", "success");
-                            setTimeout(function() {
-                                swal.close();
-                                $state.go('login');
-                            }, 1000);
-                        });
+
                 });
         };
         // $scope.refresh();
@@ -128,23 +132,7 @@ angular.module('app.controllers')
 
                     $scope.refresh();
                 }, function(error) {
-                    swal({
-                            title: data.data.error.message,
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "确认",
-                            closeOnConfirm: false,
-                            cancelButtonText: "取消",
-                            showLoaderOnConfirm: true,
-                        },
-                        function() {
-                            swal("跳转……", "", "success");
-                            setTimeout(function() {
-                                swal.close();
-                                $state.go('login');
-                            }, 1000);
-                        });
+
                     console.log(error);
                 });
         };
@@ -196,23 +184,6 @@ angular.module('app.controllers')
 
                     $scope.refresh();
                 }, function(error) {
-                    swal({
-                            title: data.data.error.message,
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "确认",
-                            closeOnConfirm: false,
-                            cancelButtonText: "取消",
-                            showLoaderOnConfirm: true,
-                        },
-                        function() {
-                            swal("跳转……", "", "success");
-                            setTimeout(function() {
-                                swal.close();
-                                $state.go('login');
-                            }, 1000);
-                        });
                     console.log(error);
                 });
 
@@ -1342,31 +1313,36 @@ angular.module('app.controllers')
                     //loading 效果
                     $.LoadingOverlay("hide");
                     console.log(data);
-                    $scope.bulle = data.config.params.bulletinStatus;
-                    $scope.bulletinStatus = data.config.params.bulletinStatus;
-                    // console.log($scope.bulle)
-                    $scope.list = data.data.result;
-                    $scope.arr = data.data;
+                    if(data.data.success){
+                        $scope.bulle = data.config.params.bulletinStatus;
+                        $scope.bulletinStatus = data.config.params.bulletinStatus;
+                        // console.log($scope.bulle)
+                        $scope.list = data.data.result;
+                        $scope.arr = data.data;
+                    }else if(data.data.error){
+                        swal({
+                                title: data.data.error.message,
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "确认",
+                                closeOnConfirm: false,
+                                cancelButtonText: "取消",
+                                showLoaderOnConfirm: true,
+                            },
+                            function() {
+                                swal("跳转……", "", "success");
+                                setTimeout(function() {
+                                    swal.close();
+                                    $state.go('login');
+                                }, 1000);
+                            });
+                    }
+
 
                 }, function(error) {
                     // console.log(error);
-                    swal({
-                            title: data.data.error.message,
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "确认",
-                            closeOnConfirm: false,
-                            cancelButtonText: "取消",
-                            showLoaderOnConfirm: true,
-                        },
-                        function() {
-                            swal("跳转……", "", "success");
-                            setTimeout(function() {
-                                swal.close();
-                                $state.go('login');
-                            }, 1000);
-                        });
+
                 });
 
         };
@@ -1432,23 +1408,6 @@ angular.module('app.controllers')
                         $('#myModal').modal('hide');
 
                     }, function(error) {
-                        swal({
-                                title: data.data.error.message,
-                                type: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "#DD6B55",
-                                confirmButtonText: "确认",
-                                closeOnConfirm: false,
-                                cancelButtonText: "取消",
-                                showLoaderOnConfirm: true,
-                            },
-                            function() {
-                                swal("跳转……", "", "success");
-                                setTimeout(function() {
-                                    swal.close();
-                                    $state.go('login');
-                                }, 1000);
-                            });
                         console.log(error);
                     });
             }
@@ -1521,23 +1480,6 @@ angular.module('app.controllers')
                     $('#myModal1').modal('hide');
 
                 }, function(error) {
-                    swal({
-                            title: data.data.error.message,
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "确认",
-                            closeOnConfirm: false,
-                            cancelButtonText: "取消",
-                            showLoaderOnConfirm: true,
-                        },
-                        function() {
-                            swal("跳转……", "", "success");
-                            setTimeout(function() {
-                                swal.close();
-                                $state.go('login');
-                            }, 1000);
-                        });
                     console.log(error);
                 });
             }
@@ -2459,30 +2401,34 @@ angular.module('app.controllers')
                     //loading 效果
                     $.LoadingOverlay("hide");
                     console.log(data);
-                    $scope.bulle = data.config.params.superviseStatus;
-                    // console.log($scope.bulle)
-                    $scope.list = data.data.result;
-                    $scope.arr = data.data;
-                    $scope.superviseStatus = data.config.params.superviseStatus;
+                    if(data.data.success){
+                        $scope.bulle = data.config.params.superviseStatus;
+                        // console.log($scope.bulle)
+                        $scope.list = data.data.result;
+                        $scope.arr = data.data;
+                        $scope.superviseStatus = data.config.params.superviseStatus;
+                    }else if(data.data.error){
+                        swal({
+                                title: data.data.error.message,
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "确认",
+                                closeOnConfirm: false,
+                                cancelButtonText: "取消",
+                                showLoaderOnConfirm: true,
+                            },
+                            function() {
+                                swal("跳转……", "", "success");
+                                setTimeout(function() {
+                                    swal.close();
+                                    $state.go('login');
+                                }, 1000);
+                            });
+                    }
+
                 }, function(error) {
                     // console.log(error);
-                    swal({
-                            title: data.data.error.message,
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "确认",
-                            closeOnConfirm: false,
-                            cancelButtonText: "取消",
-                            showLoaderOnConfirm: true,
-                        },
-                        function() {
-                            swal("跳转……", "", "success");
-                            setTimeout(function() {
-                                swal.close();
-                                $state.go('login');
-                            }, 1000);
-                        });
                 });
 
         };
@@ -2541,23 +2487,6 @@ angular.module('app.controllers')
                     });
                     $scope.refresh();
                 }, function(error) {
-                    swal({
-                            title: data.data.error.message,
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "确认",
-                            closeOnConfirm: false,
-                            cancelButtonText: "取消",
-                            showLoaderOnConfirm: true,
-                        },
-                        function() {
-                            swal("跳转……", "", "success");
-                            setTimeout(function() {
-                                swal.close();
-                                $state.go('login');
-                            }, 1000);
-                        });
                     console.log(error);
                 });
         };
@@ -2649,23 +2578,6 @@ angular.module('app.controllers')
 
                     $scope.refresh();
                 }, function(error) {
-                    swal({
-                            title: data.data.error.message,
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "确认",
-                            closeOnConfirm: false,
-                            cancelButtonText: "取消",
-                            showLoaderOnConfirm: true,
-                        },
-                        function() {
-                            swal("跳转……", "", "success");
-                            setTimeout(function() {
-                                swal.close();
-                                $state.go('login');
-                            }, 1000);
-                        });
                     console.log(error);
                 });
 
