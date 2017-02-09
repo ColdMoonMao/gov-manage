@@ -107,7 +107,7 @@
 						<div class="form-group">
 							<label class="col-lg-2 control-label">角色:</label>
 							<div class="col-lg-10" ng-class="{'has-error':myForm.role.$error.required&&myForm.$submitted,'has-success':myForm.role.$valid&&myForm.$submitted}">
-								<select ng-init="value=roleArr[10]" name="role" required class="form-control" ng-options="value as value.name for value in roleArr" ng-model="value" ng-change="roleChange(value)">
+								<select  name="role" required class="form-control" ng-options="value.id as value.name for value in roleArr" ng-model="addObj.roleId" ng-change="roleChange(addObj.roleId)">
 								</select>
 							</div>
 							<!-- /.col -->
@@ -173,7 +173,7 @@
 						<div class="form-group">
 							<label class="col-lg-2 control-label">角色:</label>
 							<div class="col-lg-10" ng-class="{'has-error':editForm.role.$error.required&&editForm.$submitted,'has-success':editForm.role.$valid&&editForm.$submitted}">
-								<select class="form-control" ng-options="value as value.name for value in roleArr" ng-model="value" ng-change="roleChange(value)" name="role">
+								<select class="form-control" ng-options="value.id as value.name for value in roleArr" ng-model="editObj.roleId" ng-change="roleChange(editObj.roleId)" name="role">
 								</select>
 							</div>
 							<!-- /.col -->

@@ -2724,11 +2724,10 @@ angular.module('app.controllers')
         //角色改变函数 添加和修改共用
         $scope.roleChange = function(value) {
             console.log(value);
-            $scope.addObj.roleId = value.id;
-            $scope.editObj.roleId = value.id;
-            console.log(value.id);
+            // $scope.addObj.roleId = value;
+            // $scope.editObj.roleId = value;
+            // console.log(value.id);
         };
-
         // //新增 addFun按钮函数
         // $scope.addFun = function() {
 
@@ -2866,8 +2865,8 @@ angular.module('app.controllers')
         };
         //修改 params
         $scope.editObj = {
-            token: sessionStorage.getItem('token'),
-            userId: '', //  令牌
+            token: sessionStorage.getItem('token'),//  令牌
+            userId: '', //用户id
             orgId: 1, //	部门id
             name: '', //	姓名
             password: '', //	密码
@@ -2876,34 +2875,31 @@ angular.module('app.controllers')
         //修改按钮函数
         $scope.edit = function() {
             console.log(this.value);
+            //重置修改模态框提交状态
+            $scope.editForm.$submitted=false;
+            //调用接口读取用户信息
             UserManageServe.get({
                     token: sessionStorage.getItem('token'),
                     userId: this.value.id
                 })
                 .then(function(data) {
                     console.log(data);
-                    $scope.getRole = data.data.result.role;
-                    console.log($scope.getRole);
+                    $scope.editObj.roleId=data.data.result.role.id;
+                    $scope.editObj.orgId=data.data.result.organization.id;
                 }, function() {
 
                 });
-            if (this.value.orgId) {
-                $scope.editObj.orgId = this.value.orgId;
+            if (this.value.name) {
+                $scope.editObj.name = this.value.name;
             }
             if (this.value.id) {
                 $scope.editObj.userId = this.value.id;
             }
-            if (this.value.name) {
-                $scope.editObj.name = this.value.name;
-            }
-            $scope.editObj.password = '';
-            $scope.editPasswordConfirm = '';
-            if (this.value.roleId) {
-                $scope.editObj.roleId = this.value.roleId;
-            }
             if (this.value.username) {
                 $scope.editUsername = this.value.username;
             }
+            $scope.editObj.password = '';
+            $scope.editPasswordConfirm = '';
         };
         //修改确认按钮函数
         $scope.editConfirm = function() {
