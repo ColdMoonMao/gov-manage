@@ -80,8 +80,25 @@ angular.module('app.controllers')
                     $scope.superviseStatus = data.config.params.superviseStatus;
                 }, function(error) {
                     // console.log(error);
+                    swal({
+                            title: data.data.error.message,
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "确认",
+                            closeOnConfirm: false,
+                            cancelButtonText: "取消",
+                            showLoaderOnConfirm: true,
+                        },
+                        function() {
+                            swal("跳转……", "", "success");
+                            setTimeout(function() {
+                                swal.close();
+                                $state.go('login');
+                            }, 1000);
+                        });
                 });
-            // console.log(GlobalServe.token);
+
         };
         // $scope.refresh();
 
@@ -139,12 +156,22 @@ angular.module('app.controllers')
                     $scope.refresh();
                 }, function(error) {
                     swal({
-                        title: "登录授权过期",
-                        text: "",
-                        timer: 1000,
-                        type: "error",
-                        showConfirmButton: false
-                    });
+                            title: data.data.error.message,
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "确认",
+                            closeOnConfirm: false,
+                            cancelButtonText: "取消",
+                            showLoaderOnConfirm: true,
+                        },
+                        function() {
+                            swal("跳转……", "", "success");
+                            setTimeout(function() {
+                                swal.close();
+                                $state.go('login');
+                            }, 1000);
+                        });
                     console.log(error);
                 });
         };
@@ -237,12 +264,22 @@ angular.module('app.controllers')
                     $scope.refresh();
                 }, function(error) {
                     swal({
-                        title: "登录授权过期",
-                        text: "",
-                        timer: 1000,
-                        type: "error",
-                        showConfirmButton: false
-                    });
+                            title: data.data.error.message,
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "确认",
+                            closeOnConfirm: false,
+                            cancelButtonText: "取消",
+                            showLoaderOnConfirm: true,
+                        },
+                        function() {
+                            swal("跳转……", "", "success");
+                            setTimeout(function() {
+                                swal.close();
+                                $state.go('login');
+                            }, 1000);
+                        });
                     console.log(error);
                 });
 
